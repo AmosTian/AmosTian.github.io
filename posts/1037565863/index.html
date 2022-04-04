@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa:300,300italic,400,400italic,700,700italic|Ma Shan Zheng:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"auspicetian.life","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="C语言基本语法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C">
+<meta property="og:url" content="https://auspicetian.life/posts/1037565863/index.html">
+<meta property="og:site_name" content="AuspiceTian">
+<meta property="og:description" content="C语言基本语法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://auspicetian.life/posts/1037565863/1529931406231.png">
+<meta property="og:image" content="https://auspicetian.life/posts/1037565863/1529931437510.png">
+<meta property="og:image" content="https://auspicetian.life/posts/1037565863/1529931471438.png">
+<meta property="og:image" content="https://auspicetian.life/posts/1037565863/1529934626218.png">
+<meta property="og:image" content="https://auspicetian.life/posts/1037565863/1529934787754.png">
+<meta property="og:image" content="https://auspicetian.life/posts/1037565863/1529934876950.png">
+<meta property="article:published_time" content="2022-03-13T23:56:41.000Z">
+<meta property="article:modified_time" content="2022-03-14T02:00:11.000Z">
+<meta property="article:author" content="AuspiceTian">
+<meta property="article:tag" content="编程语言">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://auspicetian.life/posts/1037565863/1529931406231.png">
+
+<link rel="canonical" href="https://auspicetian.life/posts/1037565863/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>C | AuspiceTian</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">AuspiceTian</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">36</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">50</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">70</span></a>
+
+  </li>
+        <li class="menu-item menu-item-essay">
+
+    <a href="/categories/%E9%9A%8F%E7%AC%94/" rel="section"><i class="fa fa-fw fa-pied-piper"></i>随笔</a>
+
+  </li>
+        <li class="menu-item menu-item-dynamic-resume">
+
+    <a href="/dynamic-resume/" rel="section"><i class="fa fa-fw fa-cog"></i>动态简历</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/AuspiceTian" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://auspicetian.life/posts/1037565863/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="AuspiceTian">
+      <meta itemprop="description" content="知道的越多，不知道的越多">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AuspiceTian">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间 2022-03-14 07:56:41 / 修改时间 10:00:11" itemprop="dateCreated datePublished" datetime="2022-03-14T07:56:41+08:00">2022-03-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C/" itemprop="url" rel="index"><span itemprop="name">C</span></a>
+                </span>
+            </span>
+
+          
+
+          
+          
+            <div class="post-symbolscount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数 </span>
+                
+                <span title="本文字数">
+                  2.7k字
+                </span>
+              
+                <span class="post-meta-item" title="阅读时长">
+                  
+                    <span class="post-meta-divider">|</span>
+                  
+                  <span class="post-meta-item-icon">
+                    <i class="fa fa-clock-o"></i>
+                  </span>
+                    <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                  <span>4 分钟</span>
+                </span>
+            </div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>  C语言基本语法</p>
+</blockquote>
+<span id="more"></span>
+<h1 id="C"><a href="#C" class="headerlink" title="C"></a>C</h1><h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><h3 id="1-1-优点"><a href="#1-1-优点" class="headerlink" title="1.1 优点"></a>1.1 优点</h3><ul>
+<li><p>简洁性：核心内容少，只有 <strong>32</strong> 个关键字，<strong>9</strong> 种控制语句、<strong>44</strong> 种运算符</p>
+<p>条件语句：if…else，switch</p>
+<p>循环语句：while，for，do…while</p>
+<p>break，continue，return，goto</p>
+</li>
+<li><p>丰富的数据类型</p>
+</li>
+<li><p>具有低级语言的特点：与汇编语相近的功能和描述方法，如地址运算和二进制数位 </p>
+<p>可以对硬件端口进行直接操作</p>
+</li>
+<li><p>结构化语言，适用于大型程序<strong>模块化设计</strong></p>
+</li>
+<li><p>代码效率高</p>
+</li>
+<li><p>语法限制不严，程序设计自由度大</p>
+</li>
+<li><p>可移植性好</p>
+</li>
+</ul>
+<h3 id="1-2-算法"><a href="#1-2-算法" class="headerlink" title="1.2 算法"></a>1.2 算法</h3><blockquote>
+<p>  通过有限步骤，明确的操作产生问题答案</p>
+</blockquote>
+<p><strong>算法表示</strong><br>自然语言，传统流程图，N-S流程图，伪代码</p>
+<p><strong>常用算法</strong>：枚举，递推，递归</p>
+<h3 id="1-3-三种基本程序结构"><a href="#1-3-三种基本程序结构" class="headerlink" title="1.3 三种基本程序结构"></a>1.3 三种基本程序结构</h3><p>顺序、循环、选择</p>
+<h2 id="2-变量"><a href="#2-变量" class="headerlink" title="2. 变量"></a>2. 变量</h2><h3 id="2-1-变量命名规则"><a href="#2-1-变量命名规则" class="headerlink" title="2.1 变量命名规则"></a>2.1 变量命名规则</h3><ul>
+<li>首字母必须是 字母或下划线</li>
+<li>只能包含字母、数字、下划线</li>
+<li>标识符不能是关键字</li>
+<li>不能跨行书写 </li>
+</ul>
+<h3 id="2-2-变量的作用域及存储类别"><a href="#2-2-变量的作用域及存储类别" class="headerlink" title="2.2 变量的作用域及存储类别"></a>2.2 变量的作用域及存储类别</h3><h4 id="2-2-1-作用域"><a href="#2-2-1-作用域" class="headerlink" title="2.2.1 作用域"></a>2.2.1 作用域</h4><p><strong>全局变量任意函数都可访问、修改</strong></p>
+<p>当局部变量与全局变量发生冲突时，以局部变量为主</p>
+<p>若要扩充作用域使用<code>extern</code></p>
+<h4 id="2-2-2-存储类别"><a href="#2-2-2-存储类别" class="headerlink" title="2.2.2 存储类别"></a>2.2.2 存储类别</h4><p>执行C语言程序，可用的存储区有</p>
+<ol>
+<li><p>程序区</p>
+</li>
+<li><p>静态存储区：编译时分配内存；包括 <code>static,extern</code></p>
+</li>
+<li><p>动态存储区：运行时分配内存；包括 <code>static,auto</code></p>
+</li>
+</ol>
+<h5 id="static"><a href="#static" class="headerlink" title="static"></a><code>static</code></h5><p>静态局部变量</p>
+<ul>
+<li>仅在本函数中使用，调用后不清零</li>
+<li>只能赋一次初值，若不初始化 自动赋0或空字符</li>
+<li>可使用静态局部变量跟踪调用次数</li>
+</ul>
+<p>静态全局变量</p>
+<ul>
+<li>仅限在定义的文件中使用，可使不同源文件中的静态全局变量独立</li>
+</ul>
+<h5 id="register"><a href="#register" class="headerlink" title="register"></a><code>register</code></h5><p>整型，字符变量，指针类型</p>
+<h5 id="extern"><a href="#extern" class="headerlink" title="extern"></a><code>extern</code></h5><p>在函数外部引用变量使用 <code>extern</code> ，扩充已定义的全局变量作用域</p>
+<p>一个C语言程序包含多个源程序，若使用同一外部变量，在一个源文件中定义，在另一个中用 <code>extern</code> 说明是外部变量。引用外部函数时，被引用函数需添加 <code>extern</code></p>
+<h2 id="3-运算符"><a href="#3-运算符" class="headerlink" title="3. 运算符"></a>3. 运算符</h2><p>结合性：单目运算符，赋值运算符，三目运算符为右结合性；<br>其余为左结合性（从左向右看）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">2</span>;</span><br><span class="line">x+=x+=x-=<span class="number">1</span>; <span class="comment">//=&gt; x = 4</span></span><br><span class="line"></span><br><span class="line">y = x&amp;<span class="number">1</span> == x%<span class="number">2</span>; <span class="comment">//=&gt; y = 1</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *设x = 10 0&amp;1 = 0 , x % 2 = 0   y = 1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> </span><br><span class="line">a = b = c = <span class="number">1</span>;</span><br><span class="line">++a||++b&amp;&amp;++c;</span><br><span class="line"><span class="comment">//a = 2,b = 1,c = 1;</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-1-算数运算符"><a href="#3-1-算数运算符" class="headerlink" title="3.1 算数运算符"></a>3.1 算数运算符</h3><p><img src="/posts/1037565863/1529931406231.png" alt="1529931406231"><img src="/posts/1037565863/1529931437510.png" alt="1529931437510"><img src="/posts/1037565863/1529931471438.png" alt="1529931471438"></p>
+<ul>
+<li>“单”表示单目运算符：逻辑非(!),按位取反(~),自增(++),自减(—),取地址(&amp;),取值(* )；</li>
+<li>“算”表示算术运算符：乘、除和求余(* ,/,%)级别高于加减(+,-)；</li>
+<li>“移”表示按位左移(&lt;&lt;)和位右移(&gt;&gt;)；</li>
+<li>“关”表示关系运算符：大小关系(&gt;,&gt;=,&lt;,&lt;=)级别高于相等不相等关系(==,!=)；</li>
+<li>“与”表示按位与(&amp;)；</li>
+<li>“异”表示按位异或(^)；</li>
+<li>“或”表示按位或(|)；</li>
+<li>“逻”表示逻辑运算符：逻辑与(&amp;&amp;)级别高于逻辑或(||)；</li>
+<li>“条”表示条件运算符(? :)；</li>
+<li>“赋”表示赋值运算符(=,+=,-=,*=,/=,%=,&gt;&gt;=,&lt;&lt;=,&amp;=,^=, |=,!=)；</li>
+</ul>
+<h2 id="4-数据类型"><a href="#4-数据类型" class="headerlink" title="4. 数据类型"></a>4. 数据类型</h2><h3 id="4-1-基本数据类型"><a href="#4-1-基本数据类型" class="headerlink" title="4.1 基本数据类型"></a>4.1 基本数据类型</h3><ul>
+<li>整数类型，浮点类型，字符类型</li>
+<li>转义字符</li>
+<li>有符号数和无符号数</li>
+<li>进制表示：十六进制：0X/0x、八进制：0</li>
+</ul>
+<h3 id="4-2-构造类型"><a href="#4-2-构造类型" class="headerlink" title="4.2 构造类型"></a>4.2 构造类型</h3><h4 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h4><ul>
+<li>当结构体成员是其本身时，只能用指针</li>
+<li>当初始化参数列表中参数数量少于成员个数时，其余成员自动赋0</li>
+<li>对结构体成员操作，实质上是对其所在地址进行操作</li>
+</ul>
+<h5 id="位域"><a href="#位域" class="headerlink" title="位域"></a>位域</h5><blockquote>
+<p>  特殊的结构体，以二进制位为单位，指定所占的二进制位数</p>
+</blockquote>
+<ul>
+<li><p>只能用 <code>unsigned,int,signed int</code></p>
+</li>
+<li><p>当存储单元剩下的空间不够存放一个位域时，从跳到下个存储单元，从低位开始存储</p>
+</li>
+</ul>
+<h4 id="结构体和共用体"><a href="#结构体和共用体" class="headerlink" title="结构体和共用体"></a>结构体和共用体</h4><p>结构体：用于将多种数据组合成一个整体。</p>
+<p>共用体：采用覆盖技术，几个不同变量共享一段内存空间。成员的起始地址一样，都是共用体的起始地址，并在同一时刻只能使用其中的一个成员变量</p>
+<p>区别就是：</p>
+<ul>
+<li>结构体每一位成员都用来表示一种具体事物的属性，共用体可以表示多种属性</li>
+<li>结构体的存储空间为各成员占用存储空间的和，共用体存储空间为最大成员的存储空间</li>
+<li>共用体不能初始化，但结构体可以</li>
+</ul>
+<h3 id="4-3-指针类型"><a href="#4-3-指针类型" class="headerlink" title="4.3 指针类型"></a>4.3 指针类型</h3><blockquote>
+<p>  指针就是内存地址</p>
+</blockquote>
+<h4 id="指针访问数组"><a href="#指针访问数组" class="headerlink" title="指针访问数组"></a>指针访问数组</h4><p>获取元素地址，使用取内容符 <code>&amp;val</code>【视为一维数组】</p>
+<h4 id="指针数组"><a href="#指针数组" class="headerlink" title="指针数组"></a>指针数组</h4><p><code>数据类型 *数组名[数组长度]</code></p>
+<p>数组名中存的是首地址</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *str[<span class="number">3</span>] = &#123;<span class="string">&quot;one&quot;</span>,<span class="string">&quot;two&quot;</span>,<span class="string">&quot;program&quot;</span>&#125;</span><br><span class="line">/=&gt;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* char *str[3];</span></span><br><span class="line"><span class="comment">* char str[0] = &quot;one&quot;;</span></span><br><span class="line"><span class="comment">* char str[1] = &quot;two&quot;;</span></span><br><span class="line"><span class="comment">* char str[2] = &quot;program&quot;;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-4-空类型-NULL"><a href="#4-4-空类型-NULL" class="headerlink" title="4.4 空类型 NULL"></a>4.4 空类型 <code>NULL</code></h3><h3 id="4-5-类型转换"><a href="#4-5-类型转换" class="headerlink" title="4.5 类型转换"></a>4.5 类型转换</h3><p>自动类型转换：将字节少的转换为字节多的</p>
+<p>赋值类型转换：右侧表达式自动转换为左侧表达式类型，并存储在左侧变量中</p>
+<p>强制类型转换</p>
+<h2 id="5-函数"><a href="#5-函数" class="headerlink" title="5. 函数"></a>5. 函数</h2><h3 id="5-1-printf-函数格式"><a href="#5-1-printf-函数格式" class="headerlink" title="5.1 printf()函数格式"></a>5.1 printf()函数格式</h3><h4 id="数据类型符"><a href="#数据类型符" class="headerlink" title="数据类型符"></a>数据类型符</h4><p><img src="/posts/1037565863/1529934626218.png" alt="1529934626218"></p>
+<p><img src="/posts/1037565863/1529934787754.png" alt="1529934787754"></p>
+<h4 id="格式控制符"><a href="#格式控制符" class="headerlink" title="格式控制符"></a>格式控制符</h4><p><img src="/posts/1037565863/1529934876950.png" alt="1529934876950"></p>
+<h4 id="精度格式符"><a href="#精度格式符" class="headerlink" title="精度格式符"></a>精度格式符</h4><p><code>.n</code> ，n为十进制整数</p>
+<ul>
+<li>如果输出数字，则表示小数的位数；</li>
+<li>如果输出的是字符，则表示输出字符的个数；</li>
+<li>若实际位数大于所定义的精度数，则截去超过的部分</li>
+</ul>
+<h3 id="5-2-switch"><a href="#5-2-switch" class="headerlink" title="5.2 switch"></a>5.2 switch</h3><blockquote>
+<p>  程序自动执行case后的每一个语句，直至遇到break</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">case</span> 常量表达式<span class="number">1</span>：</span><br><span class="line">  语句组<span class="number">1</span>;</span><br><span class="line">  <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> 常量表达式<span class="number">2</span>:</span><br><span class="line">  语句组<span class="number">2</span>;</span><br><span class="line">  <span class="keyword">break</span>;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">  语句组n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-动态分配内存"><a href="#5-3-动态分配内存" class="headerlink" title="5.3 动态分配内存"></a>5.3 动态分配内存</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">calloc</span>(<span class="type">unsigned</span> <span class="type">long</span>,<span class="type">unsigned</span> <span class="type">long</span>) &lt;==&gt;</span><br><span class="line"><span class="built_in">malloc</span>(<span class="type">unsigned</span> <span class="type">long</span> * (<span class="type">unsigned</span> <span class="type">long</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">realloc</span>(p,<span class="type">unsigned</span> <span class="type">long</span>)<span class="comment">//扩充数组</span></span><br><span class="line"><span class="built_in">free</span>()<span class="comment">//释放内存，使用完后必须释放内存，错误返回值为NULL</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-4-指针与函数"><a href="#5-4-指针与函数" class="headerlink" title="5.4 指针与函数"></a>5.4 指针与函数</h3><h4 id="指向函数的指针变量"><a href="#指向函数的指针变量" class="headerlink" title="指向函数的指针变量"></a>指向函数的指针变量</h4><p><code>函数类型 (*指针变量名)(参数类型);</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*函数指针可指向多个函数*/</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> x+y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">max</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> x &gt; y ? x : y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">min</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> x &lt; y ? x : y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> (*p)(<span class="type">int</span>,<span class="type">int</span>),c,a,b;</span><br><span class="line">	p = add;</span><br><span class="line">	</span><br><span class="line">	c = add(a,b);<span class="comment">//=&gt;c = (*p)(a,b);</span></span><br><span class="line">	p = max;</span><br><span class="line">	c = (*p)(a,b);</span><br><span class="line">	p = min;</span><br><span class="line">	c = (*p)(a,b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="函数指针可作为参数"><a href="#函数指针可作为参数" class="headerlink" title="函数指针可作为参数"></a>函数指针可作为参数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*函数指针可指向多个函数*/</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> x+y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">max</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> x &gt; y ? x : y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">min</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> x &lt; y ? x : y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">func</span><span class="params">(<span class="type">int</span> (*p)(<span class="type">int</span>,<span class="type">int</span>),<span class="type">int</span> x,<span class="type">int</span> y)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> (*p)(x,y);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> (*p)(<span class="type">int</span>,<span class="type">int</span>),c,a,b;</span><br><span class="line">	p = max;</span><br><span class="line">	c = func(p,x,y);</span><br><span class="line">    p = max;</span><br><span class="line">	c = func(p,x,y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="6-文件"><a href="#6-文件" class="headerlink" title="6. 文件"></a>6. 文件</h2><h3 id="6-1-编译预处理"><a href="#6-1-编译预处理" class="headerlink" title="6.1 编译预处理"></a>6.1 编译预处理</h3><ul>
+<li>宏定义</li>
+<li>文件包含的处理</li>
+<li>条件编译</li>
+</ul>
+<hr>
+<h4 id="宏"><a href="#宏" class="headerlink" title="宏"></a>宏</h4><blockquote>
+<p>  一般用大写，在预处理阶段，只进行代换，不做正确性检查</p>
+</blockquote>
+<ul>
+<li>便于简化程序，修改数据</li>
+</ul>
+<p>宏的定义域：从定义点开始到当前源文件结束 或 <code>#undef</code> 取消定义</p>
+<h4 id="文件包含处理"><a href="#文件包含处理" class="headerlink" title="文件包含处理"></a>文件包含处理</h4><p>使用 <code>&lt;&gt;</code> ，仅在系统指定的磁盘路径下搜索所包含的文件</p>
+<p>使用 <code>&quot;&quot;</code> ，现在当前工作目录中搜索，若找不到则在系统中寻找</p>
+<h4 id="条件编译"><a href="#条件编译" class="headerlink" title="条件编译"></a>条件编译</h4><blockquote>
+<p>  通过宏定义进行条件编译</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># ifedf 标识符</span></span><br><span class="line">		程序段<span class="number">1</span></span><br><span class="line"><span class="meta"># <span class="keyword">else</span></span></span><br><span class="line">        程序段<span class="number">2</span></span><br><span class="line"><span class="meta"># <span class="keyword">endif</span></span></span><br><span class="line">            </span><br><span class="line"><span class="meta"># <span class="keyword">if</span> 表达式</span></span><br><span class="line">		程序段<span class="number">1</span></span><br><span class="line"><span class="meta"># <span class="keyword">else</span></span></span><br><span class="line">        程序段<span class="number">2</span></span><br><span class="line"><span class="meta"># <span class="keyword">endif</span>            </span></span><br></pre></td></tr></table></figure>
+<h3 id="6-2-文件分类"><a href="#6-2-文件分类" class="headerlink" title="6.2 文件分类"></a>6.2 文件分类</h3><ul>
+<li>文本文件——ASCII</li>
+<li>二进制文件——二进制数据</li>
+</ul>
+<h3 id="6-3-文件的操作"><a href="#6-3-文件的操作" class="headerlink" title="6.3 文件的操作"></a>6.3 文件的操作</h3><h4 id="FILE"><a href="#FILE" class="headerlink" title="FILE"></a><code>FILE</code></h4><blockquote>
+<p>  C语言中存放文件属性的结构体，只能通过指针访问属性</p>
+</blockquote>
+<h4 id="打开文件"><a href="#打开文件" class="headerlink" title="打开文件"></a>打开文件</h4><blockquote>
+<p>  建立程序和文件之间的通信通道，并为文件系统建立缓冲</p>
+</blockquote>
+<p><code>FILE *fopen(char *filename,char *mode)</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FILE *fp = fopen(<span class="string">&quot;路径&quot;</span>,<span class="string">&quot;w&quot;</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>filename：磁盘文件名</li>
+<li>mode：指明文件使用方法</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r</td>
+<td>读的方式打开文件</td>
+</tr>
+<tr>
+<td>w</td>
+<td>写的方式打开文件</td>
+</tr>
+<tr>
+<td>r+</td>
+<td>读/写的方式打开文件</td>
+</tr>
+<tr>
+<td>w+</td>
+<td>写的方式打开新文件</td>
+</tr>
+<tr>
+<td>a</td>
+<td>写的方式向文件追加内容</td>
+</tr>
+<tr>
+<td>a+</td>
+<td>读/写的方式追加内容</td>
+</tr>
+<tr>
+<td>rb</td>
+<td>读的方式读二进制文件</td>
+</tr>
+<tr>
+<td>rb+</td>
+<td>读/写的方式二进制文件</td>
+</tr>
+<tr>
+<td>wb</td>
+<td>写的方式打开二进制文件</td>
+</tr>
+<tr>
+<td>wb+</td>
+<td>读/写二进制文件</td>
+</tr>
+<tr>
+<td>ab</td>
+<td>向二进制文件追加内容</td>
+</tr>
+<tr>
+<td>ab+</td>
+<td>读/写的方式向二进制文件追加内容</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="关闭文件"><a href="#关闭文件" class="headerlink" title="关闭文件"></a>关闭文件</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">	FILE *fp;</span><br><span class="line">	<span class="keyword">if</span>(fopen(<span class="string">&quot;abc.txt&quot;</span>,<span class="string">&quot;w&quot;</span>)==<span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);<span class="comment">//非0表示异常</span></span><br><span class="line">    &#125;</span><br><span class="line">    fclose(fp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h4><p>分为</p>
+<ul>
+<li>顺序读写</li>
+<li>随机读写</li>
+</ul>
+<p>需要引入 <strong>位置指针</strong> ：打开文件，默认指向文件开头</p>
+<ul>
+<li>所有文件读/写，都是从 <em>位置指针</em> 只是的位置进行读/写</li>
+</ul>
+<h5 id="顺序读写"><a href="#顺序读写" class="headerlink" title="顺序读写"></a>顺序读写</h5><h6 id="文件尾测试函数"><a href="#文件尾测试函数" class="headerlink" title="文件尾测试函数"></a>文件尾测试函数</h6><p><code>feof</code> ：若是文件尾，则不能读取数据</p>
+<ul>
+<li>指向文件尾返回 非零</li>
+<li>否则返回0</li>
+</ul>
+<p>文件使用特殊字符 <code>EOF</code> 作为文件结束标记</p>
+<h6 id="字符读-写函数"><a href="#字符读-写函数" class="headerlink" title="字符读/写函数"></a>字符读/写函数</h6><p><code>fgetc(FILE *fp)</code>：从文件中读取一个字符，若到文件尾返回<code>EOF</code></p>
+<p><code>fputc(int ch,FILE *fp)</code>：写入文件</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>从键盘读入一个字符</th>
+<th>向屏幕输出一个字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getchar()</code></td>
+<td><code>putchar()</code></td>
+</tr>
+<tr>
+<td><code>fgetc(stdin)</code></td>
+<td><code>fputc(ch,stdout)</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h6 id="字符串读-写函数"><a href="#字符串读-写函数" class="headerlink" title="字符串读/写函数"></a>字符串读/写函数</h6><p><code>fgets(char *s,int n,FILE *fp)</code></p>
+<blockquote>
+<p>  从 <code>fp</code> 指向的文件中<strong>读取</strong> <code>n-1</code> 个字符，写入s中</p>
+</blockquote>
+<p><code>fputs(char *s,FILE *fp)</code></p>
+<blockquote>
+<p>  将s中的字符串写到 <code>fp</code> 指向的文件中</p>
+</blockquote>
+<ul>
+<li>写完 <code>n-1</code> 个字符之前，遇到换行符或<code>EOF</code>，写入结束</li>
+</ul>
+<h6 id="格式读-写"><a href="#格式读-写" class="headerlink" title="格式读/写"></a>格式读/写</h6><p><code>int fscanf(FILE *fp,char *format)</code></p>
+<blockquote>
+<p>  读/写成功返回整数</p>
+</blockquote>
+<p><code>int fprintf(FILE *fp,char *fprmat)</code></p>
+<h6 id="数据块读-写"><a href="#数据块读-写" class="headerlink" title="数据块读/写"></a>数据块读/写</h6><p><code>unsigned fread(void *ptr,unsigned size,unsigned n,FILE *fp)</code></p>
+<blockquote>
+<p>  从文件 <code>fp</code> 中读取 <code>n</code> 个 <code>size</code> 字节的数据块，存储于 <code>ptr</code> 指向的内存空间</p>
+</blockquote>
+<p><code>unsigned fwrite(void *ptr,unsigned size,unsigned n,FILE *fp)</code></p>
+<blockquote>
+<p>  将 <code>ptr</code> 指向的存储空间的 n 个 <code>size</code> 字节的数据块写入文件 <code>fp</code> 中</p>
+</blockquote>
+<h5 id="随机文件读-写"><a href="#随机文件读-写" class="headerlink" title="随机文件读/写"></a>随机文件读/写</h5><h6 id="获取文件位置指针"><a href="#获取文件位置指针" class="headerlink" title="获取文件位置指针"></a>获取文件位置指针</h6><p><code>long ftell(FILE *fp)</code></p>
+<blockquote>
+<p>  返回距文件头的字节数</p>
+</blockquote>
+<h6 id="位置指针重定位"><a href="#位置指针重定位" class="headerlink" title="位置指针重定位"></a>位置指针重定位</h6><p><code>void rewind()</code> ：使位置指针指向文件头</p>
+<h6 id="文件定位函数"><a href="#文件定位函数" class="headerlink" title="文件定位函数"></a>文件定位函数</h6><p><code>int fseek(FILE *fp, long offset, int origin );</code></p>
+<blockquote>
+<p>  将位置指针移动到任意位置</p>
+</blockquote>
+<ul>
+<li><p><code>fp</code>：文件的指针，指向要操作的文件</p>
+</li>
+<li><p><code>offset</code> ：表示要移动的字节数</p>
+<p>offset 为正时，向后移动；</p>
+<p>offset 为负时，向前移动。</p>
+</li>
+<li><p><code>origin</code>：从何处开始计算偏移量。</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>起始点</th>
+<th>常量名</th>
+<th>常量值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件开头</td>
+<td>SEEK_SET</td>
+<td>0</td>
+</tr>
+<tr>
+<td>当前位置</td>
+<td>SEEK_CUR</td>
+<td>1</td>
+</tr>
+<tr>
+<td>文件末尾</td>
+<td>SEEK_END</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------<i class="fa fa-hand-peace-o"></i>本文结束-------------</div>
+    
+</div>
+
+      </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者  </strong>AuspiceTian
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接 </strong>
+    <a href="https://auspicetian.life/posts/1037565863/" title="C">https://auspicetian.life/posts/1037565863/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明  </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag"><i class="fa fa-tags"></i> 编程语言</a>
+              <a href="/tags/C/" rel="tag"><i class="fa fa-tags"></i> C</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/243084547/" rel="prev" title="问答">
+      <i class="fa fa-chevron-left"></i> 问答
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/1464987298/" rel="next" title="C++">
+      C++ <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C"><span class="nav-text">C</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-text">1. 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E4%BC%98%E7%82%B9"><span class="nav-text">1.1 优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E7%AE%97%E6%B3%95"><span class="nav-text">1.2 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E4%B8%89%E7%A7%8D%E5%9F%BA%E6%9C%AC%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84"><span class="nav-text">1.3 三种基本程序结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8F%98%E9%87%8F"><span class="nav-text">2. 变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-text">2.1 变量命名规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%8F%8A%E5%AD%98%E5%82%A8%E7%B1%BB%E5%88%AB"><span class="nav-text">2.2 变量的作用域及存储类别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-text">2.2.1 作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-%E5%AD%98%E5%82%A8%E7%B1%BB%E5%88%AB"><span class="nav-text">2.2.2 存储类别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#static"><span class="nav-text">static</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#register"><span class="nav-text">register</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#extern"><span class="nav-text">extern</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">3. 运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">3.1 算数运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">4. 数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">4.1 基本数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E6%9E%84%E9%80%A0%E7%B1%BB%E5%9E%8B"><span class="nav-text">4.2 构造类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-text">结构体</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%8D%E5%9F%9F"><span class="nav-text">位域</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E5%92%8C%E5%85%B1%E7%94%A8%E4%BD%93"><span class="nav-text">结构体和共用体</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B"><span class="nav-text">4.3 指针类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E8%AE%BF%E9%97%AE%E6%95%B0%E7%BB%84"><span class="nav-text">指针访问数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84"><span class="nav-text">指针数组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E7%A9%BA%E7%B1%BB%E5%9E%8B-NULL"><span class="nav-text">4.4 空类型 NULL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-text">4.5 类型转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%87%BD%E6%95%B0"><span class="nav-text">5. 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-printf-%E5%87%BD%E6%95%B0%E6%A0%BC%E5%BC%8F"><span class="nav-text">5.1 printf()函数格式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AC%A6"><span class="nav-text">数据类型符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E6%8E%A7%E5%88%B6%E7%AC%A6"><span class="nav-text">格式控制符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B2%BE%E5%BA%A6%E6%A0%BC%E5%BC%8F%E7%AC%A6"><span class="nav-text">精度格式符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-switch"><span class="nav-text">5.2 switch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98"><span class="nav-text">5.3 动态分配内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-%E6%8C%87%E9%92%88%E4%B8%8E%E5%87%BD%E6%95%B0"><span class="nav-text">5.4 指针与函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E5%90%91%E5%87%BD%E6%95%B0%E7%9A%84%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F"><span class="nav-text">指向函数的指针变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%8F%AF%E4%BD%9C%E4%B8%BA%E5%8F%82%E6%95%B0"><span class="nav-text">函数指针可作为参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%96%87%E4%BB%B6"><span class="nav-text">6. 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E7%BC%96%E8%AF%91%E9%A2%84%E5%A4%84%E7%90%86"><span class="nav-text">6.1 编译预处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8F"><span class="nav-text">宏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%A4%84%E7%90%86"><span class="nav-text">文件包含处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E7%BC%96%E8%AF%91"><span class="nav-text">条件编译</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E6%96%87%E4%BB%B6%E5%88%86%E7%B1%BB"><span class="nav-text">6.2 文件分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-%E6%96%87%E4%BB%B6%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-text">6.3 文件的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FILE"><span class="nav-text">FILE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6"><span class="nav-text">打开文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E6%96%87%E4%BB%B6"><span class="nav-text">关闭文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99"><span class="nav-text">文件读写</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E8%AF%BB%E5%86%99"><span class="nav-text">顺序读写</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%B0%BE%E6%B5%8B%E8%AF%95%E5%87%BD%E6%95%B0"><span class="nav-text">文件尾测试函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E8%AF%BB-%E5%86%99%E5%87%BD%E6%95%B0"><span class="nav-text">字符读&#x2F;写函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%AF%BB-%E5%86%99%E5%87%BD%E6%95%B0"><span class="nav-text">字符串读&#x2F;写函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E8%AF%BB-%E5%86%99"><span class="nav-text">格式读&#x2F;写</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%9D%97%E8%AF%BB-%E5%86%99"><span class="nav-text">数据块读&#x2F;写</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%96%87%E4%BB%B6%E8%AF%BB-%E5%86%99"><span class="nav-text">随机文件读&#x2F;写</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE%E6%8C%87%E9%92%88"><span class="nav-text">获取文件位置指针</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%E6%8C%87%E9%92%88%E9%87%8D%E5%AE%9A%E4%BD%8D"><span class="nav-text">位置指针重定位</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%AE%9A%E4%BD%8D%E5%87%BD%E6%95%B0"><span class="nav-text">文件定位函数</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="AuspiceTian"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">AuspiceTian</p>
+  <div class="site-description" itemprop="description">知道的越多，不知道的越多</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/AuspiceTian" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AuspiceTian" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_40479037?type=blog" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40479037?type&#x3D;blog" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:17636679561@163.com" title="E-Mail → mailto:17636679561@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-grav"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">AuspiceTian</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数 </span>
+    <span title="站点总字数">364.1k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">17:40</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'dark',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+  
+
+
+  
+  
+    <script async src="/js/cursor/fireworks.js"></script>
+  
+  
+  
+    <script src="/js/activate-power-mode.min.js"></script>
+    <script>
+      POWERMODE.colorful = true;
+      POWERMODE.shake = false;
+      document.body.addEventListener('input', POWERMODE);
+    </script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>
