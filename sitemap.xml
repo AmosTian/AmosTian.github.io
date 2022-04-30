@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://auspicetian.life/dynamic-resume/index.html</loc>
+    
+    <lastmod>2022-04-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://auspicetian.life/posts/1658259159/</loc>
     
     <lastmod>2022-04-30</lastmod>
@@ -563,15 +572,6 @@
     <loc>https://auspicetian.life/posts/892326447/</loc>
     
     <lastmod>2022-02-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://auspicetian.life/dynamic-resume/index.html</loc>
-    
-    <lastmod>2022-02-24</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
