@@ -13,10 +13,10 @@ let textArr = [{
         name: 'div',
         children: [{
             name: 'div',
-            text: '姓名：田兆吉'
+            text: '姓名：AmosTian'
         }, {
             name: 'div',
-            text: '年龄：24'
+            text: '年龄：23'
         }]
     }, {
         name: 'div',
