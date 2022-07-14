@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://auspicetian.life/posts/0/</loc>
+    
+    <lastmod>2022-07-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://auspicetian.life/posts/1183349577/</loc>
     
     <lastmod>2022-07-14</lastmod>
@@ -318,15 +327,6 @@
   
   <url>
     <loc>https://auspicetian.life/posts/3381441825/</loc>
-    
-    <lastmod>2022-04-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://auspicetian.life/posts/1916967425/</loc>
     
     <lastmod>2022-04-02</lastmod>
     
