@@ -1,0 +1,781 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1"><link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png"><link rel="mask-icon" href="/images/favicon.png" color="#222"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa:300,300italic,400,400italic,700,700italic|Ma Shan Zheng:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"><link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css"><script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script><script id="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:"amostian.github.io",root:"/",scheme:"Pisces",version:"7.8.0",exturl:!1,sidebar:{position:"left",display:"post",padding:18,offset:12,onmobile:!1},copycode:{enable:!0,show_result:!0,style:"mac"},back2top:{enable:!0,sidebar:!1,scrollpercent:!0},bookmark:{enable:!1,color:"#222",save:"auto"},fancybox:!0,mediumzoom:!1,lazyload:!1,pangu:!1,comments:{style:"tabs",active:null,storage:!0,lazyload:!1,nav:null},algolia:{hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}},localsearch:{enable:!0,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1},motion:{enable:!1,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},path:"search.xml"}</script><meta name="description" content="矩阵论准备知识，很多内容都是线性代数的扩展"><meta property="og:type" content="article"><meta property="og:title" content="1.准备知识——相似&amp;换位公式&amp;秩1矩阵&amp;内积&amp;正交"><meta property="og:url" content="https://amostian.github.io/posts/1879915179/index.html"><meta property="og:site_name" content="AmosTian"><meta property="og:description" content="矩阵论准备知识，很多内容都是线性代数的扩展"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/%E5%87%86%E5%A4%87%E7%9F%A5%E8%AF%86%EF%BC%88%E4%B8%80%EF%BC%89.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/%E5%87%86%E5%A4%87%E7%9F%A5%E8%AF%86%EF%BC%88%E4%BA%8C%EF%BC%89.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20220913001803966.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20220913002244773.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20220913002458303.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20220912235751888.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20220914074542612.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20221216162018820.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20221216163159365.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20220917095035907.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/v2-562307e431d264f4197a194a5394c018_720w.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20220917112113538.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20220918161219629.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20220918123629547.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20220918204358611.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20220918205245673.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20220918213824439.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20220918224931880-16712759688731.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20220918005502843.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20220917235434977.png"><meta property="og:image" content="https://amostian.github.io/posts/1879915179/image-20220918001146003.png"><meta property="article:published_time" content="2022-09-12T04:32:30.000Z"><meta property="article:modified_time" content="2024-01-09T08:23:44.124Z"><meta property="article:author" content="AmosTian"><meta property="article:tag" content="数学"><meta property="article:tag" content="矩阵论"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://amostian.github.io/posts/1879915179/%E5%87%86%E5%A4%87%E7%9F%A5%E8%AF%86%EF%BC%88%E4%B8%80%EF%BC%89.png"><link rel="canonical" href="https://amostian.github.io/posts/1879915179/"><script id="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,lang:"zh-CN"}</script><title>1.准备知识——相似&换位公式&秩1矩阵&内积&正交 | AmosTian</title><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage"><div class="container"><div class="headband"></div><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="切换导航栏"><span class="toggle-line toggle-line-first"></span> <span class="toggle-line toggle-line-middle"></span> <span class="toggle-line toggle-line-last"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span><h1 class="site-title">AmosTian</h1><span class="logo-line-after"><i></i></span></a></div><div class="site-nav-right"><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">58</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">74</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">349</span></a></li><li class="menu-item menu-item-essay"><a href="/categories/%E9%9A%8F%E7%AC%94/" rel="section"><i class="fa fa-fw fa-pied-piper"></i>随笔</a></li><li class="menu-item menu-item-dynamic-resume"><a href="/dynamic-resume/" rel="section"><i class="fa fa-fw fa-cog"></i>动态简历</a></li><li class="menu-item menu-item-search"><a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索</a></li></ul></nav><div class="search-pop-overlay"><div class="popup search-popup"><div class="search-header"><span class="search-icon"><i class="fa fa-search"></i></span><div class="search-input-container"><input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input"></div><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span></div><div id="search-result"><div id="no-result"><i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i></div></div></div></div></div></header><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div><div class="reading-progress-bar"></div><a href="https://github.com/AmosTian" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><main class="main"><div class="main-inner"><div class="content-wrap"><div class="content post posts-expand"><article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://amostian.github.io/posts/1879915179/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/avatar.png"><meta itemprop="name" content="AmosTian"><meta itemprop="description" content="知道的越多，不知道的越多"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="AmosTian"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">1.准备知识——相似&换位公式&秩1矩阵&内积&正交</h1><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建时间 2022-09-12 12:32:30" itemprop="dateCreated datePublished" datetime="2022-09-12T12:32:30+08:00">2022-09-12</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-calendar-check-o"></i> </span><span class="post-meta-item-text">更新于</span> <time title="修改时间 2024-01-09 16:23:44" itemprop="dateModified" datetime="2024-01-09T16:23:44+08:00">2024-01-09</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i> </span><span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a> </span>> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E5%AD%A6/%E7%9F%A9%E9%98%B5%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">矩阵论</span></a></span></span><div class="post-symbolscount"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i> </span><span class="post-meta-item-text">本文字数 </span><span title="本文字数">8.8k字 </span><span class="post-meta-item" title="阅读时长"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-clock-o"></i> </span><span class="post-meta-item-text">阅读时长 &asymp;</span> <span>30 分钟</span></span></div></div></header><div class="post-body" itemprop="articleBody"><blockquote><p>矩阵论准备知识，很多内容都是线性代数的扩展</p></blockquote><p><img src="/posts/1879915179/准备知识（一）.png" alt="准备知识（一）"></p><p><img src="/posts/1879915179/准备知识（二）.png" alt="准备知识（二）"></p><span id="more"></span><h2 id="1-1-相似"><a href="#1-1-相似" class="headerlink" title="1.1 相似"></a>1.1 相似</h2><blockquote><p>设 A、B为n阶方阵，如果存在可逆阵P，使得 $P^{-1}AP=B$ ，则称A与B相似，记为 $A\sim B$</p></blockquote><h3 id="1-1-1-相似性质"><a href="#1-1-1-相似性质" class="headerlink" title="1.1.1 相似性质"></a>1.1.1 相似性质</h3><ol><li>自反性：$A\sim A$ ，$I^{-1}AI = A$</li><li>对称性：$A\sim B \Rightarrow B\Rightarrow A$</li><li>传递性：$A\sim B \quad 且 \quad B\sim C\Rightarrow A\sim B$</li></ol><p>所以，方阵之间的相似关系是一种等价关系</p><h3 id="1-1-2-定理：A与B相似，则有相同特征根公式"><a href="#1-1-2-定理：A与B相似，则有相同特征根公式" class="headerlink" title="1.1.2 定理：A与B相似，则有相同特征根公式"></a>1.1.2 定理：A与B相似，则有相同特征根公式</h3><p>若A与B相似，则有</p><script type="math/tex;mode=display">\begin{aligned}
+|xI-A|=|xI-B|
+\end{aligned}</script><p>即A与B的特征根公式相同，其中A与B都是n阶方阵</p><h4 id="证明"><a href="#证明" class="headerlink" title="*证明"></a>*证明</h4><p>可设 $P^{-1}AP = B$ ，则有</p><script type="math/tex;mode=display">\begin{aligned}
+\mid xI-B\mid &=\mid xI-P^{-1}AP\mid=\mid P^{-1}(xI-A)P\mid \xlongequal{行列式计算}\mid xI-A\mid 
+\end{aligned}</script><p>由相似，可将A与B矩阵表示为 $A\sim B$ 或者 $AP=PB$ ，其中P为可逆矩阵</p><h4 id="推论"><a href="#推论" class="headerlink" title="推论"></a>推论</h4><ol><li><p>n阶方阵 $A_{n\times n}$ 的特征值为 $\lambda(A)=\{\lambda_1,\lambda_2,…,\lambda_n\}$ 可包含重复特征值</p><p><strong>eg</strong></p><script type="math/tex;mode=display">\begin{aligned}
+&A=\left ( 
+\begin{matrix}
+1\quad 1\\
+1\quad 1
+\end{matrix}
+\right),\lambda(A)=\{2,0\}\\\\
+&A=\left ( 
+\begin{matrix}
+2\quad 1\\
+0\quad 3
+\end{matrix}
+\right),\lambda(A)=\{2,3\}\\\\
+&A=\left ( 
+\begin{matrix}
+2\quad 1\\
+0\quad 2
+\end{matrix}
+\right),\lambda(A)=\{2,2\}
+\end{aligned}</script></li><li><p>进而，特征多项式 $\mid \lambda I-A \mid$ 必可分解为 $\mid (\lambda-\lambda_1)(\lambda-\lambda_2)…(\lambda-\lambda_n)\mid$</p></li><li>若 $A\sim B$ ，则特征多项式相同，进而其分解式相等，得出结论，A与B的特征值相同，即 $\lambda(A)=\lambda(B)$</li></ol><p>总结：</p><p>$相似 \Leftrightarrow 特征多项式相同\Rightarrow 特征值相等$</p><p>$特征值相等\xRightarrow{+实对称矩阵} 相似$</p><p><strong>特征值是相似变化下的不变量</strong></p><h3 id="1-1-3-相似对角化"><a href="#1-1-3-相似对角化" class="headerlink" title="1.1.3 相似对角化"></a>1.1.3 相似对角化</h3><p>若 $P^{-1}AP=\Lambda=\left(\begin{matrix}\lambda_1&amp;&amp;\\&amp;\ddots&amp;\\&amp;&amp;\lambda_n\end{matrix}\right)$ ，则 $P$ 中的 $(X_1,X_2,\cdots,X_n)$ 都是A的特征向量，且 $X_1,X_2,\cdots,X_n$ 都是A的特征向量，且 $X_1,\cdots,X_n$ 无关</p><h2 id="1-2-换位公式"><a href="#1-2-换位公式" class="headerlink" title="1.2 换位公式"></a>1.2 换位公式</h2><p>设问：若 $A=A_{n\times p},B=B_{p\times n}，$且 $p\le n$ ，则 $(A\cdot B)$ 为 n 阶方阵， $(B\cdot A)$ 为 p 阶方阵，求其特征值？</p><h3 id="1-2-1-定义"><a href="#1-2-1-定义" class="headerlink" title="1.2.1 定义"></a>1.2.1 定义</h3><p>$\vert \lambda I_n-AB \vert= \lambda^{n-p}\vert \lambda I_p-BA \vert$</p><ul><li>$AB$ 为 $n$ 阶方阵， $BA$ 为 $P$ 阶方阵</li></ul><p>可见 $AB$ 与 $BA$ 两个方阵特征值基本相等</p><h4 id="证明-1"><a href="#证明-1" class="headerlink" title="*证明"></a>*证明</h4><p><img src="/posts/1879915179/image-20220913001803966.png" alt="image-20220913001803966"></p><h3 id="1-2-2-推论"><a href="#1-2-2-推论" class="headerlink" title="1.2.2 推论"></a>1.2.2 推论</h3><p>若 $A=A_{n\times p},B=B_{p\times n}$ ，且 $p\le n$ ，则 $A\cdot B$ 为 n 阶方阵， $B\cdot A$ 为 p 阶方阵</p><ol><li><p>若 $BA$ 的特征根 $\lambda(BA)=\{\lambda_1,\lambda_2,…,\lambda_p\}$ ，则 $AB$ 的特征根 $\lambda(AB)=\{\lambda_1,\lambda_2…,\lambda_p,0,…,0\}(含n-p个零根)$ ，可见 $AB$ 与 $BA$ 只差 $n-p$ 个零根，其余根相同</p><p><img src="/posts/1879915179/image-20220913002244773.png" alt="image-20220913002244773"></p><p>即 $AB$ 与 $BA$ 必有相同非零根</p><p><img src="/posts/1879915179/image-20220913002458303.png" alt="image-20220913002458303"></p></li><li><p>由于 AB与BA 只相差 $n-p$ 个零根，所以 $tr(AB) = tr(BA)$</p><p>证：$tr(AB)=\lambda_1+\lambda_2+\cdots+\lambda_p+0+\cdots+0=tr(BA)$</p></li><li><p>$\mid I_n \pm AB\mid = \mid I_p\pm BA\mid$ ，当 $\lambda = 1,A取-A$ 时，分别可证</p></li><li><p>若 n&gt;p，则 $\mid AB \mid=0$</p><p>证明：</p><p>$AB$ 为 $n$ 阶矩阵，由于 $r(AB)\le r(A)\le p&lt;n(矩阵的秩越乘越小)$ ，故 $\mid AB\mid=0$</p><p>或者考虑 $AB$ 为 $n$ 阶方阵，必有 $n-p$ 个零特征值，$\mid AB \mid = \prod\lambda_i = 0$</p><p><img src="/posts/1879915179/image-20220912235751888.png" alt="image-20220912235751888"></p><p>例3：$P = \left(\begin{matrix}I&amp;A \\0&amp;I\end{matrix}\right)$ ，求证 $P^{-1}=\left(\begin{matrix}I&amp;-A\\0&amp; I\end{matrix}\right)$ （其实也就是二阶矩阵求逆）</p><script type="math/tex;mode=display">\begin{aligned}
+A=\left(
+\begin{matrix}
+B\quad C\\
+D\quad E
+\end{matrix}
+\right),则A^{-1}=\frac{1}{\vert A\vert}\left(
+\begin{matrix}
+E\quad -C\\
+-D\quad B
+\end{matrix}
+\right)
+\end{aligned}</script></li></ol><h2 id="1-3-秩1矩阵"><a href="#1-3-秩1矩阵" class="headerlink" title="1.3 秩1矩阵"></a>1.3 秩1矩阵</h2><script type="math/tex;mode=display">\begin{aligned}
+A&=\left(
+\begin{matrix}
+a_1b_1\quad &a_1b_2\quad &\cdots\quad &a_1b_n\\
+a_2b_1\quad &a_2b_2\quad &\cdots\quad &a_2b_n\\
+\vdots\quad &\vdots\quad &\ddots\quad &\vdots\\
+a_nb_1\quad &a_nb_2\quad &\cdots\quad &a_nb_n
+\end{matrix}
+\right)_{n\times n}=\left(
+\begin{matrix}
+a_1\\a_2\\\vdots \\a_n
+\end{matrix}
+\right)\left(
+b_1\quad b_2\quad \cdots \quad b_n
+\right)\overset{\Delta}{=}\alpha \beta^{T}\\\\
+&其中 \alpha=\left(
+\begin{matrix}
+a_1\\a_2\\\vdots \\a_n
+\end{matrix}
+\right),\beta=\left(
+\begin{matrix}
+b_1\\b_2\\\vdots \\b_n
+\end{matrix}
+\right)
+\end{aligned}</script><h3 id="1-3-1-秩1矩阵特征方程"><a href="#1-3-1-秩1矩阵特征方程" class="headerlink" title="1.3.1 秩1矩阵特征方程"></a>1.3.1 秩1矩阵特征方程</h3><script type="math/tex;mode=display">\begin{aligned}
+&\mid \lambda I_n-A\mid = \mid \lambda I_n-\alpha_{n\times 1}\beta_{1\times n}^T\mid\xlongequal{换位公式:\vert\lambda_n-(AB)_n \vert=\lambda^{n-p}\vert \lambda I_p-(BA)_p\vert}\lambda^{n-1}\mid\lambda I_1-\beta_{1\times n}^T\alpha_{n\times 1}I_1\mid\\
+&=\lambda^{n-1}(\lambda I-tr(A)),其中 tr(A)=\sum\limits_{i=1}\limits^{n}a_{ii}b_{ii}
+\end{aligned}</script><p><strong>eg</strong></p><p><img src="/posts/1879915179/image-20220914074542612.png" alt="image-20220914074542612"></p><h3 id="1-3-3-秩1矩阵的特征值"><a href="#1-3-3-秩1矩阵的特征值" class="headerlink" title="1.3.3 秩1矩阵的特征值"></a>1.3.3 秩1矩阵的特征值</h3><p>若 $A = A_{n\times n}$ ，$r(A)=1$ ，则全体特征值为 $\lambda(A)=\{tr(A),0,…,0\}$ ，其中 $tr(A)=a_1b_1+a_2b_2+…+a_nb_n=\beta^T\alpha$</p><p><strong>证明：</strong></p><p>由换位公式可知，$\alpha_{n\times 1}\beta_{1\times n}^T$ 与 $\beta_{1\times n}^T\alpha_{n\times 1}$ 相差 n-1 个零根，即有一个相等的非零特征根，而 $\beta_{1\times n}^T\alpha_{n\times 1}$ 为1阶矩阵，所以 $\lambda_1=\beta_{1\times n}^T\alpha_{n\times 1}=a_1b_1+a_2b_2+…+a_nb_n=tr(A)$</p><h3 id="1-3-4-秩1矩阵特征向量"><a href="#1-3-4-秩1矩阵特征向量" class="headerlink" title="1.3.4 秩1矩阵特征向量"></a>1.3.4 秩1矩阵特征向量</h3><p>$A=\alpha \beta^T$ 的列向量都是 $\lambda_1=tr(A)$ 的特征向量</p><p>证明：</p><script type="math/tex;mode=display">\begin{aligned}
+A\alpha = (\alpha \beta)\alpha=\lambda_1 \alpha
+\end{aligned}</script><h4 id="eg"><a href="#eg" class="headerlink" title="eg"></a>eg</h4><p><img src="/posts/1879915179/image-20221216162018820.png" alt="image-20221216162018820"></p><script type="math/tex;mode=display">\begin{aligned}
+&A为秩1矩阵，\lambda(A)=\{tr(A),0,0\}=\{-2,0,0\}\\
+&可知 \vert \lambda I-A\vert=x^2(x+2),其中\lambda_1=-2,可取\left(\begin{matrix}1\\1\\2\end{matrix}\right)为A的特向，A\left(\begin{matrix}1\\1\\2\end{matrix}\right)=-2\left(\begin{matrix}1\\1\\2\end{matrix}\right)
+\end{aligned}</script><hr><p><img src="/posts/1879915179/image-20221216163159365.png" alt="image-20221216163159365"></p><script type="math/tex;mode=display">\begin{aligned}
+&A为秩1矩阵，全体特根\lambda(A)=\{tr(A),0,0\}=\{9,0,0\},可知 \vert \lambda I-A\vert=\lambda^2(\lambda-9)\\
+&\lambda_1=9,可知A的列向量\left(\begin{matrix}1\\1\\-1\end{matrix}\right)为一个特向，A\left(\begin{matrix}1\\1\\-1\end{matrix}\right)=9\left(\begin{matrix}1\\1\\-1\end{matrix}\right)
+\end{aligned}</script><h2 id="1-4-平移矩阵"><a href="#1-4-平移矩阵" class="headerlink" title="1.4 平移矩阵"></a>1.4 平移矩阵</h2><blockquote><p>$A+cI$ 称为A的平移矩阵</p></blockquote><h3 id="1-4-1-平移法"><a href="#1-4-1-平移法" class="headerlink" title="1.4.1 平移法"></a>1.4.1 平移法</h3><h4 id="a-特征值"><a href="#a-特征值" class="headerlink" title="a. 特征值"></a>a. 特征值</h4><p>若 $\lambda(A)=\{\lambda_1+c,\lambda_2+c,…,\lambda_n+c\}$</p><h4 id="b-特征向量"><a href="#b-特征向量" class="headerlink" title="b. 特征向量"></a>b. 特征向量</h4><p>$A+cI$ 与 $A$ 有相同的特征向量</p><p>证明：</p><script type="math/tex;mode=display">\begin{aligned}
+&令A的n个特征向量x_1,x_2,...,x_n，有\\\\
+&Ax_1=\lambda_1 x_1,Ax_1=\lambda_2 x_2,...Ax_n=\lambda_1 x_n\\\\
+\Leftrightarrow &
+\left\{
+\begin{aligned}
+(A+cI)x_1 = \lambda_1x_1+cx_1=(\lambda_1+c)x_1\\
+(A+cI)x_2 = \lambda_2x_2+cx_2=(\lambda_2+c)x_2\\
+\cdots\\
+(A+cI)x_n = \lambda_nx_n+cx_n=(\lambda_n+c)x_n
+\end{aligned}
+\right.\\\\
+故&\lambda(A)=\{\lambda_1,\lambda_2,...,\lambda_n\}
+\end{aligned}</script><p><strong>eg</strong>：平移法求特征向量</p><p><img src="/posts/1879915179/image-20220917095035907.png" alt="image-20220917095035907"></p><script type="math/tex;mode=display">\begin{aligned}
+&(1)A-E=\left(
+\begin{matrix}
+0\quad 1\quad 0\\
+0\quad 1\quad 0\\
+0\quad 1\quad 0
+\end{matrix}
+\right)\\
+&由秩1公式,\lambda(A-E)=\{tr(A),0,0\},\\
+&由平移公式 \lambda(A)=\{tr(A-E)+1,1,1\}=\{2,1,1\}\\
+&且(A-E)与A的特征向量相等，A-E的列向量\left(
+\begin{matrix}
+1\\1\\1
+\end{matrix}
+\right)\\
+&(2)A-E=\left(
+\begin{matrix}
+3& 6 & 0\\
+-3& -6& 0\\
+-3& -6& 0\\
+\end{matrix}
+\right),\lambda(A-E)=\{-3,0,0\},
+\\&故\lambda(A)=\{-2,1,1\},A的特征向量为\left(
+\begin{matrix}
+3\\-3\\6
+\end{matrix}
+\right)
+\end{aligned}</script><hr><script type="math/tex;mode=display">\begin{aligned}
+&A=\left(
+\begin{matrix}
+-1& -2& 6\\
+-1& 0& 3\\
+-1& -1& 4
+\end{matrix}
+\right)，A-I=\left(
+\begin{matrix}
+-2& -2& 6\\
+-1& -1& 3\\
+-1& -1& 3
+\end{matrix}
+\right),\lambda(A-I)=\{0,0,0\}\\
+&,则\lambda(A)=\lambda(A-I)+1=\{1,1,1\}
+\end{aligned}</script><hr><script type="math/tex;mode=display">\begin{aligned}
+&A=\left(
+\begin{matrix}
+7& 4& -1\\
+4& 7& -1\\
+-4& -4& 4
+\end{matrix}
+\right),A-3I=\left(
+\begin{matrix}
+4& 4& -1\\
+4& 4& -1\\
+-4& -4& 1
+\end{matrix}
+\right),\lambda(A-3I)=\{9,0,0\}\\
+\\&\lambda(A)=\lambda(A-3I)+3=\{12,3,3\}
+\end{aligned}</script><h3 id="1-4-2-倍法"><a href="#1-4-2-倍法" class="headerlink" title="1.4.2 倍法"></a>1.4.2 倍法</h3><p>若 $\lambda(A)=\{\lambda_1,…,\lambda_n\}$ ，则 $\lambda(kA)=\{k\lambda_1,k\lambda_2,…,k\lambda_n,\}(k\neq 0)$</p><p>$kA$ 与 $A$ 有相同的特征向量</p><h2 id="1-5-复数域"><a href="#1-5-复数域" class="headerlink" title="1.5 复数域"></a>1.5 复数域</h2><h3 id="1-5-1-复数"><a href="#1-5-1-复数" class="headerlink" title="1.5.1 复数"></a>1.5.1 复数</h3><blockquote><p>$C:\{z=a+bi\mid a,b\in R\}$ ，其中 $i^2=-1,\sqrt{-1}=i$</p></blockquote><ul><li>$R\subset C$ ：实数都是复数</li></ul><p><img src="/posts/1879915179/v2-562307e431d264f4197a194a5394c018_720w.png" alt="img"></p><p>$若z=a+bi,则\overline{z}=\overline{a+bi}=a-bi$</p><h4 id="a-复数域表示"><a href="#a-复数域表示" class="headerlink" title="a. 复数域表示"></a>a. 复数域表示</h4><p>$n$ 维实列向量, $X=\left(\begin{matrix}x_1\\ x_2 \\ \vdots \\x_n\end{matrix}\right),x_i\in R$ ，$n$ 维实复列向量 $X=\left(\begin{matrix}x_1\\ x_2 \\ \vdots \\x_n\end{matrix}\right),x_i\in C$ ，列向量可表示为转置形式 $X=\left(x_1,x_2,…,x_n\right)^T,X\in C^n$ ，实矩阵 $R_{m\times n} = \{A=(a_{ij})\mid a_{i,j}\in R,1\le i\le m,1\le j\le n\}$ ，复矩阵 $C^{m\times n}=\{A=(a_{ij})\mid a_{ij}\in C,1\le i\le m,1\le j\le n\}$ ，且 $R_{m\times n}\in C^{m\times n}$ ，$A_{m\times n}=\left(\begin{matrix}a_{11}\quad &amp;a_{12}&amp;\cdots\quad &amp;a_{1n}\\a_{21}\quad &amp;a_{22}&amp;\cdots\quad &amp;a_{2n}\\ \vdots\quad &amp;\vdots &amp;\ddots\quad &amp;\vdots\\a_{m1}\quad &amp;a_{m2}&amp;\cdots \quad &amp;a_{mn}\end{matrix}\right)\in C^{m\times n}$ ，可表示为 $A=(\alpha_1,\alpha_2,\cdots,\alpha_n)$ ，且 $\alpha_i\in C^{m}$</p><h4 id="b-复数性质"><a href="#b-复数性质" class="headerlink" title="b. 复数性质"></a>b. 复数性质</h4><ol><li>$\mid z \mid = \mid\overline z \mid$</li><li>$\mid kz \mid=k\mid z\mid,k\in C$</li><li>$\mid z_1+z_2 \mid \le \mid z_1 \mid+\mid z_2 \mid$</li><li>$\overline{z_1\cdot z_2}=\overline{z_1} \cdot \overline{z_2}$</li></ol><h3 id="1-5-2-共轭公式"><a href="#1-5-2-共轭公式" class="headerlink" title="1.5.2 共轭公式"></a>1.5.2 共轭公式</h3><p>由 $z\overline{z}=(a+bi)(a-bi)=a^2+b^2$</p><ul><li>规定 $\mid z \mid=\sqrt{a^2+b^2}$ 为z的模长</li></ul><p>模公式 $z\overline z=\overline zz=\mid z\mid^2=a^2+b^2$</p><h4 id="复矩阵的共轭"><a href="#复矩阵的共轭" class="headerlink" title="复矩阵的共轭"></a>复矩阵的共轭</h4><p>$A=(a_{ij})=\left(\begin{matrix}a_{11}&amp;\cdots &amp;a_{1n}\\\vdots &amp;\ddots &amp;\vdots\\a_{n1}&amp;\cdots &amp;a_{nn}\\\end{matrix}\right)$ ，$A$ 的共轭矩阵 $\overline{A}=(\overline{a_{ij}})=\left(\begin{matrix}\overline{a_{11}}&amp;\cdots &amp;\overline{a_{1n}}\\\vdots&amp;\ddots &amp;\vdots\\\overline{a_{n1}}&amp;\cdots &amp;\overline{a_{nn}}\\\end{matrix}\right)$</p><p><strong>eg：</strong></p><p><img src="/posts/1879915179/image-20220917112113538.png" alt="image-20220917112113538"></p><p><strong>乘后共轭=共轭后乘</strong> ： $\overline{A\cdot B}=\overline{A}\cdot \overline{B}$</p><h3 id="1-5-3-Hermite变换"><a href="#1-5-3-Hermite变换" class="headerlink" title="1.5.3 Hermite变换"></a>1.5.3 Hermite变换</h3><blockquote><p>共轭转置记为 Hermite 变换，即 $A^H = \overline{A}^T=\overline{A^T}$</p></blockquote><script type="math/tex;mode=display">\begin{aligned}
+&A=(a_{ij})=\left(
+\begin{matrix}
+a_{11}&\cdots &a_{1n}\\
+\cdots &\ddots &\cdots\\
+a_{m1}&\cdots & a^{mn}
+\end{matrix}
+\right)\in C^{m\times n},\\
+&\overline{A}=\left(
+\begin{matrix}
+\overline{a_{11}}&\cdots &\overline{a_{1n}}\\
+\vdots &\ddots &\vdots\\
+\overline{a_{m1}}&\cdots &\overline{a_{mn}}
+\end{matrix}
+\right)\in C^{m\times n}\\
+&X=\left(
+\begin{matrix}
+x_1\\
+x_2\\
+\vdots\\
+x_n
+\end{matrix}
+\right)\in C^n,则X^H=(\overline{x_1},\overline{x_2},...,\overline{x_n})
+\end{aligned}</script><p>共轭不会使矩阵变型，转置使矩阵变型 $A\in C^{n\times p}\Rightarrow A^H\in C^{p\times n}$</p><p>eg：</p><script type="math/tex;mode=display">\begin{aligned}
+A=\left(
+\begin{matrix}
+1\quad i\\
+1\quad i\\
+1\quad i
+\end{matrix}
+\right)\in C^{3\times2},则A^H=\left(
+\begin{matrix}
+1\quad -i\\
+1\quad -i\\
+1\quad -i
+\end{matrix}
+\right)^T
+=\left(
+\begin{matrix}
+1\quad 1\quad 1\\
+-i\quad -i\quad -i
+\end{matrix}
+\right) \in C^{2\times 3}
+\end{aligned}</script><h4 id="a-Hermite变换性质"><a href="#a-Hermite变换性质" class="headerlink" title="a. Hermite变换性质"></a>a. Hermite变换性质</h4><div class="table-container"><table><thead><tr><th>Hermite变换</th><th>转置</th></tr></thead><tbody><tr><td>$(A^H)^H=A$</td><td>$(A^T)^T=A$</td></tr><tr><td>$(kA)^H=\overline{k}A^H$</td><td>$(kA)^T=kA^T$</td></tr><tr><td>$(A+B)^H=A^H+B^H$</td><td>$(A+B)^T=A^T+B^T$</td></tr><tr><td>$(AB)^H=B^HA^H,(ABC)^H=C^HB^HA^H$</td><td>$(AB)^T=B^TA^T$</td></tr></tbody></table></div><p>实数阵的 Hermite 变换仍是其本身</p><ul><li>$a\in C 是实数 \iff \overline{a}=a\iff a^H=a$</li></ul><h4 id="b-Hermite变换相关的矩阵分类"><a href="#b-Hermite变换相关的矩阵分类" class="headerlink" title="b. Hermite变换相关的矩阵分类"></a>b. Hermite变换相关的矩阵分类</h4><div class="table-container"><table><thead><tr><th>Hermite变换</th><th>转置</th></tr></thead><tbody><tr><td>$A^H=A$ Hermite矩阵</td><td>$A^T=A$ ，对称阵</td></tr><tr><td>$A^H=-A$ 斜Hermite矩阵</td><td>$A^T=-A$ ，反对称阵</td></tr></tbody></table></div><h2 id="1-6-内积"><a href="#1-6-内积" class="headerlink" title="1.6 内积"></a>1.6 内积</h2><p>$X=\left(\begin{matrix}x_1\\x_2\\\vdots\\x_n\end{matrix}\right),Y=\left(\begin{matrix}y_1\\y_2\\\vdots\\y_n\end{matrix}\right)\in C^n$</p><h3 id="1-6-1-复向量内积"><a href="#1-6-1-复向量内积" class="headerlink" title="1.6.1 复向量内积"></a>1.6.1 复向量内积</h3><p>$(X,Y)\overset{\Delta}{=}Y^HX=x_1\overline{y_1}+x_2\overline{y_2}+\cdots+x_n\overline{y_n}=\sum\limits_{i=1}\limits^{n}x_i\overline{y_i}=tr(Y^HX)$</p><p>$(Y,X)=X^HY=\overline{x_1}y_1+\overline{x_2}y_2+\cdots+\overline{x_n}y_1=\sum\limits_{i=1}\limits^{n}\overline{x_i}y_i=tr(X^HY)$</p><p>若取 $Y=X$ ，则其内积</p><script type="math/tex;mode=display">\begin{aligned}
+(X,X)&=X^HX=x_1\overline{x_1}+x_2\overline{x_2}+\cdots+x_n\overline{x_n}=\sum\limits_{i=1}\limits^{n}x_i\overline{x_i}\\
+&=\vert x_1 \vert^2+\vert x_2 \vert^2+\cdots+\vert x_n \vert^2 = \vert X \vert^2\\
+&=tr(X^HX)=tr(XX^H)
+\end{aligned}</script><h4 id="向量内积性质"><a href="#向量内积性质" class="headerlink" title="向量内积性质"></a>向量内积性质</h4><ol><li><p>$(X,X)\ge 0$ ；若 $X\neq 0 ,(X,X)&gt; 0$</p></li><li><p>$(X,Y)=\overline{(Y,X)}$</p></li><li><p>$(kX,Y)=k(X,Y),(X,kY)=\overline{k}(X,Y)$</p></li><li><p>$(X+Y,W)=(X,W)+(Y,W)$</p><p>$(X,Y+W)=(X,Y)+(X,W)$</p></li><li><p>$\vert (X,Y) \vert^2\le \vert X \vert\cdot\vert Y \vert$</p></li></ol><h3 id="1-6-2-复矩阵内积"><a href="#1-6-2-复矩阵内积" class="headerlink" title="1.6.2 复矩阵内积"></a>1.6.2 复矩阵内积</h3><h4 id="a-定义"><a href="#a-定义" class="headerlink" title="a. 定义"></a>a. 定义</h4><script type="math/tex;mode=display">\begin{aligned}
+&(A,B)\overset{\Delta}{=}tr(B^HA)=tr(A^HB)=\sum a_{ij}\overline{b_{ij}},A,B\in C^{m,n}\\
+&(A,A)\xlongequal{\Delta}tr(A^HA)=tr(AA^H)=\sum a_{ij}\overline{a_{ij}}=\sum \vert a_{ij} \vert^2
+\end{aligned}</script><p>矩阵A的模长：$\vert \vert A \vert \vert=\sqrt{(A,A)}=\sqrt{tr(AA^H)}=\sqrt{\sum\vert a_{ij} \vert^2}$</p><p><img src="/posts/1879915179/image-20220918161219629.png" alt="image-20220918161219629"></p><h4 id="b-性质"><a href="#b-性质" class="headerlink" title="b. 性质"></a>b. 性质</h4><ol><li><p>$(A,A)=tr(A^HA)=\sum\vert a_{ij} \vert^2 \ge 0$ ；若 $A\neq 0$ ，则 $(A,A)&gt;0$</p></li><li><p>$(A,B)=\overline{(B,A)}$</p></li><li><p>$(kA,B)=k(A,B),(A,kB)=\overline{k}(A,B)$</p></li><li><p>(A+B,D)=(A,D)+(B,D)，(D,A+B)=(D,A)+(D,B)</p></li><li><p>$\vert (A,B) \vert^2 \le \vert A\vert\cdot\vert B \vert$</p></li></ol><h4 id="c-矩阵的内积形式"><a href="#c-矩阵的内积形式" class="headerlink" title="c. 矩阵的内积形式"></a>c. 矩阵的内积形式</h4><h5 id="列分块（常用）"><a href="#列分块（常用）" class="headerlink" title="列分块（常用）"></a>列分块（常用）</h5><script type="math/tex;mode=display">\begin{aligned}
+A&=\left(
+\begin{matrix}
+a_{11}\quad&\cdots&a_{1p}\\
+\vdots\quad&\ddots&\vdots\\
+a_{n1}\quad&\cdots&a_{np}
+\end{matrix}
+\right)\in C^{n\times p}\\
+&=(\alpha_1,\cdots,\alpha_p),其中\alpha_i为n维列向量(n\times 1阶矩阵)\\\\
+A^H&=\left(
+\begin{matrix}
+\overline{a_{11}}\quad&\cdots\quad &\overline{a_{n1}}\\
+\vdots\quad &\ddots&\vdots\\
+\overline{a_{1p}}\quad&\cdots\quad &\overline{a_{np}}\\
+\end{matrix}
+\right)\in C^{p\times n}\\
+&=\left(
+\begin{matrix}
+\overline{\alpha_1}^T\\
+\vdots\\
+\overline{\alpha_p}^T
+\end{matrix}
+\right)，其中\overline{\alpha_1}^T是n维行向量(1\times n阶矩阵)\\\\
+\end{aligned}</script><script type="math/tex;mode=display">\begin{aligned}
+A^HA&=\left(
+\begin{matrix}
+\overline{\alpha_1}^T\\
+\vdots\\
+\overline{\alpha_p}^T
+\end{matrix}
+\right)(\alpha_1,\cdots,\alpha_p)\\\\
+&=\left(
+\begin{matrix}
+\overline{\alpha_1}^T\alpha_1\quad&\overline{\alpha_1}^T\alpha_2\quad &\cdots&\overline{\alpha_1}^T\alpha_p\\
+\overline{\alpha_2}^T\alpha_1\quad&\overline{\alpha_2}^T\alpha_2\quad &\cdots&\overline{\alpha_2}^T\alpha_p\\
+\vdots\quad&\vdots\quad &\ddots\quad &\vdots\\
+\overline{\alpha_p}^T\alpha_1\quad&\overline{\alpha_p}^T\alpha_2\quad &\cdots&\overline{\alpha_p}^T\alpha_p
+\end{matrix}
+\right)\\\\
+&=\left(
+\begin{matrix}
+(\alpha_1,\alpha_1)\quad &(\alpha_2,\alpha_1)\quad&\cdots\quad &(\alpha_p,\alpha_1)\\
+(\alpha_1,\alpha_2)\quad &(\alpha_2,\alpha_2)\quad&\cdots\quad &(\alpha_p,\alpha_2)\\
+\vdots\quad&\vdots\quad &\ddots\quad &\vdots\\
+(\alpha_1,\alpha_p)\quad &(\alpha_2,\alpha_p)\quad&\cdots\quad &(\alpha_p,\alpha_p)
+\end{matrix}
+\right)\\\\
+&=\left(
+\begin{matrix}
+\overline{(\alpha_1,\alpha_1)}\quad &\overline{(\alpha_1,\alpha_2)}\quad&\cdots\quad &\overline{(\alpha_1,\alpha_p)}\\
+\overline{(\alpha_2,\alpha_1)}\quad &\overline{(\alpha_2,\alpha_2)}\quad&\cdots\quad &\overline{(\alpha_2,\alpha_p)}\\
+\vdots\quad&\vdots\quad &\ddots\quad &\vdots\\
+\overline{(\alpha_p,\alpha_1)}\quad &\overline{(\alpha_p,\alpha_2)}\quad&\cdots\quad &\overline{(\alpha_p,\alpha_p)}
+\end{matrix}
+\right)\\
+\end{aligned}</script><h5 id="行分块"><a href="#行分块" class="headerlink" title="行分块"></a>行分块</h5><script type="math/tex;mode=display">\begin{aligned}
+A&=\left(
+\begin{matrix}
+a_{11}\quad&\cdots&a_{1p}\\
+\vdots\quad&\ddots&\vdots\\
+a_{n1}\quad&\cdots&a_{np}
+\end{matrix}
+\right)\in C^{n\times p}\\
+&=\left(
+\begin{matrix}
+\alpha_1\\
+\alpha_2\\
+\vdots\\
+\alpha_n
+\end{matrix}
+\right),其中\alpha_i为p维行向量(1\times p阶矩阵)\\\\
+A^H&=\left(
+\begin{matrix}
+\overline{\alpha_1}^T\quad \overline{\alpha_2}^T\quad \cdots\quad \overline{\alpha_n}^T 
+\end{matrix}
+\right),其中\overline{\alpha_i}^T 为p维列向量(p\times 1阶矩阵)
+\end{aligned}</script><script type="math/tex;mode=display">\begin{aligned}
+AA^H&=\left(
+\begin{matrix}
+\alpha_1\\
+\alpha_2\\
+\vdots\\
+\alpha_n
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\overline{\alpha_1}^T\quad \overline{\alpha_2}^T\quad \cdots\quad \overline{\alpha_n}^T 
+\end{matrix}
+\right)\\\\
+&=\left(
+\begin{matrix}
+\alpha_1\overline{\alpha_1}^T\quad &\alpha_1\overline{\alpha_2}^T\quad&\cdots\quad &\alpha_1\overline{\alpha_n}^T\\
+\alpha_2\overline{\alpha_1}^T\quad &\alpha_2\overline{\alpha_2}^T\quad&\cdots\quad &\alpha_2\overline{\alpha_n}^T\\
+\vdots\quad &\vdots\quad &\ddots\quad &\vdots\\
+\alpha_n\overline{\alpha_1}^T
+&\quad\alpha_n\overline{\alpha_2}^T\quad&\cdots\quad &\alpha_n\overline{\alpha_n}^T
+\end{matrix}
+\right)\\\\
+&=\left(
+\begin{matrix}
+(\alpha_1,\alpha_1)\quad &(\alpha_1,\alpha_2)\quad &\cdots\quad &(\alpha_1,\alpha_n)\\
+(\alpha_2,\alpha_1)\quad &(\alpha_2,\alpha_2)\quad &\cdots\quad &(\alpha_2,\alpha_n)\\
+\vdots\quad &\vdots\quad &\ddots\quad &\vdots\\
+(\alpha_n,\alpha_1)\quad &(\alpha_n,\alpha_2)\quad &\cdots\quad &(\alpha_n,\alpha_n)
+\end{matrix}
+\right)
+\end{aligned}</script><h3 id="1-6-3-模长"><a href="#1-6-3-模长" class="headerlink" title="1.6.3 模长"></a>1.6.3 模长</h3><h4 id="a-复向量模长"><a href="#a-复向量模长" class="headerlink" title="a. 复向量模长"></a>a. 复向量模长</h4><h5 id="列向量模长"><a href="#列向量模长" class="headerlink" title="列向量模长"></a>列向量模长</h5><script type="math/tex;mode=display">\begin{aligned}
+&X=\left(
+\begin{matrix}
+x_1\\x_2\\\vdots\\x_n
+\end{matrix}
+\right)\in C,则其模长 \mid X \mid = \sqrt{ \mid x_1 \mid^2+ \mid x_2 \mid^2+
+ \cdots \mid x_n \mid^2}
+ \end{aligned}</script><h5 id="模长性质"><a href="#模长性质" class="headerlink" title="模长性质"></a>模长性质</h5><p>$\mid k\cdot X \mid = \mid k \mid \cdot \mid X \mid ,k\in C$</p><p>$\vert \frac{X}{k} \vert=\frac{\vert X\vert}{\vert k \vert},(k\neq \vec{0})$</p><p>$\vert X\pm Y\vert \le \vert X\vert + \vert Y \vert$</p><h5 id="模平方公式"><a href="#模平方公式" class="headerlink" title="模平方公式"></a>模平方公式</h5><script type="math/tex;mode=display">\begin{aligned}
+&令X=\left(
+\begin{matrix}
+x_1\\
+x_2\\
+\vdots\\
+x_n
+\end{matrix}
+\right)\in C,则 \left\{
+\begin{aligned}
+&① X^HX=\mid X \mid^2\\\\
+&②tr(X^HX)=tr(XX^H)=\mid X \mid^2
+\end{aligned}
+\right.,其中\\ 
+&\mid X \mid^2 = \mid x_1 \mid ^2 + \mid x_2 \mid^2+\cdots+\mid x_n \mid^2=\sum\limits_{i=1}\limits^{n}\mid x_i \mid^2
+\end{aligned}</script><p><strong>区分</strong> ：复数的模平方和复数平方的模</p><ul><li>复数的模平方 $\mid x_1 \mid^2=(a+bi)(a-bi)=a^2+b^2 \ge 0$</li><li>复数平方的模：$\mid x_1^2 \mid=(a+bi)^2= a^2-b^2+2abi$</li></ul><p><strong>eg</strong></p><script type="math/tex;mode=display">\begin{aligned}
+&X=\left(
+\begin{matrix}
+1\\i\\1
+\end{matrix}
+\right)\in C^3,XX^H=\left(
+\begin{matrix}
+1\\i\\1
+\end{matrix}
+\right)(1\quad -i\quad 1)=\left(
+\begin{matrix}
+&1\quad &\quad &*\\
+&\quad &1&\quad\\
+&*&\quad&1
+\end{matrix}
+\right)\\
+&\therefore tr(X^HX)=tr(XX^H)=\vert 1 \vert^2+\vert  -i^2 \vert^2+\vert 1 \vert^2 = 3
+\end{aligned}</script><h4 id="b-复矩阵模长"><a href="#b-复矩阵模长" class="headerlink" title="b. 复矩阵模长"></a>b. 复矩阵模长</h4><script type="math/tex;mode=display">\begin{aligned}
+&令A=(a_{ij})\in C,则模长(矩阵的F范数)\mid \mid A \mid\mid=\sqrt{\sum\limits_{i=1}\limits^{n}\mid a_{ij} \mid^2}
+\end{aligned}</script><h5 id="复矩阵的模平方公式"><a href="#复矩阵的模平方公式" class="headerlink" title="复矩阵的模平方公式"></a>复矩阵的模平方公式</h5><script type="math/tex;mode=display">\begin{aligned}
+&设A=(a_{ij})_{n\times p},则 \quad tr(A^HA)=tr(AA^H)=\mid\mid A\mid\mid^2 = \sum\limits_{i=1}\limits^{n}\mid a_{ij} \mid^2
+\end{aligned}</script><p><strong>eg</strong></p><script type="math/tex;mode=display">\begin{aligned}
+X=\left(
+\begin{matrix}
+1\\i\\1
+\end{matrix}
+\right)\in C^{3\times 1},则\mid X \mid^2 = X^HX=(1,-i,1)\left(
+\begin{matrix}
+1\\i\\1
+\end{matrix}
+\right)=1+-i^2+1=3
+\end{aligned}</script><p>对于方阵 $A=(a_{ij})_{n\times n}$ ，有</p><script type="math/tex;mode=display">\begin{aligned}
+\left\{
+\begin{aligned}
+&tr(A)\overset{\Delta}{=} a_{11}+a_{22}+\cdots+a_{nn}=\sum\limits_{i=1}\limits^{n}\lambda_i\\
+&det(A) = \mid A \mid = \prod\limits_{i=1}\limits^{n}\lambda_i
+\end{aligned}
+\right.
+\end{aligned}</script><h2 id="1-7-正交"><a href="#1-7-正交" class="headerlink" title="1.7 正交"></a>1.7 正交</h2><h3 id="1-7-1-向量正交"><a href="#1-7-1-向量正交" class="headerlink" title="1.7.1 向量正交"></a>1.7.1 向量正交</h3><script type="math/tex;mode=display">\begin{aligned}
+X&=\left(
+\begin{matrix}
+x_1\\
+x_2\\
+\vdots\\
+x_n
+\end{matrix}
+\right),Y=\left(
+\begin{matrix}
+y_1\\
+y_2\\
+\vdots\\
+y_n
+\end{matrix}
+\right)\in C^{n}
+\end{aligned}</script><script type="math/tex;mode=display">\begin{aligned}
+X\bot Y\iff (X,Y)=0&=x_1\overline{y_1}+x_2\overline{y_2}+\cdots+x_n\overline{y_n}\\\\
+&=\overline{\overline{x_1}y_1+\overline{x_2}y_2+\cdots+\overline{x_n}y_n}\\
+=(Y,X)
+\end{aligned}</script><h4 id="正交性质"><a href="#正交性质" class="headerlink" title="正交性质"></a>正交性质</h4><ol><li><p>$X\bot Y\Rightarrow aX\bot bY$</p><p>证：$(aX,bY)=\overline{b}Y^HaX=a\overline{b}Y^HX=a\overline{b}(X,Y)=0$</p></li><li><p>勾股定理：$X_1\bot X_2\bot \cdots \pm X_n\Rightarrow \vert c_1X_1\pm c_2X_2\bot \cdots \pm c_nX_n\vert^2=\vert c_1X_1\vert^2+\vert c_2X_2\vert^2+\cdots+\vert c_nX_n\vert^2$</p><p>此时，$X_1,X_2,\cdots,x_n$ 称为一个正交组</p></li></ol><h3 id="1-7-2-单位向量"><a href="#1-7-2-单位向量" class="headerlink" title="1.7.2 单位向量"></a>1.7.2 单位向量</h3><p>若 $X\neq \vec{0}$ ，$\frac{X}{\vert X \vert}$ 是一个单位向量（$\vert \frac{X}{\vert X \vert} \vert=1$）</p><p><img src="/posts/1879915179/image-20220918123629547.png" alt="image-20220918123629547"></p><h3 id="1-7-3-优阵-正交阵"><a href="#1-7-3-优阵-正交阵" class="headerlink" title="1.7.3 优阵(正交阵)"></a>1.7.3 优阵(正交阵)</h3><p>预：非单位列向量</p><p>半：p个n维列向量(p&lt;n)</p><h4 id="a-预-半优阵-预-半正交阵"><a href="#a-预-半优阵-预-半正交阵" class="headerlink" title="a. 预-半优阵(预-半正交阵)"></a>a. 预-半优阵(预-半正交阵)</h4><p>$\alpha_1,\alpha_2,\cdots,\alpha_p$ 是 $n$ 维列向量，且 $p\le n$ ，且 $\alpha_1\bot\alpha_2\bot \cdots\bot\alpha_p$<br>，则称 $A=(\alpha_1,\alpha_2,\cdots,\alpha_p)$ 为预半优阵</p><h5 id="判定"><a href="#判定" class="headerlink" title="判定"></a>判定</h5><p>$A=(\alpha_1,\alpha_2,\cdots,\alpha_p)$ 是预半优阵 $\iff A^HA=\left(\begin{matrix}(\alpha_1,\alpha_1)&amp;\cdots&amp;0\\\vdots&amp;\ddots&amp;0\\0&amp;\cdots&amp;(\alpha_p,\alpha_p)\end{matrix}\right)$ 是对角阵，其中 $\alpha_1,\alpha_2,\cdots,\alpha_p$ 是 $n$ 维列向量</p><p><img src="/posts/1879915179/image-20220918204358611.png" alt="image-20220918204358611"></p><p><strong>区分</strong> ： $A^HA$ 是 $p \times p$ 阶满秩方阵，而 $AA^H$ 是 $n\times n$ 不满秩方阵</p><h4 id="b-半优阵-半正交阵"><a href="#b-半优阵-半正交阵" class="headerlink" title="b. 半优阵(半正交阵)"></a>b. 半优阵(半正交阵)</h4><p>$A=(\alpha_1,\alpha_2,\cdots,\alpha_p)$ 是预半优阵，其中 $\alpha_i$ 是 $n$ 维列向量，若满足 $\vert \alpha_1 \vert=\vert \alpha_2 \vert=\cdots=\vert \alpha_p \vert = 1$ ，则A为半优阵</p><h5 id="判定-1"><a href="#判定-1" class="headerlink" title="判定"></a>判定</h5><p>$A=(\alpha_1,\cdots,\alpha_p)$ 是半优阵 $\iff \alpha_1\bot\cdots\bot\alpha_p$ ，且 $\vert \alpha_1 \vert=\cdots=\vert \alpha_p \vert=1$ $\iff A^HA=I_{p}$</p><h5 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h5><ol><li><p><strong>保模长</strong> A为半U阵，则 $\vert Ax \vert^2=\vert x \vert^2$</p><p>$\vert Ax \vert^2=(Ax)^H(Ax)=x^HA^HAx=\vert X\vert^2$</p></li><li><p><strong>保正交</strong> A为半优阵，$x\bot y$ ，则$Ax\bot Ay$</p></li></ol><h4 id="c-预-优阵-预-单位正交阵"><a href="#c-预-优阵-预-单位正交阵" class="headerlink" title="c. 预-优阵(预-单位正交阵)"></a>c. 预-优阵(预-单位正交阵)</h4><p>$\alpha_1,\alpha_2,\cdots,\alpha_n$ 是 $n$ 维列向量，且 $\alpha_1\bot\alpha_2\bot\cdots\bot\alpha_n$ ，则 $A=(\alpha_1,\alpha_2,\cdots,\alpha_n)$ 是预优阵</p><p><strong>eg</strong></p><script type="math/tex;mode=display">\begin{aligned}
+&X_1=\left(
+\begin{matrix}
+1\\i\\i
+\end{matrix}
+\right),X_2=\left(
+\begin{matrix}
+2i\\1\\1
+\end{matrix}
+\right),X_3=\left(
+\begin{matrix}
+0\\1\\-1
+\end{matrix}
+\right)\\\\
+&(X_1,X_2)=0,(X_2,X_3)=0,(X_1,X_3)=0,\\\\
+&\therefore X_1\bot X_2\bot X_3,A=(X_1,X_2,X_3)是预-优阵
+\end{aligned}</script><h5 id="判定-2"><a href="#判定-2" class="headerlink" title="判定"></a>判定</h5><script type="math/tex;mode=display">\begin{aligned}
+A&=(\alpha_1,\alpha_2,\cdots,\alpha_n)\\
+&\iff A^HA=\left(
+\begin{matrix}
+&(\alpha_1,\alpha_1)&\cdots&0\\
+&\vdots&\ddots&0\\
+&0&\cdots&(\alpha_n,\alpha_n)
+\end{matrix}
+\right)是对角阵\\
+&其中，\alpha_1,\alpha_2,\cdots,\alpha_p是n维列向量
+\end{aligned}</script><p><img src="/posts/1879915179/image-20220918205245673.png" alt="image-20220918205245673"></p><h4 id="d-优阵-正交阵"><a href="#d-优阵-正交阵" class="headerlink" title="d. 优阵(正交阵)"></a>d. 优阵(正交阵)</h4><p>$\alpha_1,\alpha_2,\cdots,\alpha_n$ 是 $n$ 维列向量，$\alpha_1\bot\alpha_2\bot\cdots\bot\alpha_n$ 且 $\vert \alpha_1 \vert=\cdots=\vert \alpha_n \vert=1$ ，则 $A$ 是一个优阵(正交阵)</p><h5 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h5><ul><li>$A=A_{n\times n}$ 为优阵($A^HA=I$)，即 $A$ 的列向量 $\alpha_1,\alpha_2,\cdots,\alpha_n$ 为单位正交向量组</li><li>$A^{-1}=A^H$</li><li>$A^HA=I,且AA^H=I$</li></ul><h5 id="判定-3"><a href="#判定-3" class="headerlink" title="判定"></a>判定</h5><ol><li><p>$A$ 是优阵 $\iff A^HA=I\iff A^{-1}A=I\iff AA^H=I$ $\iff A=(\alpha_1,\alpha_2,\cdots,\alpha_n)$ ，且 $\alpha_1\bot\alpha_2,\cdots\bot\alpha_n$ ，$\vert \alpha_1\vert=\cdots=\vert\alpha_n\vert=1$</p></li><li><p>$\vert Ax\vert^2=\vert x \vert^2$ ，$A$ 是优阵</p><script type="math/tex;mode=display">\because \vert Ax\vert^2 = (Ax)^H(Ax)=x^HA^HAx=x^HIx=(x,x)=\vert x \vert^2</script></li><li><p>$x\bot y \Rightarrow Ax\bot Ay$ ，$A$ 是优阵</p><script type="math/tex;mode=display">\because (Ax,Ay)=(Ay)^HAx=y^HA^HAx=(x,y)=0\iff Ax\bot Ay</script></li><li><p>$(Ax,Ay)=(x,y)$，$A$ 是优阵</p></li></ol><h5 id="优阵构造"><a href="#优阵构造" class="headerlink" title="优阵构造"></a>优阵构造</h5><p><strong>预优阵到优阵</strong></p><script type="math/tex;mode=display">\begin{aligned}
+A=(\alpha_1,\cdots,\alpha_n) 是预优阵\Rightarrow A=(\frac{\alpha_1}{\vert \alpha_1\vert},\frac{\alpha_2}{\vert \alpha_2\vert},\cdots,\frac{\alpha_n}{\vert \alpha_n \vert})是优阵
+\end{aligned}</script><p><img src="/posts/1879915179/image-20220918213824439.png" alt="image-20220918213824439"></p><p><strong>优阵到优阵</strong></p><p>若 $A=(\alpha_1,\alpha_2,\cdots,\alpha_n)$ 为优阵，则</p><ol><li>$k=\pm1,kA=(k\alpha_1,k\alpha_2,\cdots,k\alpha_n)$ 为优阵</li><li>$B=(\beta_1,\beta_2,\cdots,\beta_n)$ 为优阵，其中 $\beta$ 组为 $\alpha$ 组的重排</li><li>(封闭性)若 $A$、$B$ 为同阶优阵，则 $AB$ 也为优阵</li></ol><p><strong>向量构造优阵</strong></p><blockquote><p>将向量作为镜面阵的法向量，构造镜面阵（优阵+H阵）</p></blockquote><p>若 $\alpha=\left(\begin{matrix}a_1\\a_2\\\vdots \\ a_n\end{matrix}\right)\in C$ ，$A=I_n-\frac{2\alpha\alpha^H}{\vert \alpha \vert^2}$ 是一个优阵</p><ol><li><p>$A^H=A$ 且 $A^2=I(A^{-1}=A)$</p></li><li><p>$A$ 为优阵 $(A^HA=I)$</p><script type="math/tex;mode=display">\begin{aligned}
+1.A^2&=(I_n-\frac{2\alpha\alpha^H}{\vert \alpha \vert^2})(I_n-\frac{2\alpha\alpha^H}{\vert \alpha \vert^2})\\
+&=I_n^2-\frac{4\alpha\alpha^H}{\vert \alpha \vert^2}+\frac{4(\alpha\alpha^H)(\alpha\alpha^H)}{\vert \alpha\vert^4}=I_n-\frac{4\alpha\alpha^H}{\vert \alpha \vert^2}+\frac{4\alpha(\alpha^H\alpha)\alpha^H}{\vert \alpha\vert^4} \\
+&=I_n-\frac{4\alpha\alpha^H}{\vert \alpha \vert^2}+\frac{4\alpha(\vert \alpha\vert^2)\alpha^H}{\vert \alpha\vert^4}=I_n-\frac{4\alpha\alpha^H}{\vert \alpha \vert^2}+\frac{4\alpha\alpha^H}{\vert \alpha \vert^2}=I_n\\
+2.A^HA&=(I_n-\frac{2\alpha\alpha^H}{\vert \alpha \vert^2})^H(I_n-\frac{2\alpha\alpha^H}{\vert \alpha \vert^2})\\
+&=(I_n-\frac{2\alpha\alpha^H}{\vert \alpha \vert^2})(I_n-\frac{2\alpha\alpha^H}{\vert \alpha \vert^2})=A^2=I\\
+&\therefore A是U阵
+\end{aligned}</script></li></ol><p><strong>eg</strong> ：</p><script type="math/tex;mode=display">\begin{aligned}
+\alpha=\left(
+\begin{matrix}
+1\\1\\1
+\end{matrix}
+\right),其U阵为 I_3-\frac{2\alpha\alpha^H}{\vert \alpha\vert^2}&=\left(
+\begin{matrix}
+1&0&0\\0&1&0\\0&0&1\\
+\end{matrix}
+\right)-\frac{2}{3}\left(
+\begin{matrix}
+1&1&1\\1&1&1\\1&1&1\\
+\end{matrix}
+\right)\\
+&=\left(
+\begin{matrix}
+\frac{1}{3}&-\frac{2}{3}&-\frac{2}{3}\\
+-\frac{2}{3}&\frac{1}{3}&-\frac{2}{3}\\
+-\frac{2}{3}&-\frac{2}{3}&\frac{1}{3}\\
+\end{matrix}
+\right)
+\end{aligned}</script><h2 id="1-8-特殊矩阵的乘积"><a href="#1-8-特殊矩阵的乘积" class="headerlink" title="1.8 特殊矩阵的乘积"></a>1.8 特殊矩阵的乘积</h2><h3 id="1-8-1-对角阵的乘积"><a href="#1-8-1-对角阵的乘积" class="headerlink" title="1.8.1 对角阵的乘积"></a>1.8.1 对角阵的乘积</h3><script type="math/tex;mode=display">\begin{aligned}
+&\Lambda=\left(
+\begin{matrix}
+\lambda_1 &\quad&\quad&\quad\\
+\quad &\lambda_2 &\quad&\quad\\
+\quad &\quad &\ddots&\quad\\
+\quad &\quad &\quad&\lambda_n\\
+\end{matrix}
+\right)\\
+&\Lambda^H\Lambda=\left(
+\begin{matrix}
+\overline{\lambda_1}\lambda_1&\quad&\quad&\quad\\
+&\overline{\lambda_2}\lambda_2 &\quad&\quad\\
+&&\ddots&\quad\\
+&&&\overline{\lambda_n}\lambda_n\\
+\end{matrix}
+\right)
+=\left(
+\begin{matrix}
+\vert \lambda_1\vert^2 &\quad&\quad&\quad\\
+&\vert \lambda_2\vert^2 &\quad&\quad\\
+&&\ddots&\quad\\
+&&&\vert \lambda_n\vert^2\\
+\end{matrix}
+\right)
+\end{aligned}</script><h3 id="1-8-2-上三角阵的乘积"><a href="#1-8-2-上三角阵的乘积" class="headerlink" title="1.8.2 上三角阵的乘积"></a>1.8.2 上三角阵的乘积</h3><p><img src="/posts/1879915179/image-20220918224931880-16712759688731.png" alt="image-20220918224931880"></p><h2 id="1-9-特商公式"><a href="#1-9-特商公式" class="headerlink" title="1.9 特商公式"></a>1.9 特商公式</h2><script type="math/tex;mode=display">\begin{aligned}
+&\lambda_1=\frac{X^HAX}{\vert X\vert^2},其中(X\neq 0为\lambda_1的一个特征向量)\\\\
+&证明:X^HAX=X^H\lambda X=\lambda X^HX=\lambda \vert X\vert^2(\vert X\vert^2>0)
+\end{aligned}</script><h2 id="1-10-许尔公式-上三角"><a href="#1-10-许尔公式-上三角" class="headerlink" title="1.10 许尔公式(上三角)"></a>1.10 许尔公式(上三角)</h2><h3 id="1-10-1-Xhur-1-1"><a href="#1-10-1-Xhur-1-1" class="headerlink" title="1.10.1 Xhur 1-1"></a>1.10.1 Xhur 1-1</h3><p>任一方阵，$A\in C^{n\times n}$ ，必存在可逆阵 $P$ ，使 $P^{-1}AP=B$ ，$B=\left(\begin{matrix}\lambda_1&amp;<em>&amp;\cdots&amp;</em>\\0&amp;\lambda_2&amp;\cdots&amp;*\\\vdots&amp;\vdots &amp;\ddots&amp;\vdots\\0&amp;0 &amp;\cdots&amp;\lambda_n\\\end{matrix}\right)$ 为上三角阵</p><h4 id="若当型"><a href="#若当型" class="headerlink" title="若当型"></a>若当型</h4><p>由Xhur公式1-1，一定 $\exists$ 更好的可逆阵 $P$ ，使得 $P^{-1}AP=B=\left(\begin{matrix}\lambda_1&amp;<em>&amp;&amp;\\&amp;\lambda_2&amp;</em>&amp;\\&amp;&amp;\ddots&amp;<em>\\&amp;&amp;&amp;\lambda_n\end{matrix}\right)$ ，其中 $</em>$ 为 $0或1$ ，也称为双线上三角</p><h3 id="1-10-2-Xhur-1-2"><a href="#1-10-2-Xhur-1-2" class="headerlink" title="1.10.2 Xhur 1-2"></a>1.10.2 Xhur 1-2</h3><p>任一方阵，$A\in C^{n\times n}$ ，必存在优阵 $Q$ ，使 $Q^{-1}AQ=Q^HAQ=B$ ，$B=\left(\begin{matrix}\lambda_1&amp;<em>&amp;\cdots&amp;</em>\\0&amp;\lambda_2&amp;\cdots&amp;*\\\vdots&amp;\vdots &amp;\ddots&amp;\vdots\\0&amp;0 &amp;\cdots&amp;\lambda_n\\\end{matrix}\right)$ 为上三角阵</p><ul><li>每个矩阵都优相似于上三角阵</li></ul><h2 id="1-11-H阵"><a href="#1-11-H阵" class="headerlink" title="1.11 H阵"></a>1.11 H阵</h2><blockquote><p>定义：$A^H=A$ ，则矩阵为 $A$</p></blockquote><h3 id="1-11-1-性质"><a href="#1-11-1-性质" class="headerlink" title="1.11.1 性质"></a>1.11.1 性质</h3><h4 id="a-对角线上元素都是实数"><a href="#a-对角线上元素都是实数" class="headerlink" title="a. 对角线上元素都是实数"></a>a. 对角线上元素都是实数</h4><p><strong>证明：</strong></p><p>$A=\left(\begin{matrix}a_{11}&amp;\quad&amp;\quad &amp;<em>\\\quad&amp;a_{22}&amp;\quad&amp;\quad \\\quad &amp;\quad&amp;\ddots&amp;\quad\\</em>&amp;\quad&amp;\quad&amp;a_{nn}\end{matrix}\right)$ ，而 $A^H=\left(\begin{matrix}\overline{a_{11}}&amp;\quad&amp;\quad &amp;<em>\\\quad&amp;\overline{a_{22}}&amp;\quad&amp;\quad \\\quad &amp;\quad&amp;\ddots&amp;\quad\\</em>&amp;\quad&amp;\quad&amp;\overline{a_{nn}}\end{matrix}\right)$ ，由Hermite性质，$A^H=A$ ，则 $a_{11}=\overline{a_{11}},a_{22}=\overline{a_{22}},…,a_{nn}=\overline{a_{nn}}$ ，可见 Hermite阵对角线元素为实数</p><h4 id="b-特根"><a href="#b-特根" class="headerlink" title="b. 特根"></a>b. 特根</h4><p>若 $A^H=A$ 是Hermite矩阵，则特征根都是实数，$\{\lambda_1,\cdots,\lambda_n\}\in R$</p><script type="math/tex;mode=display">\begin{aligned}
+&由特商公式\lambda=\frac{X^HAX}{\vert X \vert^2}，其中X\neq 0，为\lambda的特征向量\\
+&其中\vert X \vert\ge 0 ，为实数.\\
+&\therefore 若证\lambda 为实数，即证 X^HAX为实数\\
+&已知X^HAX为一维数字，则只需证明(X^HAX)^H=X^HAX即可,\\
+&已知A=A^H为Hermite矩阵，(X^HAX)^H=X^HA^HX=X^HAX\in R
+\end{aligned}</script><h4 id="c-特向"><a href="#c-特向" class="headerlink" title="c. 特向"></a>c. 特向</h4><p>若 $A=A^H\in C^{n\times n}$ ，则 $A$ 有 $n$ 个互相正交的特征向量，即 $X_1\bot X_2\bot…\bot X_n$</p><script type="math/tex;mode=display">\begin{aligned}
+&若A为Hermite阵，则\exists U阵Q，使Q^{-1}AQ=Q^HAQ=\Lambda=\left(
+\begin{matrix}
+\lambda_1&&\\
+&\ddots&\\
+&&\lambda_n
+\end{matrix}
+\right)\\
+&令Q=(X_1,X_2,\cdots,X_n)，且X_1\bot X_2\bot...\bot X_n,\\
+&AQ=Q\Lambda\iff \left(
+\begin{matrix}
+AX_1&&\\
+&AX_2&&\\
+&&\ddots&\\
+&&&AX_n
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+\lambda_1X_1&&&\\
+&\lambda_2X_2&&\\
+&&\ddots&\\
+&&&\lambda_nX_n
+\end{matrix}
+\right)\\
+&即X_i为矩阵A的\lambda_i的特征向量
+\end{aligned}</script><h3 id="1-11-2-Hermite分解定理-对角阵"><a href="#1-11-2-Hermite分解定理-对角阵" class="headerlink" title="1.11.2 Hermite分解定理(对角阵)"></a>1.11.2 Hermite分解定理(对角阵)</h3><p>若 $A=A^H$ 是Hermite阵，则存在优阵 $Q$ ,使 $Q^{-1}AQ=Q^HAQ=\Lambda=\left(\begin{matrix}\lambda_1&amp;\quad&amp;\quad\\\quad&amp;\ddots&amp;\quad\\\quad&amp;\quad&amp;\lambda_n\end{matrix}\right)$ $A=Q\Lambda Q^{-1} = Q\Lambda Q^H$ ，且 $\lambda(A)\in R$</p><h4 id="a-证明"><a href="#a-证明" class="headerlink" title="a. 证明"></a>a. 证明</h4><script type="math/tex;mode=display">\begin{aligned}
+&由许尔公式\Rightarrow 有U阵Q使Q^{-1}AQ=Q^HAQ=B\\
+&=\left(
+\begin{matrix}
+\lambda_1&*&\cdots&*\\
+0&\lambda_2&\cdots&*\\
+\vdots&\vdots &\ddots&\vdots\\
+0&0 &\cdots&\lambda_n\\
+\end{matrix}
+\right)\\
+&由A是Hermite矩阵，则A^H=A,(Q^HAQ)^H=Q^HA^HQ=Q^HAQ\\
+&=\left(
+\begin{matrix}
+\overline{\lambda_1}&0&\cdots&0\\
+*&\overline{\lambda_2}&\cdots&0\\
+\vdots&\vdots &\ddots&\vdots\\
+*&* &\cdots&\overline{\lambda_n}\\
+\end{matrix}
+\right)\\
+&由此可见，B为对角阵，且 \lambda_i 为实数
+\end{aligned}</script><h4 id="b-推论"><a href="#b-推论" class="headerlink" title="b. 推论"></a>b. 推论</h4><p>若 $A^H=A$ 是Hermite矩阵，则特征根都是实数，$\{\lambda_1,\cdots,\lambda_n\}\in R$</p><p>证明：</p><script type="math/tex;mode=display">\begin{aligned}
+&由特商公式\lambda=\frac{X^HAX}{\vert X \vert^2}，其中X\neq 0，为\lambda的特征向量\\
+&其中\vert X \vert\ge 0 ，为实数.\therefore 若证\lambda 为实数，即证 X^HAX为实数\\
+&已知X^HAX为一维数字，则只需证明(X^HAX)^H=X^HAX即可,\\
+&已知A=A^H为Hermite矩阵，(X^HAX)^H=X^HA^HX=X^HAX\in R
+\end{aligned}</script><h3 id="1-11-3-A-HA-型Hermite矩阵"><a href="#1-11-3-A-HA-型Hermite矩阵" class="headerlink" title="1.11.3 $A^HA$ 型Hermite矩阵"></a>1.11.3 $A^HA$ 型Hermite矩阵</h3><p><strong>任一矩阵 $A_{n\times p}，A^HA与AA^H$ 都是Hermite矩阵</strong></p><script type="math/tex;mode=display">\begin{aligned}
+&(A^HA)^H=A^HA,(AA^H)^H=A
+\end{aligned}</script><h4 id="a-向量-X-HX-的迹"><a href="#a-向量-X-HX-的迹" class="headerlink" title="a. 向量 $X^HX$ 的迹"></a>a. 向量 $X^HX$ 的迹</h4><script type="math/tex;mode=display">\begin{aligned}
+&X=\left(
+\begin{matrix}
+x_1\\
+x_2\\\vdots \\x_n
+\end{matrix}
+\right),X^H=(\overline{x_1},\overline{x_2},\cdots,\overline{x_n})\\
+&tr(X^HX)=tr(XX^H)=\mid x_1 \mid^2+\mid x_2 \mid^2+\cdots\mid x_n \mid^2=\sum \mid x_j \mid^2
+\end{aligned}</script><p><strong>推论</strong></p><script type="math/tex;mode=display">\begin{aligned}
+tr(XY^H)=tr(Y^HX)=x_1\overline{y_1}+\cdots+x_n\overline{y_n}
+=\sum\limits_{i=1}\limits^{n}x_i\overline{y_i}
+\end{aligned}</script><p><img src="/posts/1879915179/image-20220918005502843.png" alt></p><h4 id="b-A-HA-矩阵的迹"><a href="#b-A-HA-矩阵的迹" class="headerlink" title="b. $A^HA$ 矩阵的迹"></a>b. $A^HA$ 矩阵的迹</h4><p>$A_{n\times p}=\left(\begin{matrix}a_{11}&amp;\cdots&amp;a_{1p}\\\vdots&amp;\ddots&amp;\vdots\\a_{n1}&amp;\cdots&amp;a_{np}\end{matrix}\right)\in C^{n\times p}$ ，$A^H_{p\times n}=\left(\begin{matrix}\overline{a_{11}}&amp;\cdots&amp;\overline{a_{n1}}\\\vdots&amp;\ddots&amp;\vdots\\\overline{a_{1p}}&amp;\cdots&amp;\overline{a_{np}}\end{matrix}\right)\in C^{p\times n}$</p><script type="math/tex;mode=display">\begin{aligned}
+&AA^H=\left(
+\begin{matrix}
+a_{11}&\cdots&a_{1p}\\
+\vdots&\ddots&\vdots\\
+a_{n1}&\cdots&a_{np}
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\overline{a_{11}}&\cdots&\overline{a_{n1}}\\
+\vdots&\ddots&\vdots\\
+\overline{a_{1p}}&\cdots&\overline{a_{np}}
+\end{matrix}
+\right)\\
+&=\left(
+\begin{matrix}
+a_{11}\overline{a_{11}}+a_{12}\overline{a_{12}}+\cdots+a_{1p}\overline{a_{1p}}&\quad &\quad&\ast\\
+\quad&a_{21}\overline{a_{21}}+a_{22}\overline{a_{22}}+\cdots+a_{2p}\overline{a_{2p}}&\quad&\quad\\
+\quad &\quad &\ddots&\quad\\
+\ast &\quad&\quad&a_{n1}\overline{a_{n1}}+a_{n2}\overline{a_{n2}}+\cdots+a_{np}\overline{a_{np}}
+\end{matrix}
+\right)
+\end{aligned}</script><script type="math/tex;mode=display">\begin{aligned}
+&tr(A^HA)=tr(AA^H)=\\
+&(\mid a_{11} \mid^2+\mid a_{12} \mid^2+...+\mid a_{1p} \mid^2)+(\mid a_{21} \mid^2+\mid a_{22} \mid^2+...+\mid a_{2p} \mid^2)+\\
+&...+(\mid a_{n1} \mid^2+\mid a_{n2} \mid^2+...+\mid a_{np} \mid^2)
+=\sum\limits_{i=1,j=1}\limits^{n}\mid a_{ij} \mid^2
+\end{aligned}</script><p><img src="/posts/1879915179/image-20220917235434977.png" alt="image-20220917235434977"></p><p><strong>推论</strong></p><p>$tr(AB^H)=tr(B^HA)=\sum a_{ij}\overline{b_{ij}}$</p><p><img src="/posts/1879915179/image-20220918001146003.png" alt="image-20220918001146003"></p><ul><li><p>将 A、B 矩阵按列分块，可验证 $tr(B^HA)$</p><script type="math/tex;mode=display">\begin{aligned}
+&A=(\alpha_1,\alpha_2),B=(\beta_1,\beta_2),B^H=\left(
+\begin{matrix}
+\overline{\beta_1}^T\\
+\overline{\beta_2}^T\\
+\end{matrix}
+\right)\\
+&B^HA=\left(
+\begin{matrix}
+\overline{\beta_1}^T\\
+\overline{\beta_2}^T\\
+\end{matrix}
+\right)(\alpha_1,\alpha_2)=\left(
+\begin{matrix}
+&\overline{\beta_1}^T\alpha_1\quad &\overline{\beta_1}^T\alpha_2\\
+&\overline{\beta_2}^T\alpha_1\quad &\overline{\beta_2}^T\alpha_2
+\end{matrix}
+\right)\\
+&tr(B^HA)=\overline{\beta_1}^T\alpha_1+\overline{\beta_2}^T\alpha_2=\\
+&\quad (a_{11}\overline{b_{11}}+a_{21}\overline{b_{21}}+a_{31}\overline{b_{31}})+
+(a_{12}\overline{b_{12}}+a_{22}\overline{b_{22}}+a_{32}\overline{b_{32}})\\
+&=\sum a_{ij}\overline{b_{ij}}
+\end{aligned}</script></li><li><p>将 A、B 矩阵按行分块，可验证 $tr(AB^H)$</p><script type="math/tex;mode=display">\begin{aligned}
+&A=\left(
+\begin{matrix}
+\alpha_1\\
+\alpha_2\\
+\alpha_3
+\end{matrix}
+\right),
+B=\left(
+\begin{matrix}
+\beta_1\\
+\beta_2\\
+\beta_3
+\end{matrix}
+\right)，B^H=(\overline{\beta_1}^T,\overline{\beta_2}^T,\overline{\beta_3}^T)\\
+&AB^H=\left(
+\begin{matrix}
+\alpha_1\\
+\alpha_2\\
+\alpha_3
+\end{matrix}
+\right)(\overline{\beta_1}^T,\overline{\beta_2}^T,\overline{\beta_3}^T)=\left(
+\begin{matrix}
+\alpha_1\overline{\beta_1}^T\quad&\alpha_1\overline{\beta_2}^T\quad&\alpha_1\overline{\beta_3}^T\\
+\alpha_2\overline{\beta_1}^T\quad&\alpha_2\overline{\beta_2}^T\quad&\alpha_3\overline{\beta_3}^T\\
+\alpha_3\overline{\beta_1}^T\quad&\alpha_3\overline{\beta_2}^T\quad&\alpha_3\overline{\beta_3}^T
+\end{matrix}
+\right)\\
+&tr(AB^H)=(a_{11}\overline{b_{11}}+a_{12}\overline{b_{12}})+(a_{21}\overline{b_{21}}+a_{22}\overline{b_{22}})+(a_{31}\overline{b_{31}}+a_{32}\overline{b_{32}})\\
+&\quad\quad\quad\quad = \sum a_{ij}\overline{b_{ij}}
+\end{aligned}</script></li></ul><h2 id="1-12-二次型"><a href="#1-12-二次型" class="headerlink" title="1.12 二次型"></a>1.12 二次型</h2><h3 id="1-12-1-Hermite二次型定义"><a href="#1-12-1-Hermite二次型定义" class="headerlink" title="1.12.1 Hermite二次型定义"></a>1.12.1 Hermite二次型定义</h3><p>令 $A^H=A\in C^{n\times n}$ ，$X=\left(\begin{matrix}x_1\\x_2\\\vdots\\x_n\end{matrix}\right)$ ，称 $X^HAX=\left(\overline{x_1},\overline{x_2},\cdots,\overline{x_n}\right)A\left(\begin{matrix}x_1\\x_2\\\vdots\\x_n\end{matrix}\right)$ ，为矩阵 $A$ 产生的二次型，记为 $f(x)=X^HAX$</p><h3 id="1-13-2-正定二次型与正定阵定义"><a href="#1-13-2-正定二次型与正定阵定义" class="headerlink" title="1.13.2 正定二次型与正定阵定义"></a>1.13.2 正定二次型与正定阵定义</h3><p>若 $A^H=A$ ,对一切 $X\neq 0$ ,有 $X^HAX&gt;0$ ,则 $f(x)=X^HAX$ 为正定二次型，A为正定阵，记为 $A&gt;0$<br>若 $A^H=A$ ,对一切 $X\neq 0$ ，有 $X^HAX\ge 0$ ,则 $f(x)=X^HAX$ 为半正定二次型，A为半正定阵，记为 $A\ge 0$</p><h2 id="1-13-矩阵合同"><a href="#1-13-矩阵合同" class="headerlink" title="1.13 矩阵合同"></a>1.13 矩阵合同</h2><p>若 $P^HAP=B(P可逆)$ ,则 $A$ 与 $B$ 合同，记为 $A\overset{\Delta}{=}B$</p><ol><li>对称性: $A\overset{\Delta}{=}B\iff B\overset{\Delta}{=}A$</li><li>传递性: $A\overset{\Delta}{=}B,B\overset{\Delta}{=}C\iff A\overset{\Delta}{=}C$</li></ol><h3 id="1-13-1-合同保正定"><a href="#1-13-1-合同保正定" class="headerlink" title="1.13.1 合同保正定"></a>1.13.1 合同保正定</h3><p>若 $A$ 与 $B$ 合同，且 $A$ 是正定阵，则 $B$ 也是正定阵</p><ul><li>相似与合同都能生成新的矩阵，相似不保持正根，合同保持正根</li></ul><p>证明：</p><script type="math/tex;mode=display">\begin{aligned}
+&由A\overset{\Delta}{=}B,且X^HAX>0，若证B为正定阵，即证存在可逆阵Y，使得Y^HBY>0\\
+&令Y=P^{-1}X，则X=PY,代入二次型XAX=(PY)^HA(PY)=Y^HP^HAPY\\
+&=Y^HBY>0\\
+&\therefore B>0为正定阵
+\end{aligned}</script><h3 id="1-13-2-对角正定阵一定合同于单位阵"><a href="#1-13-2-对角正定阵一定合同于单位阵" class="headerlink" title="1.13.2 对角正定阵一定合同于单位阵"></a>1.13.2 对角正定阵一定合同于单位阵</h3><h2 id="1-14-正定阵"><a href="#1-14-正定阵" class="headerlink" title="1.14 正定阵"></a>1.14 正定阵</h2><h3 id="1-14-1-正定阵的定理"><a href="#1-14-1-正定阵的定理" class="headerlink" title="1.14.1 正定阵的定理"></a>1.14.1 正定阵的定理</h3><p>$A&gt;0\iff$ $A$ 为Hermite阵，且 $\lambda_1,\lambda_2,\cdots,\lambda_n &gt; 0$<br>$A\ge 0 \iff$ $A$ 为Hermite阵，且 $\lambda_1,\lambda_2,\cdots,\lambda_n \ge 0$</p><hr><p><strong>证明</strong></p><p>$\Rightarrow$</p><p>若 $A$ 为正定阵，则 $A$ 生成的二次型 $f(x)=X^HAX&gt;0$ ，$\therefore \lambda_i=\frac{X^HAX}{\vert X\vert^2}&gt;0$</p><p>$\Leftarrow$</p><script type="math/tex;mode=display">\begin{aligned}
+&由Hermite分解定理，A为Hermite阵，则存在U阵Q，\\
+&使得Q^HAQ=\Lambda=\left(
+\begin{matrix}
+\lambda_1&\quad&\quad\\
+&\ddots&\quad\\
+&\quad&\lambda_n\\
+\end{matrix}
+\right)\\
+&\therefore A\overset{\Delta}{=}\Lambda,而\lambda_i>0，\Lambda 为正定阵，故A为正定阵
+\end{aligned}</script><p><strong>单位阵是正定阵</strong> ：$\lambda_i= 1$ 显然大于0</p><h3 id="1-14-2-正定阵间必合同"><a href="#1-14-2-正定阵间必合同" class="headerlink" title="1.14.2 正定阵间必合同"></a>1.14.2 正定阵间必合同</h3><ol><li>$A&gt;0（正定阵） \iff A\overset{\Delta}{=}\Lambda$</li><li>$\Lambda\overset{\Delta}{=}I$ <strong>对角阵一定合同于单位阵</strong></li><li>若A,B为同阶正定阵，则 $A\overset{\Delta}{=} B$</li></ol><p><strong>证明1：</strong></p><script type="math/tex;mode=display">\begin{aligned}
+&若A正定，则有A^H=A\\
+&由Hermite分解定理，必\exists 优阵Q使得Q^HAQ=\Lambda,且\lambda_i>0\\
+\end{aligned}</script><p><strong>证明2：</strong></p><script type="math/tex;mode=display">\begin{aligned}
+若\Lambda&=\left(
+\begin{matrix}
+\lambda_1&\quad&\quad\\
+&\ddots&\\
+&&\lambda_n
+\end{matrix}
+\right),其中\lambda_i>0\\
+&\Rightarrow f(x)=X^H\Lambda X=\lambda_1\vert x_1\vert^2+\lambda_2\vert x_2\vert^2+\cdots+\lambda_n\vert x_n\vert^2>0\\
+&\Rightarrow 可分解为\Lambda=\left(
+\begin{matrix}
+\sqrt{\lambda_1}&\quad&\quad\\
+\quad&\ddots&\quad\\
+\quad&\quad&\sqrt{\lambda_n}\\
+\end{matrix}
+\right)I\left(
+\begin{matrix}
+\sqrt{\lambda_1}&&\\
+&\ddots&\\
+&&\sqrt{\lambda_n}\\
+\end{matrix}
+\right)\\
+&\quad \quad\quad\quad\quad \quad \quad=PIP\\
+&可知P可逆，且P^H=P,故P^HIP=\Lambda\\
+&即对角正定阵合同于单位阵，记为\Lambda\overset{\Delta}{=}I
+\end{aligned}</script><p><strong>证明3：</strong></p><script type="math/tex;mode=display">\begin{aligned}
+&由A>0,B>0,则A\overset{\Delta}{=}I,B\overset{\Delta}{=}I\Rightarrow A\overset{\Delta}{=}B
+\end{aligned}</script><h3 id="1-14-3-乘积形式的正定阵"><a href="#1-14-3-乘积形式的正定阵" class="headerlink" title="1.14.3 乘积形式的正定阵"></a>1.14.3 乘积形式的正定阵</h3><ol><li>对一切矩阵 $A=A_{n\times p}$ 且 $n\ge p$ ，$A^HA$ 与 $AA^H$ 都是Hermite阵</li><li>$A^HA$ 与 $AA^H$ 只相差 $n-p$ 个0根</li><li>$A^HA\ge0$ ，$A^HA\ge 0$</li><li>$r(A^HA)=r(AA^H)=r(A)$</li></ol><hr><h4 id="a-A-HA-为Hermite阵"><a href="#a-A-HA-为Hermite阵" class="headerlink" title="a. $A^HA$ 为Hermite阵"></a>a. $A^HA$ 为Hermite阵</h4><script type="math/tex;mode=display">\begin{aligned}
+(A^HA)^H=A^HA，且(AA^H)^H=AA^H，则A^HA与AA^H为Hermite阵
+\end{aligned}</script><h4 id="b-A-HA与AA-H-相差n-p个0根"><a href="#b-A-HA与AA-H-相差n-p个0根" class="headerlink" title="b. $A^HA与AA^H$ 相差n-p个0根"></a>b. $A^HA与AA^H$ 相差n-p个0根</h4><script type="math/tex;mode=display">\begin{aligned}
+&A=A_{n\times p},B={p\times n},且n\ge p\\
+&由换位公式 \vert \lambda I-AB\vert=\lambda^{n-p}\vert \lambda I-BA \vert,\\
+&则 AB与BA必有相同的非零根，故A^HA与AA^H只相差n-p个零根
+\end{aligned}</script><h4 id="c-A-HA与AA-H-是半正定阵（不是方阵的正定阵）"><a href="#c-A-HA与AA-H-是半正定阵（不是方阵的正定阵）" class="headerlink" title="c. $A^HA与AA^H$ 是半正定阵（不是方阵的正定阵）"></a>c. $A^HA与AA^H$ 是半正定阵（不是方阵的正定阵）</h4><script type="math/tex;mode=display">\begin{aligned}
+&对任意非零向量X，有二次型f(x)=X^HA^HAX=(AX)^H(AX)=\vert AX \vert^2\ge 0,\\
+&可知f(x)为半正定二次型，A^HA为半正定阵
+\end{aligned}</script><h4 id="d-r-AA-H-r-A-HA-r-A"><a href="#d-r-AA-H-r-A-HA-r-A" class="headerlink" title="d. $r(AA^H)=r(A^HA)=r(A)$"></a>d. $r(AA^H)=r(A^HA)=r(A)$</h4><script type="math/tex;mode=display">\begin{aligned}
+&由A^HA为半正定阵，则A^HA与AA^H都只有非负根\\
+&可写为\lambda(A^HA)=\{\lambda_1,\lambda_2,...\lambda_p\}\ge 0\\
+&由换位公式，知\lambda{A^HA}与\lambda{AA^H}只相差n-p个零根\\
+&\therefore \lambda(AA^H)=\{\lambda_1,\lambda_2,...,\lambda_p,0,0,...,0\}\ge 0\\
+&r(A^HA)=r(AA^H)=p=r(A)=r(A^H)
+\end{aligned}</script><script type="math/tex;mode=display">\begin{aligned}
+&齐次方程组AX=0,A^HAX=0，解集相同(同解)\\
+&若(A^HA)X=0成立，则\vert AX \vert^2=(AX)^H(AX)=X^HA^HAX=(AX)^2=0\\
+&\therefore AX=0,r(A^HA)=r(A)
+\end{aligned}</script><h2 id="1-15-矩阵的秩"><a href="#1-15-矩阵的秩" class="headerlink" title="1.15 矩阵的秩"></a>1.15 矩阵的秩</h2><ol><li><p>若 $A=A_{n\times p},n&gt;p$ ，(列满秩)，即 $r(A)=p\le n$</p><p>$r(A^HA)=p=r(A)=r(AA^H)$</p><p>$r(A)=r(A^H)=r(\overline{A})$</p></li><li><p>矩阵秩越乘越小：$r(AB)&lt;min\{r(A),r(B)\}$</p></li></ol><h2 id="1-16-幂0阵"><a href="#1-16-幂0阵" class="headerlink" title="1.16 幂0阵"></a>1.16 幂0阵</h2><h3 id="1-16-1-条件"><a href="#1-16-1-条件" class="headerlink" title="1.16.1 条件"></a>1.16.1 条件</h3><p>$A^k=0(k\ge 2)$ ，且 $A\neq 0$ ，则为 $k$ 次幂0阵</p><ul><li>若 $(A-bI)^k=0$ ，$A\neq bI$ ，则 $A$ 为平移幂0阵</li></ul><h3 id="1-16-2-特根特向"><a href="#1-16-2-特根特向" class="headerlink" title="1.16.2 特根特向"></a>1.16.2 特根特向</h3><p>若 $A^k=0$ ，则 $\lambda(A)=\{0\}$</p><ul><li>由 Cayley 定理，$\lambda^k=0\Rightarrow \lambda=0$</li><li>由特向(4.1)求法，$A\cdot A=0$ ，则 $A$ 中各列都是0根的特向</li></ul><p>若 $(A-bI)^k=0\Rightarrow \lambda(A)=\{b,\cdots,b\}$</p><h3 id="1-16-3-幂0阵不是单阵"><a href="#1-16-3-幂0阵不是单阵" class="headerlink" title="1.16.3 幂0阵不是单阵"></a>1.16.3 幂0阵不是单阵</h3><script type="math/tex;mode=display">\begin{aligned}
+&设A^k=0(A\neq 0) ，假设A为单阵，\Rightarrow P^{-1}AP\xlongequal{相似}D=\left(
+\begin{matrix}
+\lambda_1\\&\ddots\\&&\lambda_n
+\end{matrix}
+\right)=0\\
+&与A\neq 0 矛盾，故A为幂0阵，则非单阵
+\end{aligned}</script><p>推论：$A$ 与 $A-bI$ 同为单阵或非单阵，则 <strong>平移不改变单阵或非单阵</strong></p><ul><li><p>若 $(A-bI)^k=0$ 且 $A-bI\neq 0$ 则A非单阵 ，且 $\lambda(A)=\{b,b,\cdots,b\}$</p><p>则 $f(A)=f(b)I+\frac{f’(b)}{1!}(A-bI)+\frac{f’’(b)}{2!}(A-bI)^2+\cdots \frac{f^{k-1}(b)}{(k-1)!}(A-bI)^{k-1}$ 为 $f(x)$ 的解析式</p></li></ul><h3 id="1-16-4-记忆：平方幂0"><a href="#1-16-4-记忆：平方幂0" class="headerlink" title="1.16.4 记忆：平方幂0"></a>1.16.4 记忆：平方幂0</h3><p>若 $A^2=0(A\neq 0)$ ，则A中列都是0根特向</p><ul><li>A中列 $\left(\begin{matrix}1\-1\end{matrix}\right),\left(\begin{matrix}1\\1\end{matrix}\right)$ 为 $\lambda=0$ 的特向</li></ul><p><strong>eg</strong></p><script type="math/tex;mode=display">A=\left(
+\begin{matrix}
+3&1\\-1&1
+\end{matrix}
+\right)</script><script type="math/tex;mode=display">\begin{aligned}
+&A-2I=\left(
+\begin{matrix}
+1&1\\-1&-1
+\end{matrix}
+\right),则0为A-2I的特根，其特向为\left(\begin{matrix}1\\1\end{matrix}\right),\left(\begin{matrix}1\\-1\end{matrix}\right) \\
+&\Rightarrow A的特向为\{2,2\},其特向为 \left(\begin{matrix}1\\1\end{matrix}\right),\left(\begin{matrix}1\\-1\end{matrix}\right)
+\end{aligned}</script><h2 id="1-17-幂等阵性质"><a href="#1-17-幂等阵性质" class="headerlink" title="1.17 幂等阵性质"></a>1.17 幂等阵性质</h2><p>幂等条件：$A^2=A$</p><p>特根：$\lambda(A)=1或0$</p><script type="math/tex;mode=display">\begin{aligned}
+&由Cayley定理，\lambda^2=\lambda\Rightarrow \lambda=1或0,可写全体特根\lambda(A)=\{\underbrace{1,\cdots,1}_{(r)个1},\underbrace{0,\cdots,0}_{(n-r)个0}\}
+\end{aligned}</script><h3 id="1-17-1-幂等阵一定为单阵-相似于对角阵"><a href="#1-17-1-幂等阵一定为单阵-相似于对角阵" class="headerlink" title="1.17.1 幂等阵一定为单阵(相似于对角阵)"></a>1.17.1 幂等阵一定为单阵(相似于对角阵)</h3><p>$A\sim D=\left(\begin{matrix}1\\&amp;\ddots\\&amp;&amp;1\\&amp;&amp;&amp;0\\&amp;&amp;&amp;&amp;\ddots\\&amp;&amp;&amp;&amp;&amp;0\end{matrix}\right)$</p><p>单阵引理：</p><ul><li>$f(x)$ 为A的0化式，若 $f(A)=0$ ,且f(x)无重根，则A为单阵<script type="math/tex;mode=display">\begin{aligned}
+&若A^2=A\Rightarrow A^2-A=0或A(A-I)=0,则A有0化式f(x)=x^2-x，无重根,故A为单阵
+\end{aligned}</script></li></ul><h3 id="1-17-2-r-A-与r-I-A-关系"><a href="#1-17-2-r-A-与r-I-A-关系" class="headerlink" title="1.17.2 r(A)与r(I-A)关系"></a>1.17.2 r(A)与r(I-A)关系</h3><p>若 $A^2=A$ ，则 $r(A)+r(I_n-A)=n$</p><script type="math/tex;mode=display">\begin{aligned}
+&由于 A(A-I)=0\Rightarrow r(A)+r(A-I)\le n\iff r(A)+r(I_n-A)\le n\\
+&又 I=A+(I-A)，n=r(I)=r(A+(I-A))\le r(A)+r(I-A)\le n\\
+&\therefore r(A)+r(I_n-A)=r(A)+r(A-I_n)=n
+\end{aligned}</script><h3 id="1-18-3-A幂等-iff-I-A幂等"><a href="#1-18-3-A幂等-iff-I-A幂等" class="headerlink" title="1.18.3 A幂等$\iff$ I-A幂等"></a>1.18.3 A幂等$\iff$ I-A幂等</h3><p>$A^2=A\iff (I-A)^2=(I-A)$</p><ul><li>则有 $tr(I-A)=tr(I)-tr(A)=n-r=r(I-A)$</li></ul><p>证明：</p><script type="math/tex;mode=display">\begin{aligned}
+&A^2=A\Rightarrow (I-A)^2=I^2-2A+A^2=I-A\\
+\end{aligned}</script><h3 id="1-18-4-幂等阵的特向"><a href="#1-18-4-幂等阵的特向" class="headerlink" title="1.18.4 幂等阵的特向"></a>1.18.4 幂等阵的特向</h3><p>A是幂等阵，则 $A$ 有 $n$ 个无关特向</p><script type="math/tex;mode=display">\begin{aligned}
+&设特根0的特向为X_0,AX_0=0,则齐次方程线性无关解的个数为n-r(A)\\
+&设特根1的特向为X_1,AX_1=X_1\iff (A-I)X_1=0，则齐次方程线性无关解的个数为 n-r(I-A)=r(A)\\
+&故特向有n个
+\end{aligned}</script><h3 id="1-18-5-谱分解中谱阵为幂等阵"><a href="#1-18-5-谱分解中谱阵为幂等阵" class="headerlink" title="1.18.5 谱分解中谱阵为幂等阵"></a>1.18.5 谱分解中谱阵为幂等阵</h3><p>谱分解 $A=\lambda_1G_2+\cdots+\lambda_kG_k$ 中 $G_i$ 为幂等阵（$G_1^2=G_1,\cdots,G_k^2=G_k$）</p></div><div><div><div style="text-align:center;color:#ccc;font-size:14px">-------------<i class="fa fa-hand-peace-o"></i>本文结束-------------</div></div></div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者 </strong>AmosTian</li><li class="post-copyright-link"><strong>本文链接 </strong><a href="https://amostian.github.io/posts/1879915179/" title="1.准备知识——相似&amp;换位公式&amp;秩1矩阵&amp;内积&amp;正交">https://amostian.github.io/posts/1879915179/</a></li><li class="post-copyright-license"><strong>版权声明 </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div><footer class="post-footer"><div class="post-tags"><a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tags"></i> 数学</a> <a href="/tags/%E7%9F%A9%E9%98%B5%E8%AE%BA/" rel="tag"><i class="fa fa-tags"></i> 矩阵论</a></div><div class="post-nav"><div class="post-nav-item"><a href="/posts/1194751582/" rel="prev" title="Linux基本语法"><i class="fa fa-chevron-left"></i> Linux基本语法</a></div><div class="post-nav-item"><a href="/posts/2949746725/" rel="next" title="2.数据类型与运算符">2.数据类型与运算符 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div><script>window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span> <span class="toggle-line toggle-line-middle"></span> <span class="toggle-line toggle-line-last"></span></div><aside class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc">文章目录</li><li class="sidebar-nav-overview">站点概览</li></ul><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E7%9B%B8%E4%BC%BC"><span class="nav-text">1.1 相似</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-%E7%9B%B8%E4%BC%BC%E6%80%A7%E8%B4%A8"><span class="nav-text">1.1.1 相似性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-%E5%AE%9A%E7%90%86%EF%BC%9AA%E4%B8%8EB%E7%9B%B8%E4%BC%BC%EF%BC%8C%E5%88%99%E6%9C%89%E7%9B%B8%E5%90%8C%E7%89%B9%E5%BE%81%E6%A0%B9%E5%85%AC%E5%BC%8F"><span class="nav-text">1.1.2 定理：A与B相似，则有相同特征根公式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%81%E6%98%8E"><span class="nav-text">*证明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A8%E8%AE%BA"><span class="nav-text">推论</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-3-%E7%9B%B8%E4%BC%BC%E5%AF%B9%E8%A7%92%E5%8C%96"><span class="nav-text">1.1.3 相似对角化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E6%8D%A2%E4%BD%8D%E5%85%AC%E5%BC%8F"><span class="nav-text">1.2 换位公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-%E5%AE%9A%E4%B9%89"><span class="nav-text">1.2.1 定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%81%E6%98%8E-1"><span class="nav-text">*证明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-%E6%8E%A8%E8%AE%BA"><span class="nav-text">1.2.2 推论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E7%A7%A91%E7%9F%A9%E9%98%B5"><span class="nav-text">1.3 秩1矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-%E7%A7%A91%E7%9F%A9%E9%98%B5%E7%89%B9%E5%BE%81%E6%96%B9%E7%A8%8B"><span class="nav-text">1.3.1 秩1矩阵特征方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-%E7%A7%A91%E7%9F%A9%E9%98%B5%E7%9A%84%E7%89%B9%E5%BE%81%E5%80%BC"><span class="nav-text">1.3.3 秩1矩阵的特征值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-4-%E7%A7%A91%E7%9F%A9%E9%98%B5%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="nav-text">1.3.4 秩1矩阵特征向量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#eg"><span class="nav-text">eg</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E5%B9%B3%E7%A7%BB%E7%9F%A9%E9%98%B5"><span class="nav-text">1.4 平移矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-%E5%B9%B3%E7%A7%BB%E6%B3%95"><span class="nav-text">1.4.1 平移法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E7%89%B9%E5%BE%81%E5%80%BC"><span class="nav-text">a. 特征值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="nav-text">b. 特征向量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-%E5%80%8D%E6%B3%95"><span class="nav-text">1.4.2 倍法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E5%A4%8D%E6%95%B0%E5%9F%9F"><span class="nav-text">1.5 复数域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-%E5%A4%8D%E6%95%B0"><span class="nav-text">1.5.1 复数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E5%A4%8D%E6%95%B0%E5%9F%9F%E8%A1%A8%E7%A4%BA"><span class="nav-text">a. 复数域表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E5%A4%8D%E6%95%B0%E6%80%A7%E8%B4%A8"><span class="nav-text">b. 复数性质</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-%E5%85%B1%E8%BD%AD%E5%85%AC%E5%BC%8F"><span class="nav-text">1.5.2 共轭公式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%8D%E7%9F%A9%E9%98%B5%E7%9A%84%E5%85%B1%E8%BD%AD"><span class="nav-text">复矩阵的共轭</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-3-Hermite%E5%8F%98%E6%8D%A2"><span class="nav-text">1.5.3 Hermite变换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-Hermite%E5%8F%98%E6%8D%A2%E6%80%A7%E8%B4%A8"><span class="nav-text">a. Hermite变换性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-Hermite%E5%8F%98%E6%8D%A2%E7%9B%B8%E5%85%B3%E7%9A%84%E7%9F%A9%E9%98%B5%E5%88%86%E7%B1%BB"><span class="nav-text">b. Hermite变换相关的矩阵分类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-%E5%86%85%E7%A7%AF"><span class="nav-text">1.6 内积</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-1-%E5%A4%8D%E5%90%91%E9%87%8F%E5%86%85%E7%A7%AF"><span class="nav-text">1.6.1 复向量内积</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E5%86%85%E7%A7%AF%E6%80%A7%E8%B4%A8"><span class="nav-text">向量内积性质</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-2-%E5%A4%8D%E7%9F%A9%E9%98%B5%E5%86%85%E7%A7%AF"><span class="nav-text">1.6.2 复矩阵内积</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E5%AE%9A%E4%B9%89"><span class="nav-text">a. 定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E6%80%A7%E8%B4%A8"><span class="nav-text">b. 性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-%E7%9F%A9%E9%98%B5%E7%9A%84%E5%86%85%E7%A7%AF%E5%BD%A2%E5%BC%8F"><span class="nav-text">c. 矩阵的内积形式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%97%E5%88%86%E5%9D%97%EF%BC%88%E5%B8%B8%E7%94%A8%EF%BC%89"><span class="nav-text">列分块（常用）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A1%8C%E5%88%86%E5%9D%97"><span class="nav-text">行分块</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-3-%E6%A8%A1%E9%95%BF"><span class="nav-text">1.6.3 模长</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E5%A4%8D%E5%90%91%E9%87%8F%E6%A8%A1%E9%95%BF"><span class="nav-text">a. 复向量模长</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%97%E5%90%91%E9%87%8F%E6%A8%A1%E9%95%BF"><span class="nav-text">列向量模长</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A8%A1%E9%95%BF%E6%80%A7%E8%B4%A8"><span class="nav-text">模长性质</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A8%A1%E5%B9%B3%E6%96%B9%E5%85%AC%E5%BC%8F"><span class="nav-text">模平方公式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E5%A4%8D%E7%9F%A9%E9%98%B5%E6%A8%A1%E9%95%BF"><span class="nav-text">b. 复矩阵模长</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%8D%E7%9F%A9%E9%98%B5%E7%9A%84%E6%A8%A1%E5%B9%B3%E6%96%B9%E5%85%AC%E5%BC%8F"><span class="nav-text">复矩阵的模平方公式</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-%E6%AD%A3%E4%BA%A4"><span class="nav-text">1.7 正交</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-1-%E5%90%91%E9%87%8F%E6%AD%A3%E4%BA%A4"><span class="nav-text">1.7.1 向量正交</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E4%BA%A4%E6%80%A7%E8%B4%A8"><span class="nav-text">正交性质</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-2-%E5%8D%95%E4%BD%8D%E5%90%91%E9%87%8F"><span class="nav-text">1.7.2 单位向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-3-%E4%BC%98%E9%98%B5-%E6%AD%A3%E4%BA%A4%E9%98%B5"><span class="nav-text">1.7.3 优阵(正交阵)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E9%A2%84-%E5%8D%8A%E4%BC%98%E9%98%B5-%E9%A2%84-%E5%8D%8A%E6%AD%A3%E4%BA%A4%E9%98%B5"><span class="nav-text">a. 预-半优阵(预-半正交阵)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A4%E5%AE%9A"><span class="nav-text">判定</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E5%8D%8A%E4%BC%98%E9%98%B5-%E5%8D%8A%E6%AD%A3%E4%BA%A4%E9%98%B5"><span class="nav-text">b. 半优阵(半正交阵)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A4%E5%AE%9A-1"><span class="nav-text">判定</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8"><span class="nav-text">性质</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-%E9%A2%84-%E4%BC%98%E9%98%B5-%E9%A2%84-%E5%8D%95%E4%BD%8D%E6%AD%A3%E4%BA%A4%E9%98%B5"><span class="nav-text">c. 预-优阵(预-单位正交阵)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A4%E5%AE%9A-2"><span class="nav-text">判定</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#d-%E4%BC%98%E9%98%B5-%E6%AD%A3%E4%BA%A4%E9%98%B5"><span class="nav-text">d. 优阵(正交阵)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8-1"><span class="nav-text">性质</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A4%E5%AE%9A-3"><span class="nav-text">判定</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BC%98%E9%98%B5%E6%9E%84%E9%80%A0"><span class="nav-text">优阵构造</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%98%E7%A7%AF"><span class="nav-text">1.8 特殊矩阵的乘积</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-1-%E5%AF%B9%E8%A7%92%E9%98%B5%E7%9A%84%E4%B9%98%E7%A7%AF"><span class="nav-text">1.8.1 对角阵的乘积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-2-%E4%B8%8A%E4%B8%89%E8%A7%92%E9%98%B5%E7%9A%84%E4%B9%98%E7%A7%AF"><span class="nav-text">1.8.2 上三角阵的乘积</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-%E7%89%B9%E5%95%86%E5%85%AC%E5%BC%8F"><span class="nav-text">1.9 特商公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-%E8%AE%B8%E5%B0%94%E5%85%AC%E5%BC%8F-%E4%B8%8A%E4%B8%89%E8%A7%92"><span class="nav-text">1.10 许尔公式(上三角)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-10-1-Xhur-1-1"><span class="nav-text">1.10.1 Xhur 1-1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8B%A5%E5%BD%93%E5%9E%8B"><span class="nav-text">若当型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-10-2-Xhur-1-2"><span class="nav-text">1.10.2 Xhur 1-2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-11-H%E9%98%B5"><span class="nav-text">1.11 H阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-11-1-%E6%80%A7%E8%B4%A8"><span class="nav-text">1.11.1 性质</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E5%AF%B9%E8%A7%92%E7%BA%BF%E4%B8%8A%E5%85%83%E7%B4%A0%E9%83%BD%E6%98%AF%E5%AE%9E%E6%95%B0"><span class="nav-text">a. 对角线上元素都是实数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E7%89%B9%E6%A0%B9"><span class="nav-text">b. 特根</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-%E7%89%B9%E5%90%91"><span class="nav-text">c. 特向</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-11-2-Hermite%E5%88%86%E8%A7%A3%E5%AE%9A%E7%90%86-%E5%AF%B9%E8%A7%92%E9%98%B5"><span class="nav-text">1.11.2 Hermite分解定理(对角阵)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E8%AF%81%E6%98%8E"><span class="nav-text">a. 证明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E6%8E%A8%E8%AE%BA"><span class="nav-text">b. 推论</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-11-3-A-HA-%E5%9E%8BHermite%E7%9F%A9%E9%98%B5"><span class="nav-text">1.11.3 $A^HA$ 型Hermite矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E5%90%91%E9%87%8F-X-HX-%E7%9A%84%E8%BF%B9"><span class="nav-text">a. 向量 $X^HX$ 的迹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-A-HA-%E7%9F%A9%E9%98%B5%E7%9A%84%E8%BF%B9"><span class="nav-text">b. $A^HA$ 矩阵的迹</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-12-%E4%BA%8C%E6%AC%A1%E5%9E%8B"><span class="nav-text">1.12 二次型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-12-1-Hermite%E4%BA%8C%E6%AC%A1%E5%9E%8B%E5%AE%9A%E4%B9%89"><span class="nav-text">1.12.1 Hermite二次型定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-13-2-%E6%AD%A3%E5%AE%9A%E4%BA%8C%E6%AC%A1%E5%9E%8B%E4%B8%8E%E6%AD%A3%E5%AE%9A%E9%98%B5%E5%AE%9A%E4%B9%89"><span class="nav-text">1.13.2 正定二次型与正定阵定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-13-%E7%9F%A9%E9%98%B5%E5%90%88%E5%90%8C"><span class="nav-text">1.13 矩阵合同</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-13-1-%E5%90%88%E5%90%8C%E4%BF%9D%E6%AD%A3%E5%AE%9A"><span class="nav-text">1.13.1 合同保正定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-13-2-%E5%AF%B9%E8%A7%92%E6%AD%A3%E5%AE%9A%E9%98%B5%E4%B8%80%E5%AE%9A%E5%90%88%E5%90%8C%E4%BA%8E%E5%8D%95%E4%BD%8D%E9%98%B5"><span class="nav-text">1.13.2 对角正定阵一定合同于单位阵</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-14-%E6%AD%A3%E5%AE%9A%E9%98%B5"><span class="nav-text">1.14 正定阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-14-1-%E6%AD%A3%E5%AE%9A%E9%98%B5%E7%9A%84%E5%AE%9A%E7%90%86"><span class="nav-text">1.14.1 正定阵的定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-14-2-%E6%AD%A3%E5%AE%9A%E9%98%B5%E9%97%B4%E5%BF%85%E5%90%88%E5%90%8C"><span class="nav-text">1.14.2 正定阵间必合同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-14-3-%E4%B9%98%E7%A7%AF%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E5%AE%9A%E9%98%B5"><span class="nav-text">1.14.3 乘积形式的正定阵</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-A-HA-%E4%B8%BAHermite%E9%98%B5"><span class="nav-text">a. $A^HA$ 为Hermite阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-A-HA%E4%B8%8EAA-H-%E7%9B%B8%E5%B7%AEn-p%E4%B8%AA0%E6%A0%B9"><span class="nav-text">b. $A^HA与AA^H$ 相差n-p个0根</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-A-HA%E4%B8%8EAA-H-%E6%98%AF%E5%8D%8A%E6%AD%A3%E5%AE%9A%E9%98%B5%EF%BC%88%E4%B8%8D%E6%98%AF%E6%96%B9%E9%98%B5%E7%9A%84%E6%AD%A3%E5%AE%9A%E9%98%B5%EF%BC%89"><span class="nav-text">c. $A^HA与AA^H$ 是半正定阵（不是方阵的正定阵）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#d-r-AA-H-r-A-HA-r-A"><span class="nav-text">d. $r(AA^H)&#x3D;r(A^HA)&#x3D;r(A)$</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-15-%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9"><span class="nav-text">1.15 矩阵的秩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-16-%E5%B9%820%E9%98%B5"><span class="nav-text">1.16 幂0阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-16-1-%E6%9D%A1%E4%BB%B6"><span class="nav-text">1.16.1 条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-16-2-%E7%89%B9%E6%A0%B9%E7%89%B9%E5%90%91"><span class="nav-text">1.16.2 特根特向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-16-3-%E5%B9%820%E9%98%B5%E4%B8%8D%E6%98%AF%E5%8D%95%E9%98%B5"><span class="nav-text">1.16.3 幂0阵不是单阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-16-4-%E8%AE%B0%E5%BF%86%EF%BC%9A%E5%B9%B3%E6%96%B9%E5%B9%820"><span class="nav-text">1.16.4 记忆：平方幂0</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-17-%E5%B9%82%E7%AD%89%E9%98%B5%E6%80%A7%E8%B4%A8"><span class="nav-text">1.17 幂等阵性质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-17-1-%E5%B9%82%E7%AD%89%E9%98%B5%E4%B8%80%E5%AE%9A%E4%B8%BA%E5%8D%95%E9%98%B5-%E7%9B%B8%E4%BC%BC%E4%BA%8E%E5%AF%B9%E8%A7%92%E9%98%B5"><span class="nav-text">1.17.1 幂等阵一定为单阵(相似于对角阵)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-17-2-r-A-%E4%B8%8Er-I-A-%E5%85%B3%E7%B3%BB"><span class="nav-text">1.17.2 r(A)与r(I-A)关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-18-3-A%E5%B9%82%E7%AD%89-iff-I-A%E5%B9%82%E7%AD%89"><span class="nav-text">1.18.3 A幂等$\iff$ I-A幂等</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-18-4-%E5%B9%82%E7%AD%89%E9%98%B5%E7%9A%84%E7%89%B9%E5%90%91"><span class="nav-text">1.18.4 幂等阵的特向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-18-5-%E8%B0%B1%E5%88%86%E8%A7%A3%E4%B8%AD%E8%B0%B1%E9%98%B5%E4%B8%BA%E5%B9%82%E7%AD%89%E9%98%B5"><span class="nav-text">1.18.5 谱分解中谱阵为幂等阵</span></a></li></ol></li></ol></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" alt="AmosTian" src="/images/avatar.png"><p class="site-author-name" itemprop="name">AmosTian</p><div class="site-description" itemprop="description">知道的越多，不知道的越多</div></div><div class="site-state-wrap motion-element"><nav class="site-state"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">349</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/"><span class="site-state-item-count">58</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/"><span class="site-state-item-count">74</span> <span class="site-state-item-name">标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/AmosTian" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AmosTian" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a> </span><span class="links-of-author-item"><a href="https://blog.csdn.net/qq_40479037?type=blog" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40479037?type&#x3D;blog" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a> </span><span class="links-of-author-item"><a href="mailto:17636679561@163.com" title="E-Mail → mailto:17636679561@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a></span></div></div><div id="days"></div><script>function show_date_time(){window.setTimeout("show_date_time()",1e3),BirthDay=new Date("01/27/2022 15:13:14"),today=new Date,timeold=today.getTime()-BirthDay.getTime(),sectimeold=timeold/1e3,secondsold=Math.floor(sectimeold),msPerDay=864e5,e_daysold=timeold/msPerDay,daysold=Math.floor(e_daysold),e_hrsold=24*(e_daysold-daysold),hrsold=setzero(Math.floor(e_hrsold)),e_minsold=60*(e_hrsold-hrsold),minsold=setzero(Math.floor(60*(e_hrsold-hrsold))),seconds=setzero(Math.floor(60*(e_minsold-minsold))),document.getElementById("days").innerHTML="已运行 "+daysold+" 天 "+hrsold+" 小时 "+minsold+" 分 "+seconds+" 秒"}function setzero(e){return e<10&&(e="0"+e),e}show_date_time()</script></div></aside><div id="sidebar-dimmer"></div></div></main><footer class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2024</span> <span class="with-love"><i class="fa fa-grav"></i> </span><span class="author" itemprop="copyrightHolder">AmosTian</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-area-chart"></i> </span><span class="post-meta-item-text">站点总字数 </span><span title="站点总字数">758.9k</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-coffee"></i> </span><span class="post-meta-item-text">站点阅读时长 &asymp;</span> <span title="站点阅读时长">31:46</span></div></div></footer></div><script color="0,0,0" opacity="0.5" zindex="-1" count="150" src="/lib/canvas-nest/canvas-nest.min.js"></script><script src="/lib/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script><script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script><script src="/js/utils.js"></script><script src="/js/schemes/pisces.js"></script><script src="/js/next-boot.js"></script><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script><script src="/js/local-search.js"></script><script>if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'neutral',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}</script><script>if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }</script><script async src="/js/cursor/fireworks.js"></script><script src="/js/activate-power-mode.min.js"></script><script>POWERMODE.colorful=!0,POWERMODE.shake=!1,document.body.addEventListener("input",POWERMODE)</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({pluginRootPath:"live2dw/",pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,model:{jsonPath:"live2d-widget-model-hijiki"},display:{position:"right",width:150,height:300},mobile:{show:!1},log:!1})</script></body></html>

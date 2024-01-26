@@ -1,0 +1,336 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1"><link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png"><link rel="mask-icon" href="/images/favicon.png" color="#222"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa:300,300italic,400,400italic,700,700italic|Ma Shan Zheng:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"><link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css"><script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script><script id="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:"amostian.github.io",root:"/",scheme:"Pisces",version:"7.8.0",exturl:!1,sidebar:{position:"left",display:"post",padding:18,offset:12,onmobile:!1},copycode:{enable:!0,show_result:!0,style:"mac"},back2top:{enable:!0,sidebar:!1,scrollpercent:!0},bookmark:{enable:!1,color:"#222",save:"auto"},fancybox:!0,mediumzoom:!1,lazyload:!1,pangu:!1,comments:{style:"tabs",active:null,storage:!0,lazyload:!1,nav:null},algolia:{hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}},localsearch:{enable:!0,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1},motion:{enable:!1,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},path:"search.xml"}</script><meta property="og:type" content="article"><meta property="og:title" content="5.线性空间与线性变换"><meta property="og:url" content="https://amostian.github.io/posts/2396364736/index.html"><meta property="og:site_name" content="AmosTian"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/%E7%BA%BF%E6%80%A7%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221224150550024.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221126211405669.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221224163713702.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221224163855072.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221224210540555.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221224213755074.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221224213807765.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221224214259307.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221224223022996.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221224223148329.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221126215350699.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221126220144196.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221126112234189.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221126112220956.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221126095113575.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20230109155406910.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221225091140933.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221225105507983.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221225105844430.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221225114712581.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221225120050651.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221225120446774.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221225120756249.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221225172835156.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221225183535490.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221225183603355.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221225183635035.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221225183646047.png"><meta property="og:image" content="https://amostian.github.io/posts/2396364736/image-20221225183715318.png"><meta property="article:published_time" content="2022-12-22T00:27:38.000Z"><meta property="article:modified_time" content="2023-03-16T14:28:47.000Z"><meta property="article:author" content="AmosTian"><meta property="article:tag" content="数学"><meta property="article:tag" content="矩阵论"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://amostian.github.io/posts/2396364736/%E7%BA%BF%E6%80%A7%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2.png"><link rel="canonical" href="https://amostian.github.io/posts/2396364736/"><script id="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,lang:"zh-CN"}</script><title>5.线性空间与线性变换 | AmosTian</title><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage"><div class="container"><div class="headband"></div><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="切换导航栏"><span class="toggle-line toggle-line-first"></span> <span class="toggle-line toggle-line-middle"></span> <span class="toggle-line toggle-line-last"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span><h1 class="site-title">AmosTian</h1><span class="logo-line-after"><i></i></span></a></div><div class="site-nav-right"><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">58</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">74</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">349</span></a></li><li class="menu-item menu-item-essay"><a href="/categories/%E9%9A%8F%E7%AC%94/" rel="section"><i class="fa fa-fw fa-pied-piper"></i>随笔</a></li><li class="menu-item menu-item-dynamic-resume"><a href="/dynamic-resume/" rel="section"><i class="fa fa-fw fa-cog"></i>动态简历</a></li><li class="menu-item menu-item-search"><a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索</a></li></ul></nav><div class="search-pop-overlay"><div class="popup search-popup"><div class="search-header"><span class="search-icon"><i class="fa fa-search"></i></span><div class="search-input-container"><input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input"></div><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span></div><div id="search-result"><div id="no-result"><i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i></div></div></div></div></div></header><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div><div class="reading-progress-bar"></div><a href="https://github.com/AmosTian" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><main class="main"><div class="main-inner"><div class="content-wrap"><div class="content post posts-expand"><article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://amostian.github.io/posts/2396364736/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/avatar.png"><meta itemprop="name" content="AmosTian"><meta itemprop="description" content="知道的越多，不知道的越多"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="AmosTian"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">5.线性空间与线性变换</h1><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建时间 2022-12-22 08:27:38" itemprop="dateCreated datePublished" datetime="2022-12-22T08:27:38+08:00">2022-12-22</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-calendar-check-o"></i> </span><span class="post-meta-item-text">更新于</span> <time title="修改时间 2023-03-16 22:28:47" itemprop="dateModified" datetime="2023-03-16T22:28:47+08:00">2023-03-16</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i> </span><span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a> </span>> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E5%AD%A6/%E7%9F%A9%E9%98%B5%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">矩阵论</span></a></span></span><div class="post-symbolscount"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i> </span><span class="post-meta-item-text">本文字数 </span><span title="本文字数">5.5k字 </span><span class="post-meta-item" title="阅读时长"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-clock-o"></i> </span><span class="post-meta-item-text">阅读时长 &asymp;</span> <span>16 分钟</span></span></div></div></header><div class="post-body" itemprop="articleBody"><p><img src="/posts/2396364736/线性空间与线性变换.png" alt="线性空间与线性变换"></p><span id="more"></span><h2 id="5-1-线性空间概念"><a href="#5-1-线性空间概念" class="headerlink" title="5.1 线性空间概念"></a>5.1 线性空间概念</h2><h3 id="5-1-1-定义与性质"><a href="#5-1-1-定义与性质" class="headerlink" title="5.1.1 定义与性质"></a>5.1.1 定义与性质</h3><p><strong>数域</strong>：含0和1，且对加减乘除封闭的数集</p><h4 id="a-定义"><a href="#a-定义" class="headerlink" title="a. 定义"></a>a. 定义</h4><p>设 $V$ 是一个非空集合，其元素为 $x,y,z$ ，$K$ 是一个数域，如果 $V$ 中元素满足</p><ol><li>$V$ 对加法封闭，即当 $x,y\in V$ 时，有唯一 $x\oplus y\in V$ ，且加法满足：<ul><li>结合律：$(x\oplus y)\oplus z=x\oplus (y\oplus z)$</li><li>交换律：$x\oplus y=y\oplus x$</li><li>存在零元素：$x\oplus 0=x$</li><li>存在负元素：对 $\forall x\in V，\exists y\in V$ ，使 $x\oplus y=0$ ，则称 $y$ 为 $x$ 的负元素，记为 $-x$</li></ul></li><li>$V$ 对数乘运算封闭，即当 $x\in V,k\in K$ 时，有唯一 $k\circ x\in V$ ，且数乘运算满足<ul><li>$1\circ x=x$ （幺元素）</li><li>$k\circ(x\oplus y)=k\circ x\oplus k\circ y$</li><li>$(k+l)\circ x=k\circ x\oplus l\circ x$</li><li>$k\circ(l\circ x)=(k\circ l)\circ x$</li></ul></li></ol><p>则称 $V$ 为数域 $K$ 上的线性空间或向量空间</p><blockquote><p>当 $K=R$ 时，称为实线性空间</p><p>当 $K=C$ 时，称为复线性空间</p></blockquote><p><strong>eg</strong></p><p>实数域上全体 $n$ 维向量的集合 $R^n=\{\left(\begin{matrix}x_1\\\vdots\\x_n\end{matrix}\right)\vert x_1,\cdots,x_n\in R\}$ ， $\alpha=\left(\begin{matrix}x_1\\x_2\\\vdots\\x_n\end{matrix}\right),\beta=\left(\begin{matrix}y_1\\y_2\\\vdots\\y_n\end{matrix}\right)\in R^n,k\in R$</p><ul><li>加法： $\alpha+\beta=\left(\begin{matrix}x_1+y_1\\x_2+y_2\\\vdots\\x_n+y_n\end{matrix}\right)\in R^n$</li><li>数乘：$k\alpha=\left(\begin{matrix}kx_1\\kx_2\\\vdots\\kx_n\end{matrix}\right)\in R^n$</li></ul><p>$R^n$ 是数域 $R$ 上的线性空间</p><p>$C^n$ 是数域 $C$ 上的线性空间</p><hr><p>正弦函数集合 $S[x]=\{asin(x+b)\vert a,b\in R\}$ ，$s_1,s_2\in S[x]$</p><ul><li><p>加法</p><script type="math/tex;mode=display">\begin{aligned}
+s_1+s_2&=A_1sin(x+B_1)+A_2sin(x+B_2)\\
+&=(A_1sinB_1cosx+A_1cosB_1sinx)+(A_2sinB_2cosx+A_2cosB_2sinx)\\
+&=(a_1cosx+b_1sinx)+(a_2cosx+b_2sinx)\\
+&=(a_1+a_2)cosx+(b_1+b_2)sinx\\
+&=Asin(x+B)\in S[x]
+\end{aligned}</script></li><li><p>数乘</p><script type="math/tex;mode=display">\begin{aligned}
+\lambda s_1=\lambda A_1sin(x+B_1)=(\lambda A_1)sin(x+B_1)\in S[x]
+\end{aligned}</script></li></ul><p>$\therefore S[x]$ 是一个线性空间</p><hr><p>设 $R^+$ 为所有正实数组成的数集，加法和数乘定义为：$m\oplus n=mn$ ，$k\circ m=m^k$ ，证： $R^+$ 为 $R$ 上的线性空间</p><ul><li><p>加法： $a\oplus b=ab\in R^+$</p><p>$a\oplus b=ab=ba=b\oplus a$</p><p>$(a\oplus b)\oplus c=(ab)\oplus c=a(bc)=a\oplus(b\oplus c)$</p><p>$R^+$ 中存在零元素1，$\forall a\in R^+$，有 $a\oplus 1=a\cdot 1=a$</p><p>$\forall a\in R^+$ ，$a\oplus x=a\cdot x=1\Rightarrow x=a^{-1}$ ，即有负元素 $a^{-1}$</p></li><li><p>数乘：$\forall k\in R$ ，$ka=a^k\in R^+$</p><p>$1\circ a=a^1=a$</p><p>$\lambda\circ(\mu\circ a)=\lambda\circ a^\mu=(a^{\mu})^{\lambda}=a^{\lambda\mu}=(\lambda\mu)\circ a$</p><p>$(\lambda+\mu)\circ a=a^{\lambda+\mu}=a^{\lambda}a^{\mu}=a^\lambda\oplus a^\mu=\lambda\circ a\oplus\mu \circ a$</p><p>$\lambda\circ (a\oplus b)=\lambda\circ (ab)=(ab)^\lambda=a^\lambda b^\lambda=a^\lambda\oplus b^\lambda=\lambda\circ a\oplus \lambda\circ b$</p></li></ul><p>故 $R^+$ 是一个线性空间</p><h4 id="b-性质"><a href="#b-性质" class="headerlink" title="b. 性质"></a>b. 性质</h4><blockquote><p>线性空间 $V$ 中的元素，有唯一的零元素，任意元素有唯一的负元素</p></blockquote><script type="math/tex;mode=display">\begin{aligned}
+证明：&假设0_1,0_2是V的两个零元素，由于 0_1=0_1+0_2=0_2,所以零元素唯一\\
+&设元素 x有两个负元素 x_1,x_2,由于x_1=x_1+0=x_1+(x_2+x)=(x_1+x)+x_2=x_2\\
+&\therefore 任意元素有唯一负元素
+\end{aligned}</script><h3 id="5-1-2-线性空间的基与维数"><a href="#5-1-2-线性空间的基与维数" class="headerlink" title="5.1.2 线性空间的基与维数"></a>5.1.2 线性空间的基与维数</h3><h4 id="a-线性表示"><a href="#a-线性表示" class="headerlink" title="a. 线性表示"></a>a. 线性表示</h4><p>如果 $x_1,\cdots,x_m$ 为线性空间 $V$ 中的 $m$ 个向量，$x\in V$ ，且存在数域 $K$ 中一组数 $c_1,\cdots,c_m$ ，使 $x=c_1x_1+\cdots+c_mx_m$ ，则称 $x$ 为向量组 $x_1,\cdots,x_m$ 的线性组合，即 $x$ 可由 $x_1,\cdots,x_m$ 线性表示</p><h4 id="b-线性相关与线性无关"><a href="#b-线性相关与线性无关" class="headerlink" title="b. 线性相关与线性无关"></a>b. 线性相关与线性无关</h4><p>对于 $x_1,\cdots,x_m\in V$ ，如果存在不全为零的 $m$ 个数 $c_1,\cdots,c_m\in K$ ，使 $c_1x_1+\cdots+c_mx_m=0$ ，则称向量组 $x_1,\cdots,x_m$ 线性相关，否则为线性无关</p><h4 id="c-基与维数"><a href="#c-基与维数" class="headerlink" title="c. 基与维数"></a>c. 基与维数</h4><p>如果 $x_1,\cdots,x_m$ 是线性空间 $V$ 中 $m$ 个元素且满足：</p><ul><li>$x_1,\cdots,x_m$ 线性无关</li><li>$\forall x\in V$ 可由 $x_1,\cdots,x_m$ 线性表示</li></ul><p>则 $x_1,\cdots,x_m$ 为 $V$ 的一个基，$m$ 称为 $V$ 的维数，记为 $dim V=m$</p><p>维数为 $m$ 的线性空间 $V$ 记为 $V^m$ ，当 $m=+\infty$ 时，称为 无限维线性空间</p><h5 id="基性质"><a href="#基性质" class="headerlink" title="基性质"></a>基性质</h5><ul><li><p>设 $V$ 是 $r$ 维子空间 ($dim V=r$) ，则 $W$ 中任 $r+1$ 个向量必线性相关</p><script type="math/tex;mode=display">\begin{aligned}
+证明：&设V的基为 \alpha_1,\cdots,\alpha_r，任取\beta_1,\cdots,\beta_r,\beta_{r+1} \in V，可知每个\beta 可有\alpha 基向量表示，即\\
+&向量组\{\beta_1,\cdots,\beta_r\}的秩\le r(\alpha_q,\cdots,\alpha_r) =r\le r+1，故\{\beta\}向量组线性相关
+\end{aligned}</script></li><li><p>$V$ 的基 $[\alpha_1,\cdots,\alpha_r]$ 必是向量组 $V$ 的一个极大无关组，从而 $dim V=r(V)$</p></li></ul><h5 id="基的扩充"><a href="#基的扩充" class="headerlink" title="基的扩充"></a>基的扩充</h5><p>设 $W$ 是数域 $K$ 上的线性空间 $V^n$ 的一个 $m$ 维子空间，$x_1,\cdots,x_m$ 是 $W$ 的基，则这 $m$ 个基向量必可扩充为 $V^n$ 的一个基</p><script type="math/tex;mode=display">\begin{aligned}
+归纳法：&当n-m=0时，定理显然成立\\
+&假定 n-m=k时成立，则当 n-m=k+1时，由于 x_1,\cdots,x_m不是V^n的基\\
+&则在V^n中至少有一个向量 x_{m+1}不能由x_1,\cdots,x_m线性表示，\therefore x_1,\cdots,x_m,x_{m+1}线性无关\\
+&子空间L(x_1,\cdots,x_m,x_{m+1}) 是m+1维的\\
+&\because n-(m+1)=n-m-1=k，\therefore L(x_1,\cdots,x_m,x_{m+1})的基 x_1,\cdots,x_m,x_{m+1} 可以扩充为 V^n的一个基
+\end{aligned}</script><h4 id="d-坐标"><a href="#d-坐标" class="headerlink" title="d. 坐标"></a>d. 坐标</h4><p>设线性空间 $V^n$ 的一个基 $x_1,\cdots,x_n,x\in V^n$ ，$x=\xi_1x_1+\xi_2x_2+\xi_nx_n$ ，则称 $\xi_1,\cdots,\xi_n$ 为 $x$ 在该基下的坐标，记为 $(\xi_1,\cdots,\xi_n)^T$</p><p><strong>定理</strong> ：设 $x_1,\cdots,x_n$ 是 $V^n$ 的一个基，且 $x\in V^n$ ，则 $x$ 可唯一表示为 $x_1,\cdots,x_n$ 的线性组合</p><h4 id="e-基变换与坐标变换"><a href="#e-基变换与坐标变换" class="headerlink" title="e. 基变换与坐标变换"></a>e. 基变换与坐标变换</h4><p>设 $I:x_1,\cdots,x_n;II:y_1,\cdots,y_n$ 是 $V^n$ 的两个基，则有：</p><script type="math/tex;mode=display">\left\{
+\begin{aligned}
+&y_1=c_{11}x_1+c_{21}x_2+\cdots+c_{n1}x_n\\
+&y_2=c_{12}x_1+c_{22}x_2+\cdots+c_{n2}x_n\\
+&\vdots\\
+&y_n=c_{1n}x_1+c_{2n}x_2+\cdots+c_{nn}x_n\\
+\end{aligned}
+\right.</script><p>有 $(y_1,\cdots,y_n)=(x_1,\cdots,x_n)C$ ，其中矩阵 $C=\left(\begin{matrix}c_{11}&amp;c_{12}&amp;\cdots&amp;c_{1n}\\c_{21}&amp;c_{22}&amp;\cdots&amp;c_{2n}\\\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\c_{n1}&amp;c_{n2}&amp;\cdots&amp;c_{nn}\end{matrix}\right)$ 称为基 $I$ 到基 $II$ 的过渡矩阵</p><hr><p>对于同一向量，在不同基下有不同表示方式</p><script type="math/tex;mode=display">\begin{aligned}
+x&=(x_1,\cdots,x_n)\left(
+\begin{matrix}
+\xi_1\\\vdots\\\xi_n
+\end{matrix}
+\right)\\
+&=(y_1,\cdots,y_n)\left(
+\begin{matrix}
+\eta_1\\\vdots\\\eta_n
+\end{matrix}
+\right)=(x_1,\cdots,x_n)C\left(
+\begin{matrix}
+\eta_1\\\vdots\\\eta_n
+\end{matrix}
+\right)
+\end{aligned}</script><p>则有 <strong>坐标变换</strong> $\left(\begin{matrix}\xi_1\\\vdots\\\xi_n\end{matrix}\right)=C\left(\begin{matrix}\eta_1\\\vdots\\\eta_n\end{matrix}\right)$</p><hr><p><strong>eg</strong></p><p>设矩阵空间 $K^{2\times 2}$ 的两个基</p><p><img src="/posts/2396364736/image-20221224150550024.png" alt="image-20221224150550024"></p><p>求过渡矩阵</p><script type="math/tex;mode=display">\begin{aligned}
+解：&令E_{11}=\left(\begin{matrix}1&0\\0&0\end{matrix}\right),E_{12}=\left(\begin{matrix}0&1\\0&0\end{matrix}\right),E_{21}=\left(\begin{matrix}0&0\\1&0\end{matrix}\right),E_{22}=\left(\begin{matrix}0&0\\0&1\end{matrix}\right)\\
+&则有基变换 (A_1,A_2,A_3,A_4)=(E_{11},E_{12},E_{21},E_{22})C_1\\
+&(B_1,B_2,B_3,B_4)=(E_{11},E_{12},E_{21},E_{22})C_2\\
+&其中C_1=\left(
+\begin{matrix}
+1&1&0&0\\0&0&1&1\\0&0&1&-1\\1&-1&0&0
+\end{matrix}
+\right),C_2=\left(
+\begin{matrix}
+1&1&1&1\\1&1&1&0\\1&1&0&0\\1&0&0&0
+\end{matrix}
+\right)\\
+&\therefore (B_1,B_2,B_3,B_4)=(A_1,A_2,A_3,A_4)C_1^{-1}C_2\\
+&得到由基(I)到基(II)的过渡矩阵 C=C_1^{-1}C_2=\frac{1}{2}\left(
+\begin{matrix}
+2&1&1&1\\0&1&1&1\\2&2&1&0\\0&0&1&0
+\end{matrix}
+\right)
+\end{aligned}</script><h2 id="5-2-子空间"><a href="#5-2-子空间" class="headerlink" title="5.2 子空间"></a>5.2 子空间</h2><h3 id="5-2-1-定义"><a href="#5-2-1-定义" class="headerlink" title="5.2.1 定义"></a>5.2.1 定义</h3><p>设 $W\subset V$ ，$W$ 是数域 $K$ 上的线性空间 $V$ 的一个非空子集合，且</p><script type="math/tex;mode=display">\begin{aligned}
+&(1)对\forall \alpha,\beta\in W，有\alpha+\beta\in W(对加法封闭)\\
+&(2)对\forall \alpha\in W,\forall k\in K ，有k\alpha \in W(对数乘封闭)
+\end{aligned}</script><p>则称 $W$ 为 $V$ 的线性子空间或子空间</p><ul><li><p>平凡子空间 $W=V$ 或 $\varphi=\{0\}$ ；其余称为非平凡子空间</p></li><li><p><strong>子空间 $W$ 一定含有零向量 $\vec{0} \in W$</strong>；若不包含零向量，则不是子空间</p></li><li>齐次方程解集 $W(A)=\{X\in C^n\vert AX=0\}$ ，对加法，数乘封闭($AX_1=0,AX_2=0,A(X_1+X_2)=0$)，($AX_1 =0$,$A(kX_1)=k(AX_1)=0$) ，且有零向量，故是 $C^n$ 的子空间</li><li>非齐次方程解集 $W(A)=\{X\in C^n\vert AX=b\neq 0\}$ 不含零向量，故W(A) 不是子空间，且对加法，数乘不封闭</li></ul><h3 id="5-2-2-生成子空间"><a href="#5-2-2-生成子空间" class="headerlink" title="5.2.2 生成子空间"></a>5.2.2 生成子空间</h3><h4 id="a-引理"><a href="#a-引理" class="headerlink" title="a. 引理"></a>a. 引理</h4><p>由 $C^n$ 中向量 $\alpha_1,\alpha_2\cdots,\alpha_m$ 的所0有 <strong>线性组合生成的向量集合</strong> $W(A)=\{x=k_1\alpha_1+k_2\alpha_2+\cdots+k_m\alpha_m\}$ 是一个子空间，称W为由$\alpha_1,\cdots,\alpha_m$ 生成的子空间，记为 $W=L(\alpha_1,\cdots,\alpha_m)$ 或 $W=span(\alpha_1,\cdots,\alpha_m)$</p><p><img src="/posts/2396364736/image-20221126211405669.png" alt="image-20221126211405669"></p><h4 id="b-维数公式"><a href="#b-维数公式" class="headerlink" title="b. 维数公式"></a>b. 维数公式</h4><p>$dim (V_1+V_2)=dimV_1+dim V_2-dim(V_1\bigcap V_2)$</p><h4 id="c-子空间的交与和"><a href="#c-子空间的交与和" class="headerlink" title="c. 子空间的交与和"></a>c. 子空间的交与和</h4><p><strong>交</strong>：如果 $V_1$ ，$V_2$ 是数域 $K$ 上的线性空间 $V$ 的两个子空间，那么 $V_1\bigcap V_2$ 也是 $V$ 的子空间</p><p><img src="/posts/2396364736/image-20221224163713702.png" alt="image-20221224163713702"></p><p><strong>和</strong> ：设 $V_1$ ，$V_2$ 都是 $V$ 的子空间，则集合 $\{z\vert z=x+y,x\in V_1,y\in V_2\}$ 称为 $V_1$ 与 $V_2$ 的和，记为 $V_1+V_2$</p><p>如果 $V_1$ ，$V_2$ 都是 $V$ 的子空间，则 $V_1+V_2$ 也是 $V$ 的子空间</p><p><img src="/posts/2396364736/image-20221224163855072.png" alt="image-20221224163855072"></p><ul><li>$V_1\bigcap V_2$ 是包含在 $V_1$ ，$V_2$ 的最大子空间</li><li>$V_1+V_2$ 是包含 $V_1,V_2$ 的最小子空间</li></ul><p><strong>eg</strong></p><p><img src="/posts/2396364736/image-20221224210540555.png" alt="image-20221224210540555"></p><script type="math/tex;mode=display">\begin{aligned}
+&显然V_1+V_2\supset L(a_1,\cdots,a_m,b_1,\cdots,b_l)，\\
+&又\forall x\in V_1+V_2，有x=x_1+x_2,x_1\in V_1,x_2\in V_2\\
+&\therefore x_1=k_1a_1+\cdots+k_ma_m,x_2=p_1b_1+\cdots+p_lb_l\\
+&\therefore x\in L(a_1,\cdots,a_m,b_1,\cdots,b_l)\\
+&可得V_1+V_2\subset L(a_1,\cdots,a_m,b_1,\cdots,b_l)
+\end{aligned}</script><h4 id="d-直和"><a href="#d-直和" class="headerlink" title="d. 直和"></a>d. 直和</h4><p>如果 $V_1+V_2$ 中的任一向量只能唯一地表示为$V_1$ 的一个向量和 $V_2$ 中的一个向量的和，则称 $V_1+V_2$ 为 $V_1$ 与 $V_2$ 的直和，记为 $V_1\oplus V_2$</p><p><strong>定理</strong>：若 $V_1+V_2$ 为直和$\iff V_1\bigcap V_2=L(0)$</p><ul><li>不存在公共部分，即无法用公共部分的向量代替</li></ul><p><img src="/posts/2396364736/image-20221224213755074.png" alt="image-20221224213755074"></p><p><img src="/posts/2396364736/image-20221224213807765.png" alt="image-20221224213807765"></p><p><strong>推论：</strong></p><ul><li>设 $V_1$ ,$V_2$ 都是 $V$ 的子空间，则 $V_1+V_2$ 是直和 $\iff dim(V_1+V_2)=dim V_1+dimV_2$</li><li>如果 $x_1,\cdots,x_k$ 为 $V_1$ 的基，$y_1,\cdots,y_l$ 为 $V_2$ 的基，且 $V_1+V_2$ 为直和，则 $x_1,\cdots,x_k,y_1,\cdots,y_l$ 为 $V_1\oplus V_2$ 的基</li></ul><p><strong>eg</strong></p><p><img src="/posts/2396364736/image-20221224214259307.png" alt="image-20221224214259307"></p><script type="math/tex;mode=display">\begin{aligned}
+(1)&由于V_1:(\xi_1,\xi_2,\xi_3,\xi_4)=(\xi_1,\xi_1,\xi_1,\xi_4)=\xi_1(1,1,1,0)+\xi_4(0,0,0,1)\\
+&设 y_1=(1,1,1,0),y_2=(0,0,0,1),则有V_1=L(y_1,y_2)\\
+&则有V_1+V_2=L(y_1,y_2,x_1,x_2)\\
+(2)&\because x_2=y_1+y_2-x_1,\Rightarrow r(y_1,y_2,x_1,x_2)=dim(V_1+V_2)=3\\
+&y_1,y_2,x_1为V_1+V_2的一个基\\
+(3)&设x\in V_1\bigcap V_1,则有k_1,k_2,l_1,l_2,使x=k_1y_1+k_2y_2=l_1x_1+l_2x_2\\
+&\therefore \left\{
+\begin{aligned}
+k_1-l_1=0\\
+k_1-l_2=0\\
+k_1-l_1=0\\
+k_2-l_2=0
+\end{aligned}
+\right.\Rightarrow \left\{
+\begin{aligned}
+&k_1=l_1\\
+&k_1=l_2\\
+&k_2=l_2
+\end{aligned}
+\right.\Rightarrow k_1=l_2=l_1=k_2\\
+&\therefore x=k_1y_1+k_1y_2=k_1(1,1,1,1)\\
+&\therefore (1,1,1,1)为 V_1\bigcap V_2的一个基，dim (V_1\bigcap V_2)=1
+\end{aligned}</script><hr><p><img src="/posts/2396364736/image-20221224223022996.png" alt="image-20221224223022996"></p><p><img src="/posts/2396364736/image-20221224223148329.png" alt="image-20221224223148329"></p><h3 id="5-2-3-A产生的子空间"><a href="#5-2-3-A产生的子空间" class="headerlink" title="5.2.3 A产生的子空间"></a>5.2.3 A产生的子空间</h3><h4 id="a-列空间（值域）"><a href="#a-列空间（值域）" class="headerlink" title="a. 列空间（值域）"></a>a. 列空间（值域）</h4><p>$A=A_{m\times n}$ 的值域 $R(A)=\{全体y=Ax\vert x\in C^n\}\subset C^m$</p><script type="math/tex;mode=display">\begin{aligned}
+&A=A_{m\times n}=(\alpha_1,\cdots,\alpha_n),其中\alpha_i\in C^m ，X=\left(
+\begin{matrix}
+x_1\\\vdots\\x_n
+\end{matrix}
+\right)\in C^n\\
+&Y=AX=x_1\alpha_1+\cdots+x_n\alpha_n=\left(x_1\alpha_1,\cdots,x_n\alpha_n\right)为A的生成列空间
+\end{aligned}</script><p>即对 $C^n$ 中的所有列向量进行 $A$ 变换产生的列生成空间，记为 $R(A)=\{y=x_1\alpha_1+\cdots+x_n\alpha_n\vert X\in C^n\}$</p><p>$R(A)=L(\alpha_1,\cdots,\alpha_n)$ 或 $R(A)=span(\alpha_1,\cdots,\alpha_n)$</p><p><img src="/posts/2396364736/image-20221126215350699.png" alt="image-20221126215350699"></p><p>$r(A)=r(\alpha_1,\cdots,\alpha_n)\overset{\Delta}{=}r(A)\Rightarrow 维数：dimR(A)=r(A)（维数=秩数）$</p><h4 id="b-A的核空间"><a href="#b-A的核空间" class="headerlink" title="b. A的核空间"></a>b. A的核空间</h4><blockquote><p>前置知识：$AX=0$ 的其他通解形式 $X=(I-A^+A)Y,\forall Y\in C^n$</p></blockquote><p>$A=A_{m\times n}$ 的核空间为 $N(A)=\{X\vert AX=0\}\subset C^n=\{X=(I-A^+A)Y\mid \forall Y\in C^n\}\subset C^n$ （解空间）</p><p><img src="/posts/2396364736/image-20221126220144196.png" alt="image-20221126220144196"></p><p>可知，$N(A)=R(I-A^-A)=R(I-A^+A)$ ，则有 $dim N(A)=dim R(I_n-A^-A)=r(I_n-A^+A)$ 由于 $A^-A,A^+A$ 为幂等阵 $r(I_n-A^-A)=r(I_n-A^+A)=n-r(A)$ ，即 $dimN(A)=n-r(A)$</p><h5 id="维数公式"><a href="#维数公式" class="headerlink" title="维数公式"></a>维数公式</h5><p>$dim N(A)+dim R(A)=n$ 或 $dim N(A)+r(A)=n$ ，即 $dim N(A)=n-r(A)$</p><h4 id="c-正交引理"><a href="#c-正交引理" class="headerlink" title="c. 正交引理"></a>c. 正交引理</h4><h5 id="C-m-中正交引理-列空间中向量的正交向量"><a href="#C-m-中正交引理-列空间中向量的正交向量" class="headerlink" title="$C^m$ 中正交引理(列空间中向量的正交向量)"></a>$C^m$ 中正交引理(列空间中向量的正交向量)</h5><p>任取 $b\in C^m$ ，令 $x_0=A^+b\in C^n$ ，则 $(b-Ax_0)\bot Ax,\forall x\in C^n$</p><p><img src="/posts/2396364736/image-20221126112234189.png" alt="image-20221126112234189"></p><p><img src="/posts/2396364736/image-20221126112220956.png" alt="image-20221126112220956"></p><h6 id="正交子空间"><a href="#正交子空间" class="headerlink" title="正交子空间"></a>正交子空间</h6><p>设 $A\in C^{m\times n}$ ，则有 $N(A)\bot R(A^H)$ ，且 $N(A^H)\bot R(A)$</p><p><strong>证明：</strong></p><script type="math/tex;mode=display">\begin{aligned}
+&任取 y\in N(A),即满足Ay=0。任取A^Hx\in R(A^H),若证N(A)\bot R(A^H) ，则只需证(y,A^Hx)=0,\\
+&\because (y,A^Hx)=(A^Hx)^Hy=x^HAy=X^H(Ay)=X^H0=0，即有N(A)\bot R(A^H)
+\end{aligned}</script><p>$A^H\in C^{n\times m}$ ，$R(A^H)\subset C^n$ ,$N(A^H)\subset C^m$ ，$R(A^H)+N(A^H)=C^n$</p><h5 id="C-n-中正交引理-核空间的正交向量"><a href="#C-n-中正交引理-核空间的正交向量" class="headerlink" title="$C^n$ 中正交引理(核空间的正交向量)"></a>$C^n$ 中正交引理(核空间的正交向量)</h5><p>任取 $b\in C^m$ ，令 $x_0=A^+b\in C^n$ ，则 $x_0\bot N(A)$ ，即 $x_0\bot y ,y\in \{y\vert Ay=0\}$</p><p><img src="/posts/2396364736/image-20221126095113575.png" alt="image-20221126095113575"></p><p><strong>证明：</strong></p><script type="math/tex;mode=display">\begin{aligned}
+&由于y在A的解空间，则已知Ay=0,要证x_0\bot y,即证内积(y,x_0)=0\\
+&(y,x_0)=x_0^Hy=(A^+b)^Hy=(A^+AA^+b)^Hy=(A^+b)^H(A^+A)^Hy=(A^+b)^HA^+Ay=0\\
+&\Rightarrow x_0\bot y,即 x_0\bot N(A)
+\end{aligned}</script><h6 id="x-0-A-b-为-Ax-b-的最小解"><a href="#x-0-A-b-为-Ax-b-的最小解" class="headerlink" title="$x_0=A^+b$ 为 $Ax=b$ 的最小解"></a>$x_0=A^+b$ 为 $Ax=b$ 的最小解</h6><script type="math/tex;mode=display">\begin{aligned}
+&令x_0=A^+b，\forall x\in N(A),Ay=b有通解y= x_0+tx,而\vert y\vert^2=\vert x_0+x\vert^2\\
+&\because x_0\bot x,由勾股定理\Rightarrow \vert x_0+x\vert^2=\vert x_0\vert^2+\vert x \vert^2\ge \vert x_0\vert^2   
+\end{aligned}</script><p><img src="/posts/2396364736/image-20230109155406910.png" alt="image-20230109155406910"></p><h2 id="5-3-线性映射与自然基分解"><a href="#5-3-线性映射与自然基分解" class="headerlink" title="5.3 线性映射与自然基分解"></a>5.3 线性映射与自然基分解</h2><p>同一空间——线性变换</p><p>不同空间——线性映射</p><p><strong>自然基</strong> ：$R^n$ 中的自然基为：</p><script type="math/tex;mode=display">\epsilon_1=\left(
+\begin{matrix}
+1\\0\\\vdots\\0
+\end{matrix}
+\right),\epsilon_2=\left(
+\begin{matrix}
+0\\1\\\vdots\\0
+\end{matrix}
+\right),\cdots,\epsilon_n=\left(
+\begin{matrix}
+0\\0\\\vdots\\1
+\end{matrix}
+\right)</script><p>$R^n$ 中每一向量 $\alpha=(a_1,a_2,\cdots,a_n)$ 都有分解公式 $\alpha=a_1\epsilon_1+a_2\epsilon_2+\cdots+a_n\epsilon_n$</p><p><strong>映射</strong>：设 $S$ 和 $S’$ 是两个集合，存在一个法则 $\sigma:S\rightarrow S’$ ，它使 $S$ 中的每个元素 $a$ 在 $S’$ 中有一个确定的元素 $a’$ 与之对应，记为</p><script type="math/tex;mode=display">\sigma(a)=a' 或 a\rightarrow a'</script><p>称为集合 $S$ 到 $S’$ 的映射， $a’$ 称为 $a$ 在映射 $\sigma$ 下的 <code>象</code> ，$a$ 为 $a’$ 在映射 $\sigma$ 下的 <code>原象</code></p><p><strong>交换</strong>：$S$ 到 $S$ 自身的映射</p><p><strong>相等</strong>：设 $\sigma_1$ 与 $\sigma_2$ 都是集合 $S$ 到 $S’$ 的映射，如果对于 $\forall a\in S$ ，都有 $\sigma_1(a)=\sigma_2(a)$ ，则称 $\sigma_1$ 与 $\sigma_2$ 相等，记为 $\sigma_1=\sigma_2$</p><p><strong>乘法</strong>：设 $\sigma$ ，$\tau$ 依次是集合 $S$ 到 $S_1$ ，$S_1$ 到 $S_2$ 的映射 ，乘积 $\tau \sigma$ 定义为$(\tau\sigma)(a)\overset{\Delta}{=}\tau(\sigma(a)),a\in S$ ，$\tau\sigma$ 是 $S$ 到 $S_2$ 的一个映射</p><ul><li>不满足交换律： $\tau\sigma\neq \sigma \tau$</li><li>满足结合律：$\mu(\tau\sigma)=(\mu\tau)\sigma$ ($\mu$ 是 $S_2$ 到 $S_3$ 的映射)</li></ul><h3 id="5-3-1-定义与性质"><a href="#5-3-1-定义与性质" class="headerlink" title="5.3.1 定义与性质"></a>5.3.1 定义与性质</h3><p>设 $W$ 为一个线性空间，且 $\varphi:W\rightarrow R^n$ 是一个映射 $(\alpha,\beta\in W,k\in R)$ ，若满足：</p><script type="math/tex;mode=display">\begin{aligned}
+(1)&\varphi(\alpha+\beta)=\varphi(\alpha)+\varphi(\beta)\\
+(2)&\varphi(k\alpha)=k\varphi(\alpha)
+\end{aligned}</script><p>则称 $\varphi$ 为 $W$ 到 $R^n$ 的一个线性映射</p><h4 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h4><p>零点不变：$\varphi(0)=0$</p><p>线性映射保持线性组合结构 ：$\varphi(k_1\alpha_1+k_2\alpha_2+\cdots+k_p\alpha_p)=k_1\varphi(\alpha_1)+k_2\varphi(\alpha_2)+\cdots+k_p\varphi(\alpha_p),k_1,k_2,\cdots,k_p\in R$</p><ul><li><code>原象</code> 线性相关（无关），则 <code>像</code> 也线性相关（无关）</li></ul><h3 id="5-3-2-应用"><a href="#5-3-2-应用" class="headerlink" title="5.3.2 应用"></a>5.3.2 应用</h3><ol><li>构造一个线性映射，把未知问题转化为求原象问题</li><li>写出自然基分解公式，然后找出自然基的原象</li><li>写出自然基原象的线性组合，可得所求原象</li></ol><p><img src="/posts/2396364736/image-20221225091140933.png" alt="image-20221225091140933"></p><p>解：令多项式集合 $W=\{f(x)=a_0+a_1x+\cdots+a_{n-1}x^{n-1}\vert a_j\in R,0\le j\le n-1\}$ ， $W$ 为一个线性空间，$dim(W)=n$</p><p>引入映射 $\varphi:W\rightarrow R^n,\forall f,g\in W$</p><script type="math/tex;mode=display">\varphi(f)=(f(x_1),f(x_2),\cdots,f(x_n))\\
+\varphi(g)=(g(x_1),g(x_2),\cdots,g(x_n))</script><p>对于映射 $\varphi$ ，有 $\varphi(f+g)=\varphi(f)+\varphi(g)$ ，$\varphi(kf)=k\varphi(f)$ ，可知 $\varphi$ 为线性映射（<strong>不改变组合结构</strong>）</p><p>设 $f(x)\in W$ 为所求的多项式，满足：$f(x_1)=b_1,f(x_2)=b_2,\cdots,f(x_n)=b_n$</p><p>令 $\beta=(b_1,b_2,\cdots,b_n)\in R^n$ ，则有 $\varphi(f)=(f(x_1),f(x_2),\cdots,f(x_n))=(b_1,b_2,\cdots,b_n)=\beta$</p><p>即问题转化为求一个 $f$ ，使 $\varphi(f)=\beta=b_1\epsilon_1+b_2\epsilon_2+\cdots+b_n\epsilon_n$ ，其原象 $f_1,f_2,\cdots,f_n\in W$ 使 $\varphi(f_1)=\epsilon_1,\varphi(f_2)=\epsilon_2,\cdots,\varphi(f_n)=\epsilon_n$</p><p>则必有 $\varphi(f)=b_1\varphi(f_1)+b_2\varphi(f_2)+\cdots+b_n\varphi(f_n)=b_1\epsilon_1+b_2\epsilon_2+\cdots+b_n\epsilon_n=\beta$</p><p>若 $\varphi(f_1)=\epsilon_1=(1,0,\cdots,0)\Rightarrow (f_1(x_1),f_1(x_2),\cdots,f_n(x_n))=(1,0,\cdots,0)\\\Rightarrow f_1(x_1)=1,f_1(x_2)=\cdots=f_1(x_n)=0$</p><p>则 $(n-1)$ 次多项式 $f_1$ 恰有 $n-1$ 个根为 $x_2,x_3,\cdots,x_n$ ，可设</p><script type="math/tex;mode=display">\begin{aligned}
+&f_1(x)=k_1(x-x_2)(x-x_3)\cdots(x-x_n)\\
+&\xRightarrow{1=f_1(x_1)}k_1=\frac{1}{(x_1-x_2)(x_1-x_3)\cdots(x_1-x_n)} \\
+&\Rightarrow f_1(x)=\frac{(x-x_2)(x-x_3)\cdots(x-x_n)}{(x_1-x_2)(x_1-x_3)\cdots(x_1-x_n)}
+\end{aligned}</script><p>同理：</p><script type="math/tex;mode=display">\begin{aligned}
+&f(x)=b_1f_1(x)+b_2f_2(x)+\cdots+b_nf_n(x)\\
+&f_1(x)=\frac{(x-x_2)(x-x_3)\cdots(x-x_n)}{(x_1-x_2)(x_1-x_3)\cdots(x_1-x_n)}\\
+&f_2(x)=\frac{(x-x_1)(x-x_2)\cdots(x-x_n)}{(x_2-x_1)(x_2-x_3)\cdots(x_2-x_n)}\\
+&\vdots\\
+&f_n(x)=\frac{(x-x_1)(x-x_2)\cdots(x-x_{n-1})}{(x_n-x_1)(x_n-x_2)\cdots(x_n-x_{n-1})}
+\end{aligned}</script><p><strong>eg</strong></p><p><img src="/posts/2396364736/image-20221225105507983.png" alt="image-20221225105507983"></p><hr><p><img src="/posts/2396364736/image-20221225105844430.png" alt="image-20221225105844430"></p><script type="math/tex;mode=display">\begin{aligned}
+&由 \varphi(f)=(f(x_1),f(x_2),\cdots,f(x_n))\in R^n，可知\varphi(f_1)=\epsilon_1,\varphi(f_2)=\epsilon_2,\cdots,\varphi(f_n)=\epsilon_n\\
+&由于 \epsilon_1,\cdots,\epsilon_n线性无关，由线性映射可知，f_1,f_2,\cdots,f_n线性无关，任取f(x)\in W，则\\
+&f=k_1f_1+k_2f_2+\cdots+k_nf_n\\
+&由\varphi(f)=k_1\varphi(f_1)+k_2\varphi(f_2)
++\cdots+k_n\varphi(f_n)=k_1\epsilon_1+k_2\epsilon_2+\cdots+k_n\epsilon_n=(k_1,k_2,\cdots,k_n)\\
+&\Rightarrow (f(x_1),f(x_2),\cdots,f(x_n))=(\epsilon_1,\epsilon_2,\cdots,\epsilon_n)\\
+&\Rightarrow k_1=f(x_1),k_2=f(x_2),\cdots,k_n=f(x_n)\\
+&\Rightarrow f(x)=f(x_1)f_1(x)+f(x_2)f_2(x)+\cdots+f(x_n)f_n(x)
+\end{aligned}</script><h2 id="5-4-线性变换"><a href="#5-4-线性变换" class="headerlink" title="5.4 线性变换"></a>5.4 线性变换</h2><h3 id="5-4-1-平面内向量绕原点旋转坐标变换"><a href="#5-4-1-平面内向量绕原点旋转坐标变换" class="headerlink" title="5.4.1 平面内向量绕原点旋转坐标变换"></a>5.4.1 平面内向量绕原点旋转坐标变换</h3><p>设向量 $V=\left(\begin{matrix}x\\y\end{matrix}\right)$ 旋转 $\theta$ 角后变为 $V’=\left(\begin{matrix}x’\\y’\end{matrix}\right)$ ，$V$ 的倾角为 $\varphi$</p><p><img src="/posts/2396364736/image-20221225114712581.png" alt="image-20221225114712581"></p><p>可写</p><script type="math/tex;mode=display">\begin{aligned}
+&x=rcos\varphi,y=rsin\varphi\\
+&\left\{
+\begin{aligned}
+&x'=rcos(\theta+\varphi)=rcos\theta cos\varphi-rsin\theta sin\varphi\\
+&y'=rsin(\theta+\varphi)=rsin\theta cos\varphi+rcos\theta sin\varphi
+\end{aligned}
+\right.\\
+&\iff\left\{
+\begin{aligned}
+x'=xcos\theta-ysin\theta\\
+y'=xsin\theta+ycos\theta
+\end{aligned}
+\right.\\
+&令A=\left(
+\begin{matrix}
+cos\theta&-sin\theta\\
+sin\theta&cos\theta
+\end{matrix}
+\right),可写\left(
+\begin{matrix}
+x'\\y'
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+cos\theta&-sin\theta\\sin\theta&cos\theta
+\end{matrix}
+\right)\left(
+\begin{matrix}
+x\\y
+\end{matrix}
+\right)=A\left(
+\begin{matrix}
+x\\y
+\end{matrix}
+\right)
+\end{aligned}</script><h3 id="5-4-2-三维空间绕坐标轴旋转坐标变换"><a href="#5-4-2-三维空间绕坐标轴旋转坐标变换" class="headerlink" title="5.4.2 三维空间绕坐标轴旋转坐标变换"></a>5.4.2 三维空间绕坐标轴旋转坐标变换</h3><h4 id="a-绕z轴旋转"><a href="#a-绕z轴旋转" class="headerlink" title="a. 绕z轴旋转"></a>a. 绕z轴旋转</h4><p><img src="/posts/2396364736/image-20221225120050651.png" alt="image-20221225120050651"></p><script type="math/tex;mode=display">\begin{aligned}
+&\left\{
+\begin{aligned}
+&x'=xcos\varphi-ysin\varphi\\
+&y'=xsin\varphi+ycos\varphi\\
+&z'=z
+\end{aligned}
+\right.\quad,\varphi为V与V'在xoy面投影的夹角\\
+&记为\left(
+\begin{matrix}
+x'\\y'\\z'
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+cos\varphi&-sin\varphi&0\\
+sin\varphi&cos\varphi&0\\
+0&0&1
+\end{matrix}
+\right)\left(
+\begin{matrix}
+x\\y\\z
+\end{matrix}
+\right)
+\end{aligned}</script><h4 id="b-绕x轴旋转"><a href="#b-绕x轴旋转" class="headerlink" title="b. 绕x轴旋转"></a>b. 绕x轴旋转</h4><p><img src="/posts/2396364736/image-20221225120446774.png" alt="image-20221225120446774"></p><script type="math/tex;mode=display">\begin{aligned}
+&\left\{
+\begin{aligned}
+&x'=x\\
+&y'=ycos\alpha-zsin\alpha\\
+&z'=ysin\alpha+zcos\alpha
+\end{aligned}
+\right.\quad,\alpha为V与V'在zoy面投影的夹角\\
+&记为\left(
+\begin{matrix}
+x'\\y'\\z'
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+1&0&0\\
+0&cos\alpha&-sin\alpha\\
+0&sin\alpha&cos\alpha\\
+\end{matrix}
+\right)\left(
+\begin{matrix}
+x\\y\\z
+\end{matrix}
+\right)
+\end{aligned}</script><h4 id="c-绕y轴旋转"><a href="#c-绕y轴旋转" class="headerlink" title="c. 绕y轴旋转"></a>c. 绕y轴旋转</h4><p><img src="/posts/2396364736/image-20221225120756249.png" alt="image-20221225120756249"></p><script type="math/tex;mode=display">\begin{aligned}
+&\left\{
+\begin{aligned}
+&y'=y\\
+&z'=zcos\beta-xsin\beta\\
+&x'=zsin\beta+xcos\beta\\
+\end{aligned}
+\right.\quad,\beta为V与V'在xoz面投影的夹角\\
+&记为\left(
+\begin{matrix}
+x'\\y'\\z'
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+cos\beta&0&sin\beta\\
+0&1&0\\
+-sin\beta&0&cos\beta\\
+\end{matrix}
+\right)\left(
+\begin{matrix}
+x\\y\\z
+\end{matrix}
+\right)
+\end{aligned}</script><h3 id="5-4-3-线性变换"><a href="#5-4-3-线性变换" class="headerlink" title="5.4.3 线性变换"></a>5.4.3 线性变换</h3><p>设 $V$ 为数域 $K$ 上的线性空间，若变换 $\sigma:V\rightarrow V$ ，对于 $\forall \alpha,\beta\in V,k\in K$ ，满足</p><script type="math/tex;mode=display">\sigma(\alpha+\beta)=\sigma(\alpha)+\sigma(\beta)\\
+\sigma(k\alpha)=k\sigma(\alpha)</script><p>则称 $\sigma$ 为空间 $V$ 上的线性变换</p><h4 id="a-性质"><a href="#a-性质" class="headerlink" title="a. 性质"></a>a. 性质</h4><ol><li><p>$\sigma$ 为 $V$ 的线性变换，则 $\sigma(0)=0$ ，$\sigma(-\alpha)=-\sigma(\alpha)$</p></li><li><p>线性变换保持线性组合及关系式不变</p><p>若 $\beta=k_1\alpha_1+k_2\alpha_2+\cdots+k_r\alpha_r$ ，则 $\sigma(\beta)=k_1\sigma(\alpha_1)+k_2\sigma(\alpha_2)+\cdots+k_r\sigma(\alpha_r)$</p></li><li><p>线性变换不改变线性相关性，但不保持线性无关性。即</p><p>若 $\alpha_1,\alpha_2,\cdots,\alpha_r$ 线性相关，则 $\sigma(\alpha_1),\sigma(\alpha_2),\cdots,\sigma(\alpha_r)$ 线性相关</p><p>若 $\alpha_1,\alpha_2,\cdots,\alpha_r$ 线性无关，则 $\sigma(\alpha_1),\sigma(\alpha_2),\cdots,\sigma(\alpha_r)$ 未必无关</p></li></ol><h4 id="b-复合乘积"><a href="#b-复合乘积" class="headerlink" title="b. 复合乘积"></a>b. 复合乘积</h4><p>设 $\sigma$ ，$\tau$ 为线性空间 $V$ 的两个线性变换，复合乘积为 $\sigma\tau$ ：$(\sigma\tau)(\alpha)=\sigma(\tau(\alpha))，\forall \alpha\in V$ ，则 $\sigma\tau$ 也是 $V$ 上的线性变换</p><ul><li>结合律：$(\sigma\tau)\varphi=\sigma(\tau\varphi)$</li><li>$I\sigma=\sigma I=\sigma$ ，$I$ 为恒等变换</li></ul><h4 id="c-数乘"><a href="#c-数乘" class="headerlink" title="c. 数乘"></a>c. 数乘</h4><p>设 $\sigma$ 为空间 $V$ 的线性变换，定义 $k$ 与 $\sigma$ 的数乘：$(k\sigma)(x)=k\sigma(x),\forall x\in V$ ，则 $k\sigma$ 也是 $V$ 的线性变换</p><p>性质：</p><p><img src="/posts/2396364736/image-20221225172835156.png" alt="image-20221225172835156"></p><h4 id="d-逆线性变换"><a href="#d-逆线性变换" class="headerlink" title="d. 逆线性变换"></a>d. 逆线性变换</h4><p>设 $\sigma$ 为空间 $V$ 的线性变换，若有 $V$ 的变换 $\tau$ 使 $\sigma\tau=\tau\sigma=I$ ，则称 $\sigma$ 为可逆变换，$\tau$ 为 $\sigma$ 的逆变换，记为 $\sigma^{-1}$</p><ul><li>可逆变换 $\sigma$ 的逆变换 $\sigma^{-1}$ 也是线性变换</li><li>线性变换 $\sigma$ 可逆 $\iff$ 线性变换 $\sigma$ 是一一对应的</li><li>设 $\epsilon_1,\epsilon_2,\cdots,\epsilon_n$ 是线性空间 $V$ 的一组基，$\sigma$ 为 $V$ 的线性变换，则 $\sigma$ 可逆当且仅当 $\sigma(\epsilon_1),\cdots,\sigma(\epsilon_n)$ 线性无关</li><li>可逆线性变换是把 无关向量变成无关向量</li></ul><h3 id="5-4-4-线性变换的矩阵表示"><a href="#5-4-4-线性变换的矩阵表示" class="headerlink" title="5.4.4 线性变换的矩阵表示"></a>5.4.4 线性变换的矩阵表示</h3><p>设 $\epsilon_1,\epsilon_2,\cdots,\epsilon_n$ 为数域 $F$ 上线性空间 $V$ 的一组基，$\sigma$ 为 $V$ 的线性变换，基向量的像可被基线性表示，即</p><script type="math/tex;mode=display">\left\{
+\begin{aligned}
+&\sigma(\epsilon_1)=a_{11}\epsilon_1+a_{21}\epsilon_{2}+\cdots+a_{n1}\epsilon_n\\
+&\sigma(\epsilon_2)=a_{12}\epsilon_1+a_{22}\epsilon_{2}+\cdots+a_{n2}\epsilon_n\\
+\vdots\\
+&\sigma(\epsilon_n)=a_{1n}\epsilon_1+a_{2n}\epsilon_{2}+\cdots+a_{nn}\epsilon_n\\
+\end{aligned}
+\right.</script><p>$\sigma(\epsilon_1,\epsilon_2,\cdots,\epsilon_n)=(\epsilon_1,\epsilon_2,\cdots,\epsilon_n)A$ ，其中 $A=\left(\begin{matrix}a_{11}&amp;a_{12}&amp;\cdots&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots&amp;a_{2n}\\\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\a_{n1}&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{matrix}\right)$</p><p>矩阵 $A$ 为线性变换 $\sigma$ 在基 $\epsilon_1,\epsilon_2,\cdots,\epsilon_n$ 下的矩阵</p><p><strong>定理：</strong></p><p>设 $\epsilon_1,\epsilon_2,\cdots,\epsilon_n$ 为数域 $F$ 上线性空间 $V$ 的一组基，在这组基下，$V$ 的每一个线性变换都与 $F^{n\times n}$ 中的唯一矩阵对应，且具有性质：</p><ul><li>线性变换的和对应于矩阵的和</li><li>线性变换的乘积对应于矩阵的乘积</li><li>线性变换的数量积对应于矩阵的数量积</li><li>可逆线性变换与可逆矩阵对应，且逆变换对应于逆矩阵</li></ul><p>设线性空间 $V$ 上的线性变换 $\varphi$ 在两个基 $\epsilon_1,\epsilon_2,\cdots,\epsilon_n$ 与 $\eta_1,\eta_2,\cdots,\eta_n$ 下的矩阵分别是 $A$ 、$B$ ，则有相似公式 $B=P^{-1}AP$</p><p><img src="/posts/2396364736/image-20221225183535490.png" alt="image-20221225183535490"></p><p><strong>eg</strong></p><p><img src="/posts/2396364736/image-20221225183603355.png" alt="image-20221225183603355"></p><p><img src="/posts/2396364736/image-20221225183635035.png" alt="image-20221225183635035"></p><hr><p><img src="/posts/2396364736/image-20221225183646047.png" alt="image-20221225183646047"></p><p><img src="/posts/2396364736/image-20221225183715318.png" alt="image-20221225183715318"></p></div><div><div><div style="text-align:center;color:#ccc;font-size:14px">-------------<i class="fa fa-hand-peace-o"></i>本文结束-------------</div></div></div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者 </strong>AmosTian</li><li class="post-copyright-link"><strong>本文链接 </strong><a href="https://amostian.github.io/posts/2396364736/" title="5.线性空间与线性变换">https://amostian.github.io/posts/2396364736/</a></li><li class="post-copyright-license"><strong>版权声明 </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div><footer class="post-footer"><div class="post-tags"><a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tags"></i> 数学</a> <a href="/tags/%E7%9F%A9%E9%98%B5%E8%AE%BA/" rel="tag"><i class="fa fa-tags"></i> 矩阵论</a></div><div class="post-nav"><div class="post-nav-item"><a href="/posts/3097253091/" rel="prev" title="github权限"><i class="fa fa-chevron-left"></i> github权限</a></div><div class="post-nav-item"><a href="/posts/2899123831/" rel="next" title="8.常用矩阵总结">8.常用矩阵总结 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div><script>window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span> <span class="toggle-line toggle-line-middle"></span> <span class="toggle-line toggle-line-last"></span></div><aside class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc">文章目录</li><li class="sidebar-nav-overview">站点概览</li></ul><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E7%BA%BF%E6%80%A7%E7%A9%BA%E9%97%B4%E6%A6%82%E5%BF%B5"><span class="nav-text">5.1 线性空间概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-1-%E5%AE%9A%E4%B9%89%E4%B8%8E%E6%80%A7%E8%B4%A8"><span class="nav-text">5.1.1 定义与性质</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E5%AE%9A%E4%B9%89"><span class="nav-text">a. 定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E6%80%A7%E8%B4%A8"><span class="nav-text">b. 性质</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-2-%E7%BA%BF%E6%80%A7%E7%A9%BA%E9%97%B4%E7%9A%84%E5%9F%BA%E4%B8%8E%E7%BB%B4%E6%95%B0"><span class="nav-text">5.1.2 线性空间的基与维数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%A4%BA"><span class="nav-text">a. 线性表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E4%B8%8E%E7%BA%BF%E6%80%A7%E6%97%A0%E5%85%B3"><span class="nav-text">b. 线性相关与线性无关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-%E5%9F%BA%E4%B8%8E%E7%BB%B4%E6%95%B0"><span class="nav-text">c. 基与维数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9F%BA%E6%80%A7%E8%B4%A8"><span class="nav-text">基性质</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9F%BA%E7%9A%84%E6%89%A9%E5%85%85"><span class="nav-text">基的扩充</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#d-%E5%9D%90%E6%A0%87"><span class="nav-text">d. 坐标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#e-%E5%9F%BA%E5%8F%98%E6%8D%A2%E4%B8%8E%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="nav-text">e. 基变换与坐标变换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E5%AD%90%E7%A9%BA%E9%97%B4"><span class="nav-text">5.2 子空间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-1-%E5%AE%9A%E4%B9%89"><span class="nav-text">5.2.1 定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-2-%E7%94%9F%E6%88%90%E5%AD%90%E7%A9%BA%E9%97%B4"><span class="nav-text">5.2.2 生成子空间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E5%BC%95%E7%90%86"><span class="nav-text">a. 引理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E7%BB%B4%E6%95%B0%E5%85%AC%E5%BC%8F"><span class="nav-text">b. 维数公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-%E5%AD%90%E7%A9%BA%E9%97%B4%E7%9A%84%E4%BA%A4%E4%B8%8E%E5%92%8C"><span class="nav-text">c. 子空间的交与和</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#d-%E7%9B%B4%E5%92%8C"><span class="nav-text">d. 直和</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-3-A%E4%BA%A7%E7%94%9F%E7%9A%84%E5%AD%90%E7%A9%BA%E9%97%B4"><span class="nav-text">5.2.3 A产生的子空间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E5%88%97%E7%A9%BA%E9%97%B4%EF%BC%88%E5%80%BC%E5%9F%9F%EF%BC%89"><span class="nav-text">a. 列空间（值域）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-A%E7%9A%84%E6%A0%B8%E7%A9%BA%E9%97%B4"><span class="nav-text">b. A的核空间</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%B4%E6%95%B0%E5%85%AC%E5%BC%8F"><span class="nav-text">维数公式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-%E6%AD%A3%E4%BA%A4%E5%BC%95%E7%90%86"><span class="nav-text">c. 正交引理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#C-m-%E4%B8%AD%E6%AD%A3%E4%BA%A4%E5%BC%95%E7%90%86-%E5%88%97%E7%A9%BA%E9%97%B4%E4%B8%AD%E5%90%91%E9%87%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E5%90%91%E9%87%8F"><span class="nav-text">$C^m$ 中正交引理(列空间中向量的正交向量)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%AD%A3%E4%BA%A4%E5%AD%90%E7%A9%BA%E9%97%B4"><span class="nav-text">正交子空间</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#C-n-%E4%B8%AD%E6%AD%A3%E4%BA%A4%E5%BC%95%E7%90%86-%E6%A0%B8%E7%A9%BA%E9%97%B4%E7%9A%84%E6%AD%A3%E4%BA%A4%E5%90%91%E9%87%8F"><span class="nav-text">$C^n$ 中正交引理(核空间的正交向量)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#x-0-A-b-%E4%B8%BA-Ax-b-%E7%9A%84%E6%9C%80%E5%B0%8F%E8%A7%A3"><span class="nav-text">$x_0&#x3D;A^+b$ 为 $Ax&#x3D;b$ 的最小解</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-%E7%BA%BF%E6%80%A7%E6%98%A0%E5%B0%84%E4%B8%8E%E8%87%AA%E7%84%B6%E5%9F%BA%E5%88%86%E8%A7%A3"><span class="nav-text">5.3 线性映射与自然基分解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-1-%E5%AE%9A%E4%B9%89%E4%B8%8E%E6%80%A7%E8%B4%A8"><span class="nav-text">5.3.1 定义与性质</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8"><span class="nav-text">性质</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-2-%E5%BA%94%E7%94%A8"><span class="nav-text">5.3.2 应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2"><span class="nav-text">5.4 线性变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-1-%E5%B9%B3%E9%9D%A2%E5%86%85%E5%90%91%E9%87%8F%E7%BB%95%E5%8E%9F%E7%82%B9%E6%97%8B%E8%BD%AC%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="nav-text">5.4.1 平面内向量绕原点旋转坐标变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-2-%E4%B8%89%E7%BB%B4%E7%A9%BA%E9%97%B4%E7%BB%95%E5%9D%90%E6%A0%87%E8%BD%B4%E6%97%8B%E8%BD%AC%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="nav-text">5.4.2 三维空间绕坐标轴旋转坐标变换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E7%BB%95z%E8%BD%B4%E6%97%8B%E8%BD%AC"><span class="nav-text">a. 绕z轴旋转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E7%BB%95x%E8%BD%B4%E6%97%8B%E8%BD%AC"><span class="nav-text">b. 绕x轴旋转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-%E7%BB%95y%E8%BD%B4%E6%97%8B%E8%BD%AC"><span class="nav-text">c. 绕y轴旋转</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-3-%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2"><span class="nav-text">5.4.3 线性变换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E6%80%A7%E8%B4%A8"><span class="nav-text">a. 性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E5%A4%8D%E5%90%88%E4%B9%98%E7%A7%AF"><span class="nav-text">b. 复合乘积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-%E6%95%B0%E4%B9%98"><span class="nav-text">c. 数乘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#d-%E9%80%86%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2"><span class="nav-text">d. 逆线性变换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-4-%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="nav-text">5.4.4 线性变换的矩阵表示</span></a></li></ol></li></ol></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" alt="AmosTian" src="/images/avatar.png"><p class="site-author-name" itemprop="name">AmosTian</p><div class="site-description" itemprop="description">知道的越多，不知道的越多</div></div><div class="site-state-wrap motion-element"><nav class="site-state"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">349</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/"><span class="site-state-item-count">58</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/"><span class="site-state-item-count">74</span> <span class="site-state-item-name">标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/AmosTian" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AmosTian" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a> </span><span class="links-of-author-item"><a href="https://blog.csdn.net/qq_40479037?type=blog" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40479037?type&#x3D;blog" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a> </span><span class="links-of-author-item"><a href="mailto:17636679561@163.com" title="E-Mail → mailto:17636679561@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a></span></div></div><div id="days"></div><script>function show_date_time(){window.setTimeout("show_date_time()",1e3),BirthDay=new Date("01/27/2022 15:13:14"),today=new Date,timeold=today.getTime()-BirthDay.getTime(),sectimeold=timeold/1e3,secondsold=Math.floor(sectimeold),msPerDay=864e5,e_daysold=timeold/msPerDay,daysold=Math.floor(e_daysold),e_hrsold=24*(e_daysold-daysold),hrsold=setzero(Math.floor(e_hrsold)),e_minsold=60*(e_hrsold-hrsold),minsold=setzero(Math.floor(60*(e_hrsold-hrsold))),seconds=setzero(Math.floor(60*(e_minsold-minsold))),document.getElementById("days").innerHTML="已运行 "+daysold+" 天 "+hrsold+" 小时 "+minsold+" 分 "+seconds+" 秒"}function setzero(e){return e<10&&(e="0"+e),e}show_date_time()</script></div></aside><div id="sidebar-dimmer"></div></div></main><footer class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2024</span> <span class="with-love"><i class="fa fa-grav"></i> </span><span class="author" itemprop="copyrightHolder">AmosTian</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-area-chart"></i> </span><span class="post-meta-item-text">站点总字数 </span><span title="站点总字数">758.9k</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-coffee"></i> </span><span class="post-meta-item-text">站点阅读时长 &asymp;</span> <span title="站点阅读时长">31:46</span></div></div></footer></div><script color="0,0,0" opacity="0.5" zindex="-1" count="150" src="/lib/canvas-nest/canvas-nest.min.js"></script><script src="/lib/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script><script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script><script src="/js/utils.js"></script><script src="/js/schemes/pisces.js"></script><script src="/js/next-boot.js"></script><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script><script src="/js/local-search.js"></script><script>if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'neutral',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}</script><script>if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }</script><script async src="/js/cursor/fireworks.js"></script><script src="/js/activate-power-mode.min.js"></script><script>POWERMODE.colorful=!0,POWERMODE.shake=!1,document.body.addEventListener("input",POWERMODE)</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({pluginRootPath:"live2dw/",pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,model:{jsonPath:"live2d-widget-model-hijiki"},display:{position:"right",width:150,height:300},mobile:{show:!1},log:!1})</script></body></html>

@@ -1,0 +1,925 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1"><link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png"><link rel="mask-icon" href="/images/favicon.png" color="#222"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa:300,300italic,400,400italic,700,700italic|Ma Shan Zheng:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext"><link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css"><script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script><script id="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:"amostian.github.io",root:"/",scheme:"Pisces",version:"7.8.0",exturl:!1,sidebar:{position:"left",display:"post",padding:18,offset:12,onmobile:!1},copycode:{enable:!0,show_result:!0,style:"mac"},back2top:{enable:!0,sidebar:!1,scrollpercent:!0},bookmark:{enable:!1,color:"#222",save:"auto"},fancybox:!0,mediumzoom:!1,lazyload:!1,pangu:!1,comments:{style:"tabs",active:null,storage:!0,lazyload:!1,nav:null},algolia:{hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}},localsearch:{enable:!0,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1},motion:{enable:!1,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},path:"search.xml"}</script><meta name="description" content="矩阵上的运算：特根特向求法，张量积，广义逆"><meta property="og:type" content="article"><meta property="og:title" content="4. 矩阵运算"><meta property="og:url" content="https://amostian.github.io/posts/941171150/index.html"><meta property="og:site_name" content="AmosTian"><meta property="og:description" content="矩阵上的运算：特根特向求法，张量积，广义逆"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://amostian.github.io/posts/941171150/%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221108164618263.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221215145159790.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221108204943513.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221108220336996.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221130092000538.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221108224219839.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221110105854746.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221110111610819.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221110111625840.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221130104216128.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221129084616158.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221129085054034.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221122221204147.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221124085851248.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221122221536891.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221122221934498.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221123233049779.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221123105211268.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221123233226169.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221124092613349.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221124104713257.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221124112035934.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221124100826429.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221125153333205.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221125152959510.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221125153456284.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221125153422858.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221125160752119.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221125161121714.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221125161507448.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221125163153329.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221125165105628.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221125172800196.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221124000200566.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221125170844010.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221125170910008.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221125171018323.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221125171411895.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221125171423593.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221124000402978.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221124000532698.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221124000539000.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221124113517977.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221124113527586.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221124113603589.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221124113635194.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221201101544718.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221201093610582.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221201095119097.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221201095202557.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221201100739325.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221201102640820.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221201104449808.png"><meta property="og:image" content="https://amostian.github.io/posts/941171150/image-20221201104508692.png"><meta property="article:published_time" content="2022-11-08T07:35:14.000Z"><meta property="article:modified_time" content="2023-06-16T02:36:46.572Z"><meta property="article:author" content="AmosTian"><meta property="article:tag" content="数学"><meta property="article:tag" content="矩阵论"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://amostian.github.io/posts/941171150/%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97.png"><link rel="canonical" href="https://amostian.github.io/posts/941171150/"><script id="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,lang:"zh-CN"}</script><title>4. 矩阵运算 | AmosTian</title><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage"><div class="container"><div class="headband"></div><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="切换导航栏"><span class="toggle-line toggle-line-first"></span> <span class="toggle-line toggle-line-middle"></span> <span class="toggle-line toggle-line-last"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span><h1 class="site-title">AmosTian</h1><span class="logo-line-after"><i></i></span></a></div><div class="site-nav-right"><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">58</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">74</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">349</span></a></li><li class="menu-item menu-item-essay"><a href="/categories/%E9%9A%8F%E7%AC%94/" rel="section"><i class="fa fa-fw fa-pied-piper"></i>随笔</a></li><li class="menu-item menu-item-dynamic-resume"><a href="/dynamic-resume/" rel="section"><i class="fa fa-fw fa-cog"></i>动态简历</a></li><li class="menu-item menu-item-search"><a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索</a></li></ul></nav><div class="search-pop-overlay"><div class="popup search-popup"><div class="search-header"><span class="search-icon"><i class="fa fa-search"></i></span><div class="search-input-container"><input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input"></div><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span></div><div id="search-result"><div id="no-result"><i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i></div></div></div></div></div></header><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div><div class="reading-progress-bar"></div><a href="https://github.com/AmosTian" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><main class="main"><div class="main-inner"><div class="content-wrap"><div class="content post posts-expand"><article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://amostian.github.io/posts/941171150/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/avatar.png"><meta itemprop="name" content="AmosTian"><meta itemprop="description" content="知道的越多，不知道的越多"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="AmosTian"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">4. 矩阵运算</h1><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建时间 2022-11-08 15:35:14" itemprop="dateCreated datePublished" datetime="2022-11-08T15:35:14+08:00">2022-11-08</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-calendar-check-o"></i> </span><span class="post-meta-item-text">更新于</span> <time title="修改时间 2023-06-16 10:36:46" itemprop="dateModified" datetime="2023-06-16T10:36:46+08:00">2023-06-16</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i> </span><span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a> </span>> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E6%95%B0%E5%AD%A6/%E7%9F%A9%E9%98%B5%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">矩阵论</span></a></span></span><div class="post-symbolscount"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i> </span><span class="post-meta-item-text">本文字数 </span><span title="本文字数">7.7k字 </span><span class="post-meta-item" title="阅读时长"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-clock-o"></i> </span><span class="post-meta-item-text">阅读时长 &asymp;</span> <span>25 分钟</span></span></div></div></header><div class="post-body" itemprop="articleBody"><blockquote><p>矩阵上的运算：特根特向求法，张量积，广义逆</p></blockquote><p><img src="/posts/941171150/矩阵运算.png" alt="矩阵运算"></p><span id="more"></span><h2 id="4-1-特根特向求法"><a href="#4-1-特根特向求法" class="headerlink" title="4.1 特根特向求法"></a>4.1 特根特向求法</h2><h3 id="4-1-1-特根求法"><a href="#4-1-1-特根求法" class="headerlink" title="4.1.1 特根求法"></a>4.1.1 特根求法</h3><p>若 $n$ 阶方阵 $A=(a_{ij})$ 中 <strong>行和=常数k</strong> ，则常数 $k$ 为 $A$ 的一个特征根，全1向量 $X=\left(\begin{matrix}1\\\vdots\\1\end{matrix}\right)$ 为 $k$ 相应的特向</p><p>若 $n$ 阶方阵 $A=(a_{ij})$ 中 <strong>列和=常数k</strong> ，则常数 $k$ 为 $A^T$ 的一个特根，全1向量 $X=\left(\begin{matrix}1\\\vdots\\1\end{matrix}\right)$为 $A^T$ 的一个特向</p><p><strong>eg</strong></p><script type="math/tex;mode=display">\begin{aligned}
+&A=\left(
+\begin{matrix}
+1&2\\0&-1
+\end{matrix}
+\right)，B=\left(
+\begin{matrix}
+3&3&3\\-1&-1&-1\\-1&-1&-1
+\end{matrix}
+\right),可知A与B都是列和为1的矩阵，可以验证\\
+&X=\left(
+\begin{matrix}
+1\\1
+\end{matrix}
+\right),AX=\left(
+\begin{matrix}
+3\\-1
+\end{matrix}
+\right),Y=\left(
+\begin{matrix}
+1\\1\\1
+\end{matrix}
+\right)，BY=\left(
+\begin{matrix}
+3&3&3\\-1&-1&-1\\-1&-1&-1
+\end{matrix}
+\right)\left(
+\begin{matrix}
+1\\1\\1
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+9\\-3\\-3
+\end{matrix}
+\right)\\
+&故全一向量不是列和矩阵的特征向量\\
+&而对于A^T=\left(
+\begin{matrix}
+1&0\\2&-1
+\end{matrix}
+\right)与B^T=\left(
+\begin{matrix}
+3&-1&-1\\3&-1&-1\\3&-1&-1
+\end{matrix}
+\right)为行和矩阵，全1向量为 A^T的特征向量
+\end{aligned}</script><script type="math/tex;mode=display">\begin{aligned}
+&已知二阶阵A=\left(
+\begin{matrix}
+3&1\\2&2
+\end{matrix}
+\right)(行和阵),特根为4,tr(A)-4=1,相应特向X=\left(
+\begin{matrix}
+1\\1
+\end{matrix}
+\right),Y=\left(
+\begin{matrix}
+1\\-2
+\end{matrix}
+\right)\\
+&X，Y线性无关，所以P=\left(
+X,Y
+\right)=\left(
+\begin{matrix}
+1&1\\1&-2
+\end{matrix}
+\right)为可逆阵，故A可相似对角化为对角阵\\
+&P^{-1}AP=D=\left(
+\begin{matrix}
+4&0\\
+0&1
+\end{matrix}
+\right),故可知A为单阵
+\end{aligned}</script><p><strong>实对称阵特根为实数</strong></p><h3 id="4-1-2-特征向量"><a href="#4-1-2-特征向量" class="headerlink" title="4.1.2 特征向量"></a>4.1.2 特征向量</h3><script type="math/tex;mode=display">若(A-\lambda_1I)P=0,则P中的列都是\lambda_1的特征向量</script><p>证明：</p><script type="math/tex;mode=display">\begin{aligned}
+&(A-\lambda_1I)P=0\iff AP=\lambda_1 P,令P=(X_1,\cdots,X_n)，按列分块，则有\\
+&A(X_1,\cdots,X_n)=\lambda_1(X_1,\cdots,X_n)\Rightarrow (AX_1,\cdots,AX_n)=(\lambda_1X_1,\cdots,\lambda_nX_n)\\
+&则P中各列都是\lambda_1的特征向量
+\end{aligned}</script><h4 id="a-两个互异特根的特向"><a href="#a-两个互异特根的特向" class="headerlink" title="a. 两个互异特根的特向"></a>a. 两个互异特根的特向</h4><script type="math/tex;mode=display">若 (A-\lambda_1I)(A-\lambda_2I)=0,则(A-\lambda_2I)的列都是\lambda_1的特向，(A-\lambda_1I)的列是\lambda_2的特向</script><p>eg：</p><script type="math/tex;mode=display">\begin{aligned}
+&A=\left(
+\begin{matrix}
+1&0&-2\\0&0&0\\-2&0&4
+\end{matrix}
+\right)(为正规H单阵)，全体特征根\lambda(A)=\{5,0,0\},不同特征根为5,0\\
+&由于A是单阵，必有(A-\lambda_1I)(A-\lambda_2I)=(A-5I)(A-0I)=0\\
+&其中，\lambda_1=5对应的特征向量为A中的一个列向量\left(
+\begin{matrix}
+1\\0\\-2
+\end{matrix}
+\right)，\\
+&\lambda_2=0对应的特征向量为A-5I=\left(
+\begin{matrix}
+-4&0&-2\\0&-5&0\\-2&0&-1
+\end{matrix}
+\right)的列向量\\
+&分别为 \left(
+\begin{matrix}
+0\\1\\0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+2\\0\\1
+\end{matrix}
+\right)
+\end{aligned}</script><hr><p><img src="/posts/941171150/image-20221108164618263.png" alt="image-20221108164618263"></p><hr><script type="math/tex;mode=display">A=\left(
+\begin{matrix}
+1&0\\-1&0
+\end{matrix}
+\right),A^2=A为幂等阵，则A中非0列\left(
+\begin{matrix}
+1\\-1
+\end{matrix}
+\right)是\lambda_1=1的特征向量</script><hr><p><img src="/posts/941171150/image-20221215145159790.png" alt="image-20221215145159790"></p><script type="math/tex;mode=display">\begin{aligned}
+&A^2=\left(
+\begin{matrix}
+0&1\\-1&0
+\end{matrix}
+\right)\cdot\left(
+\begin{matrix}
+0&1\\-1&0
+\end{matrix}
+\right)=-I\Rightarrow A^2+I=0\iff(A-iI)(A+iI)=0\\
+&故(A+iI)中列向量 \left(\begin{matrix}i\\-1\end{matrix}\right) 为i的特向，(A-iI)中列向量 \left(\begin{matrix}-i\\-1\end{matrix}\right)为-i的特向
+\end{aligned}</script><h4 id="b-三个互异特根的特向"><a href="#b-三个互异特根的特向" class="headerlink" title="b. 三个互异特根的特向"></a>b. 三个互异特根的特向</h4><script type="math/tex;mode=display">\begin{aligned}
+若&(A-\lambda_1I)(A-\lambda_2I)(A-\lambda_3I)=0,则\\
+&(A-\lambda_2I)(A-\lambda_3I)中非零列为\lambda_1的特向\\
+&(A-\lambda_1I)(A-\lambda_3I)中非零列为\lambda_2的特向\\
+&(A-\lambda_1I)(A-\lambda_2I)中非零列为\lambda_3的特向
+\end{aligned}</script><p><strong>eg</strong></p><script type="math/tex;mode=display">A=\left(
+\begin{matrix}
+-1&i&0\\-i&0&-i\\0&i&-i
+\end{matrix}
+\right)，求特征向量</script><script type="math/tex;mode=display">\begin{aligned}
+&由特征多项式计算得\lambda(A)=\{1,-1,2\}，3阶方阵有3个互异特征根，故A为单阵\\
+&且有0化式(x-1)(x+1)(x-2)成立，即(A-I)(A+I)(A-2I)=0成立，\\
+&可知\lambda_1=1,\lambda_2=-1,\lambda_3=2对应的特征向量\\
+&分别为(A+I)(A-2I),(A-I)(A-2I),(A-I)(A+I)的列向量,即有X_1=\left(
+\begin{matrix}
+1\\-2i\\1
+\end{matrix}
+\right)\\
+&X_2=\left(
+\begin{matrix}
+-1\\0\\1
+\end{matrix}
+\right),X_3=\left(
+\begin{matrix}
+1\\i\\1
+\end{matrix}
+\right),可令U阵Q=\left(
+\frac{X_1}{\sqrt{6}},\frac{X_2}{\sqrt{2}},\frac{X_3}{\sqrt{3}}
+\right),必有Q^{-1}AQ=D=\left(
+\begin{matrix}
+1&&\\
+&-1&\\
+&&-2
+\end{matrix}
+\right)
+\end{aligned}</script><h4 id="c-重根的特向"><a href="#c-重根的特向" class="headerlink" title="c. 重根的特向"></a>c. 重根的特向</h4><script type="math/tex;mode=display">\begin{aligned}
+&若(A-\lambda I)^2=0,则(A-\lambda I)中非0列都是\lambda的特向\\
+&SP:若A^2=0,则A中非0列都是\lambda 的特向
+\end{aligned}</script><p><strong>eg</strong></p><p><img src="/posts/941171150/image-20221108204943513.png" alt="image-20221108204943513"></p><hr><script type="math/tex;mode=display">A=\left(
+\begin{matrix}
+2&0&0\\1&1&1\\1&-1&3
+\end{matrix}
+\right)，其A的特向</script><script type="math/tex;mode=display">\begin{aligned}
+&\lambda(A)=\{2,2,2\},0化式为(x-2)^3，且 (A-2I)^2=\left(
+\begin{matrix}
+0&0&0\\1&-1&1\\1&-1&1
+\end{matrix}
+\right)\left(
+\begin{matrix}
+0&0&0\\1&-1&1\\1&-1&1
+\end{matrix}
+\right)=0\\
+&可见其特向为 \left(
+\begin{matrix}
+0\\1\\1
+\end{matrix}
+\right),且三重根\lambda=2只有一个特向，所以A不是单阵
+\end{aligned}</script><h3 id="4-1-3-交换定理与公共特征向量"><a href="#4-1-3-交换定理与公共特征向量" class="headerlink" title="4.1.3 交换定理与公共特征向量"></a>4.1.3 交换定理与公共特征向量</h3><h4 id="a-Cayley定理"><a href="#a-Cayley定理" class="headerlink" title="a. Cayley定理"></a>a. Cayley定理</h4><p>若方阵 $A$ 的特征多项式 $T(x)=\vert A-x I\vert=c_0+c_1x+c_2x^2+\cdots+c_nx^n$ ，则 $T(A)=c_0I+c_1A+c_2A^2+\cdots+c_nA^n=0$</p><ul><li>方阵A的特征多项式可分解为 $T(x)=(x-\lambda_1)(x-\lambda_2)\cdots(x-\lambda_n)$ 满足 $T(A)=(A-\lambda_1I)(A-\lambda_2I)\cdots(A-\lambda_nI)=0$</li></ul><h4 id="b-交换定理"><a href="#b-交换定理" class="headerlink" title="b. 交换定理"></a>b. 交换定理</h4><p>若方阵 $AB=BA(可交换)$ ，任取 $A$ 的特根 $X$ ，满足 $AX=\lambda_1 X$ ， $BX=t_1 X$ ，即 $X$ 是 $A$ 和 $B$ 的公共特征向量</p><ul><li>若 $A,B$ 可交换，则存在公共特向 $X\neq 0$</li></ul><p>证明：</p><script type="math/tex;mode=display">\begin{aligned}
+&任取A的一个根 \lambda_1与特向X\neq 0，使 AX=\lambda_1 X，设B的全体特根为\{t_1,\cdots,t_n\}\\
+&由Cayley定理，T(B)=(B-t_1I)(B-t_2I)\cdots(B-t_nI)=0，则有 T(B)X=0\\
+&\Rightarrow (B-t_1I)(B-t_2I)\cdots(B-t_nI)X=0\\
+&1.若 (B-t_1I)X=0,则有BX=t_1X，X为A与B的公共特向\\
+&2.若 (B-t_1I)X\neq 0,\\
+&\quad 不妨设(B-t_pI)\cdots(B-t_1I)X\neq 0,(B-t_{p+1}I)(B-t_pI)\cdots(B-t_1I)X=0\\
+&\quad 即 (B-t_{p+1}I)Y=0\Rightarrow BY=t_{p+1}Y,且YX\neq 0\\
+&\quad AY=A(B-t_pI)\cdots(B-t_1I)X\xlongequal{AB=BA}(B-t_pI)\cdots(B-t_1I)AX\\
+&\quad \quad\quad=(B-t_pI)\cdots(B-t_1I)\lambda_1X=\lambda_1(B-t_pI)\cdots(B-t_1I)X,\\
+&\quad 即AY=\lambda_1Y，故Y =(B-t_pI)\cdots(B-t_1I)X为公共特向
+\end{aligned}</script><h4 id="c-可交换的实对称阵为单阵"><a href="#c-可交换的实对称阵为单阵" class="headerlink" title="c. 可交换的实对称阵为单阵"></a>c. 可交换的实对称阵为单阵</h4><p>若 $A，B$ 为 $n$ 阶实对称阵，且可交换 $AB=BA$ ，则存在正交阵 $Q$ ，使 $Q^{-1}AQ,Q^{-1}BQ$ 为对角阵</p><h2 id="4-2-张量积"><a href="#4-2-张量积" class="headerlink" title="4.2 张量积"></a>4.2 张量积</h2><h3 id="4-2-1-定义"><a href="#4-2-1-定义" class="headerlink" title="4.2.1 定义"></a>4.2.1 定义</h3><p>设 $A=(a_{ij})_{m\times n}$ ，$B=(b_{ij})_{p\times q}$ ，则称分块矩阵 $\left(\begin{matrix}a_{11}B&amp;a_{12}B&amp;\cdots&amp;a_{1n}B\\a_{21}B&amp;a_{22}B&amp;\cdots&amp;a_{2n}B\\\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\a_{n1}B&amp;a_{n2}&amp;\cdots&amp;a_{nn}\end{matrix}\right)$ 为 $A$ 与 $B$ 的张量积，记作 $A\otimes B=(a_{ij}B)_{mp\times nq}$</p><p><strong>eg</strong></p><script type="math/tex;mode=display">A=\left(
+\begin{matrix}
+a&b\\c&d
+\end{matrix}
+\right),B=\left(
+\begin{matrix}
+2\\3
+\end{matrix}
+\right)</script><script type="math/tex;mode=display">\begin{aligned}
+&A\otimes B=\left(
+\begin{matrix}
+aB&bB\\cB&dB
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+2a&2b\\3a&3b\\2c&2d\\3c&3d
+\end{matrix}
+\right),B\otimes A=\left(
+\begin{matrix}
+2A\\3B
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+2a&2b\\2c&2d\\3a&3b\\3c&3d
+\end{matrix}
+\right)
+\end{aligned}</script><ul><li><strong>张量积不满足交换律</strong> ，即 $A\otimes B\neq B\otimes A$</li></ul><h4 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h4><ol><li><p>两个上三角的张量积也是上三角</p></li><li><p>两个对角阵的张量积是对角阵</p><script type="math/tex;mode=display">\begin{aligned}
+&P^{-1}AP=A_1=\left(
+\begin{matrix}
+\lambda_1&&0\\
+&\ddots&\\
+0&&\lambda_m
+\end{matrix}
+\right),Q^{-1}BQ=\left(
+\begin{matrix}
+t_1&&0\\
+&\ddots&\\
+0&&t_n
+\end{matrix}
+\right)\\
+&(P\otimes Q)^{-1}(A\otimes B)(P\otimes Q)\xlongequal{吸收公式}(P^{-1}AP)\otimes (Q^{-1}BQ)\\
+&=A_1\otimes B_1=\left(
+\begin{matrix}
+\lambda_1B_1&&0\\
+&\ddots&\\
+0&&\lambda_mB_n
+\end{matrix}
+\right)
+\end{aligned}</script></li><li><p>$I_n\otimes I_m=I_{m}\otimes I_n=I_{m\times n}$</p></li></ol><h3 id="4-2-2-计算"><a href="#4-2-2-计算" class="headerlink" title="4.2.2 计算"></a>4.2.2 计算</h3><h4 id="a-分块法"><a href="#a-分块法" class="headerlink" title="a. 分块法"></a>a. 分块法</h4><p><strong>右进右出</strong></p><script type="math/tex;mode=display">\left(
+\begin{matrix}
+A&B\\C&D
+\end{matrix}
+\right)\otimes F=\left(
+\begin{matrix}
+A\otimes F&B\otimes F\\C\otimes F&D\otimes F
+\end{matrix}
+\right)\\\\
+(A\quad B)\otimes F=(A\otimes F\quad B\otimes F)</script><p>一般情况下：$F \otimes (A\quad B)\neq (F\otimes A\quad F\otimes B)$</p><p><img src="/posts/941171150/image-20221108220336996.png" alt="image-20221108220336996"></p><h4 id="b-向量与向量张量积"><a href="#b-向量与向量张量积" class="headerlink" title="b. 向量与向量张量积"></a>b. 向量与向量张量积</h4><script type="math/tex;mode=display">列向量\alpha=\left(
+\begin{matrix}
+a_1\\a_2\\\vdots\\a_n
+\end{matrix}
+\right)\beta=\left(
+\begin{matrix}
+b_1\\b_2\\\vdots\\b_q
+\end{matrix}
+\right),则\alpha \otimes \beta=\left(
+\begin{matrix}
+a_1\otimes \beta\\a_2\otimes \beta\\\vdots\\a_n\otimes \beta
+\end{matrix}
+\right)_{nq\times 1}=\left(
+\begin{matrix}
+a_1b_1\\a_1b_2\\\vdots\\a_1b_q\\\vdots \\a_nb_1\\a_nb_2\\\vdots\\a_nb_q
+\end{matrix}
+\right)_{nq\times 1}</script><h4 id="c-向量与矩阵张量积"><a href="#c-向量与矩阵张量积" class="headerlink" title="c. 向量与矩阵张量积"></a>c. 向量与矩阵张量积</h4><script type="math/tex;mode=display">列向量\alpha=\left(
+\begin{matrix}
+a_1\\a_2\\\vdots\\a_m
+\end{matrix}
+\right),B_{n\times q}=(\beta_1,\beta_2,\cdots,\beta_q)，\alpha\otimes B=\left(
+\begin{matrix}
+a_1B\\a_2B\\\vdots\\a_mB
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+a_1b_{11}&a_1b_{12}&\cdots&a_1b_{1q}\\
+a_1b_{21}&a_1b_{22}&\cdots&a_1b_{2q}\\
+\vdots&\vdots&\ddots&\vdots\\
+a_1b_{p1}&a_1b_{p2}&\cdots&a_1b_{pq}\\
+a_2b_{11}&a_2b_{12}&\cdots&a_2b_{1q}\\
+a_2b_{21}&a_2b_{22}&\cdots&a_2b_{2q}\\
+\vdots&\vdots&\ddots&\vdots\\
+a_2b_{p1}&a_2b_{p2}&\cdots&a_2b_{pq}\\
+\vdots&\vdots&\vdots&\vdots\\
+a_mb_{11}&a_mb_{12}&\cdots&a_mb_{1q}\\
+a_mb_{21}&a_mb_{22}&\cdots&a_mb_{2q}\\
+\vdots&\vdots&\ddots&\vdots\\
+a_mb_{p1}&a_mb_{p2}&\cdots&a_mb_{pq}\\
+\end{matrix}
+\right)_{mp\times q}</script><h3 id="4-2-3-运算律"><a href="#4-2-3-运算律" class="headerlink" title="4.2.3 运算律"></a>4.2.3 运算律</h3><ol><li><p>数乘： $k(A\otimes B)=(kA)\otimes B=A\otimes (kB)$</p></li><li><p>分配律(<strong>右进右出</strong>)：$(A+B)\otimes C=A\otimes C+B\otimes C$ ，$C\otimes(A+B)=C\otimes A+C\otimes B$</p></li><li><p>结合律：$(A\otimes B)\otimes C=A\otimes (B\otimes C)$</p><p><img src="/posts/941171150/image-20221130092000538.png" alt="image-20221130092000538"></p></li><li><p>吸收律：$(A\otimes B)(C\otimes D)=(AC)\otimes (BD)$</p><p>$张乘(左边括号间乘法个数)\leftrightarrow 乘张(右边括号内乘法个数相等)$</p><p><img src="/posts/941171150/image-20221108224219839.png" alt="image-20221108224219839"></p><p>推论：</p><script type="math/tex;mode=display">\begin{aligned}
+&若A=A_{m\times m}为m阶方阵,B=B_{n\times n}为n阶方阵，则\\
+&(A\otimes B)^k=A^k\otimes B^k\\
+&(A\otimes I_n)(I_m\otimes B)=A\otimes B\\
+&(A_1\otimes B_1)(A_2\otimes B_2)\cdots(A_k\otimes B_k)=(A_1A_2\cdots A_k)\otimes (B_1\otimes B_2\cdots B_k)\\
+&(A_1\otimes A_2\otimes \cdots\otimes A_k)(B_1\otimes B_2\otimes \cdots\otimes B_k)=(A_1B_1)\otimes(A_2\otimes \cdots\otimes A_k)(B_2\otimes \cdots\otimes B_k)\\
+&=(A_1B_1)\otimes (A_2B_2)\otimes \cdots \otimes (A_kB_k)
+\end{aligned}</script><p>eg：</p><script type="math/tex;mode=display">A=A_{m\times m}，证明e^{A\otimes I_n}=e^A\otimes I_n</script></li></ol><script type="math/tex;mode=display">\begin{aligned}
+   &e^{A\otimes I_n}=\sum_{k=1}\limits^\infty\frac{1}{k!}(A\otimes I)^k=\sum_{k=1}\limits^\infty\frac{1}{k!}(A^k\otimes I^k)=(\sum_{k=1}\limits^\infty\frac{1}{k!}A^k)\otimes I^k=e^A\otimes I
+   \end{aligned}</script><ol><li>转置与求逆公式：<script type="math/tex;mode=display">\begin{aligned}
+&(A\otimes B)^H=A^H\otimes B^H\\
+&(A\otimes B)^{-1}= A^{-1}\otimes B^{-1}
+\end{aligned}</script></li><li><p>若A与B都是U阵，则 $A\otimes B$ 为U阵</p></li><li><p>秩公式：$r(A\otimes B)=r(A)r(B)$</p><p>推论：</p><script type="math/tex;mode=display">\begin{aligned}
+&若X_1、\cdots、X_p为C^m中p个线性无关的列向量，Y_1、\cdots、Y_q为C^n中q个线性无关列向量，则\\
+&则pq个列向量\{X_i\otimes Y_j\}线性无关
+\end{aligned}</script><p>由于 $r(\{X\otimes Y\})=r(\{X\})r(\{Y\})$ ，张量积的秩等于两个向量组的秩的乘积，所以张量积线性无关</p></li></ol><h3 id="4-2-4-张量积行列式"><a href="#4-2-4-张量积行列式" class="headerlink" title="4.2.4 张量积行列式"></a>4.2.4 张量积行列式</h3><p>设 $A=(a_{ij}) \in C^{m\times m} ，B=(b_{ij})\in C^{n\times n}$ ，则</p><script type="math/tex;mode=display">\begin{aligned}
+&tr(A\otimes B)=tr(A)\cdot tr(B)\\
+&\vert A\otimes B \vert=\vert A \vert^n\vert B \vert^m
+\end{aligned}</script><p>证明：</p><p><img src="/posts/941171150/image-20221110105854746.png" alt="image-20221110105854746"></p><script type="math/tex;mode=display">\begin{aligned}
+&由许尔公式，存在可逆阵P使P^{-1}AP=\left(
+\begin{matrix}
+\lambda_1&&*\\
+&\ddots&\\
+0&&\lambda_m
+\end{matrix}
+\right)为上三角，且P\otimes I为可逆阵，构造一个新公式\\
+&(P\otimes I)^{-1}A\otimes B(P\otimes I)=(P^{-1}AP)\otimes B=A_1\otimes B=\left(
+\begin{matrix}
+\lambda_1B&&&(*B)\\
+&\lambda_2B&&\\
+&&\ddots&\\
+0&&&\lambda_mB
+\end{matrix}
+\right)\\
+&故\vert A\otimes B \vert=\vert \lambda_1^nB\vert\vert \lambda_2^nB\vert\cdots\vert \lambda_m^nB\vert^m=\vert \lambda_1^n\lambda_2^n\cdots\lambda_m^n\vert\vert B \vert^m = \vert A \vert^n\vert B\vert ^m
+\end{aligned}</script><h3 id="4-2-5-张量积特征值特征向量"><a href="#4-2-5-张量积特征值特征向量" class="headerlink" title="4.2.5 张量积特征值特征向量"></a>4.2.5 张量积特征值特征向量</h3><h4 id="a-特征值"><a href="#a-特征值" class="headerlink" title="a. 特征值"></a>a. 特征值</h4><p>若 $A=A_{m\times m}$ 的特征根为 $\lambda_1,\lambda_2,\cdots,\lambda_m，B=B_{n\times n}$ 的特征根为 $t_1,t_2,\cdots,t_n$</p><ul><li><p>$A\otimes B$ 的全体特征根为 $mn$ 个数 $\{\lambda_it_j\}$ ，有重根</p></li><li><p>$A\otimes I_n\pm I_m\otimes B$ 是的全体特根为 $mn$ 个数 $\{\lambda_i\pm t_j\}$</p></li></ul><h4 id="b-特征向量"><a href="#b-特征向量" class="headerlink" title="b. 特征向量"></a>b. 特征向量</h4><p>设 $\{X_1,\cdots,X_p\}$ 是 $A\in C^{m\times m}$ 关于 $\lambda$ 的线性无关的特征向量, $\{Y_1,\cdots,Y_q\}$ 是 $B\in C^{n\times n}$ 关于t的线性无关的特征向量</p><ul><li>$pq$ 个向量 $\{X_i\otimes Y_j\}$ 是 $A\otimes B$ 关于 $\lambda t$ 的特征向量</li><li>$\{X\otimes Y\}$ 是 $A\otimes I_n\pm I_m\otimes B$ 关于 $\lambda+t$ 的一个特征向量</li></ul><p><img src="/posts/941171150/image-20221110111610819.png" alt="image-20221110111610819"></p><p><strong>eg</strong></p><p><img src="/posts/941171150/image-20221110111625840.png" alt="image-20221110111625840"></p><script type="math/tex;mode=display">\begin{aligned}
+&A=\left(
+\begin{matrix}
+2&2\\1&3
+\end{matrix}
+\right)\otimes \left(
+\begin{matrix}
+1&-1\\0&1
+\end{matrix}
+\right)=B\otimes D,且B为行和等矩阵，D为上三角阵，则\lambda(A)=\{4,tr(A)-4\}=\{4,1\},\lambda(B)=\{1,1\}\\
+&\therefore A\otimes B=\prod\lambda_A\lambda_B=\{4,4,1,1\},特式\vert \lambda I-A\vert=(\lambda-4)^2(\lambda-1)^2\\
+&可知，\left(
+\begin{matrix}
+1\\1
+\end{matrix}
+\right)\left(
+\begin{matrix}
+-2\\1
+\end{matrix}
+\right)是B的特征向量，\left(
+\begin{matrix}
+1\\0
+\end{matrix}
+\right)是D的特征向朗,故A\otimes B的特征向量为\left(
+\begin{matrix}
+1\\0\\1\\0
+\end{matrix}
+\right),\left(
+\begin{matrix}
+-2\\0\\1\\0
+\end{matrix}
+\right)
+\end{aligned}</script><h4 id="c-矩阵函数的特根特向"><a href="#c-矩阵函数的特根特向" class="headerlink" title="c. 矩阵函数的特根特向"></a>c. 矩阵函数的特根特向</h4><p>设 A 和 B 分别是 m 阶与 n 阶方阵， $f(x,y)$ 是二元多项式， $f(x,y)=\sum_{i,j=1}\limits^pc_{ij}x^iy^j$</p><p>定义 mn 阶矩阵 $f(A,B)$ 如下：</p><script type="math/tex;mode=display">f(A,B)=\sum_{i,j=1}\limits^pc_{ij}A^i\otimes B^j,(A^0=I_m,B^0=I_n)</script><p><img src="/posts/941171150/image-20221130104216128.png" alt="image-20221130104216128"></p><h2 id="4-3-矩阵拉直"><a href="#4-3-矩阵拉直" class="headerlink" title="4.3 矩阵拉直"></a>4.3 矩阵拉直</h2><h3 id="4-3-1-定义"><a href="#4-3-1-定义" class="headerlink" title="4.3.1 定义"></a>4.3.1 定义</h3><p><strong>按行拉直</strong>：设矩阵 $A=(a_{ij})_{m\times n}$ ，其按行拉直向量为一个列向量 $\vec{A}=\left(a_{11},\cdots,a_{1n},\cdots,a_{m1},\cdots,a_{mn}\right)^T$</p><p><strong>引理</strong>：设 $A=(a_{ij})_{m\times n}$ ，记 $A$ 的 $m$ 个行分块为 $A_1,\cdots,A_m$ ，则有 $A=\left(\begin{matrix}A_1\\\vdots\\A_m\end{matrix}\right)$ ，则 $\vec{A}=\left(\begin{matrix}A_1^T\\\vdots\\A_m^T\end{matrix}\right)$</p><p><strong>按行拉直：按行分块，列向量</strong></p><p><strong>eg</strong></p><p><img src="/posts/941171150/image-20221129084616158.png" alt="image-20221129084616158"></p><h3 id="4-3-2-拉直性质"><a href="#4-3-2-拉直性质" class="headerlink" title="4.3.2 拉直性质"></a>4.3.2 拉直性质</h3><p>线性性质：</p><ul><li>$\overrightarrow{A+B}=\vec{A}+\vec{B}$</li><li>$\overrightarrow{kA}=k\vec{A}$</li></ul><p>$X=X(t)\in C^{m\times n}$ ，则 $\frac{\overrightarrow{dX}}{dt}=\frac{d}{dt}\vec{X}$</p><p>拉直三项公式</p><ul><li><p>$\overrightarrow{ABC}=(A\otimes C^T)\vec{B}$</p><p><img src="/posts/941171150/image-20221129085054034.png" alt="image-20221129085054034"></p></li><li><p>在方程组中为 $\overrightarrow{AXB}=(A\otimes B^T)\vec{X}$</p></li></ul><p>乘积推广：两项拉直可以看做特殊三项拉直</p><p>设 $A=(a_{ij})_{m\times m},X=(x_{ij})_{m\times n},B=(b_{ij})_{n\times n}$</p><script type="math/tex;mode=display">\overrightarrow{AX}=\overrightarrow{AXI_n}=(A\otimes I_n)\vec{X}\\
+\overrightarrow{XB}=\overrightarrow{I_mXB}=(I_m\otimes B^T)\vec{X}\\
+\overrightarrow{AX+XB}=(\overrightarrow{AXI_n}+\overrightarrow{I_mXB})=(A\otimes I_n+I_m\otimes B^T)\vec{X}</script><h3 id="4-3-3-应用——矩阵方程AXB-C有解判定"><a href="#4-3-3-应用——矩阵方程AXB-C有解判定" class="headerlink" title="4.3.3 应用——矩阵方程AXB=C有解判定"></a>4.3.3 应用——矩阵方程AXB=C有解判定</h3><blockquote><p>见：6.2 矩阵方程求解</p></blockquote><h2 id="4-4-加号逆"><a href="#4-4-加号逆" class="headerlink" title="4.4 加号逆"></a>4.4 加号逆</h2><h3 id="4-4-1-定义"><a href="#4-4-1-定义" class="headerlink" title="4.4.1 定义"></a>4.4.1 定义</h3><p>若 $m\times n$ 矩阵 $A=A_{m\times n}$ 与矩阵 $X=X_{n\times m}$ 满足四个条件</p><ul><li>$AXA=A$</li><li>$XAX=X$</li><li>$(AX)^H=AX$</li><li>$(XA)^H=XA$</li></ul><p>则 $X$ 为 $A$ 的加号逆(广义逆)，记为 $X=A^+$</p><h4 id="a-性质"><a href="#a-性质" class="headerlink" title="a. 性质"></a>a. 性质</h4><ul><li><p>$A$ 与 $A^+$ 互为加号逆</p></li><li><p>$A^{+}$ 具有唯一性</p><script type="math/tex;mode=display">\begin{aligned}
+  &证明：(反证法)\\
+  &假设X，Y都满足四个条件,有AXA=A,XAX=X,(AX)^H=AX,(AY)^H=AY,\\
+  &AYA=A,YAY=Y,(AY)^H=AY,(YA)^H=YA\\
+  &有X=XAX\xlongequal{A=AYA(替换右侧X)}XAYAX=X(AY)^H(AX)^H=X[(AX)(AY)]^H\\
+  &\xlongequal{AXA=A}X(AY)^H=XAY\xlongequal{AYA=A(消去左侧X)}XAYAY=(XA)^H(YA)^HY=\\
+  &[(YA)(XA)]^HA=(YA)^HY=Y\\
+  &故可得A^+具有唯一性
+  \end{aligned}</script></li><li><p>$A^+$ 的H穿脱公式：$(A^H)^+=(A^+)^H$</p></li><li><p>乘积的加号逆无穿脱公式：$(AB)^+\neq B^+A^+$</p></li></ul><h4 id="b-特殊矩阵的加号逆"><a href="#b-特殊矩阵的加号逆" class="headerlink" title="b. 特殊矩阵的加号逆"></a>b. 特殊矩阵的加号逆</h4><ul><li><p>$A=0$ ，则 $A^{+}=0$</p></li><li><p>若方阵 $A=A_{n\times n}$ 可逆 ($\vert A \vert\neq 0$) ，则 $A^+=A^{-1}$</p></li><li><p>若 $A=(a)$ 为1阶阵，即 $A=(复数a)$ ，则有 $(a)^+=a^+=\left\{\begin{aligned}a^{-1},&amp;a\neq 0\\0,&amp;a=0\end{aligned}\right.$</p></li><li><p>对角阵 $D=\left(\begin{matrix}a_1&amp;&amp;&amp;\\&amp;a_2&amp;&amp;\\&amp;&amp;\ddots\\&amp;&amp;&amp;a_n\end{matrix}\right)$ ，则 $D^+=\left(\begin{matrix}a_1^+&amp;&amp;&amp;\\&amp;a_2^+&amp;&amp;\\&amp;&amp;\ddots\\&amp;&amp;&amp;a_n^+\end{matrix}\right)$</p><p><strong>eg：</strong></p><p><img src="/posts/941171150/image-20221122221204147.png" alt="image-20221122221204147"></p><p>$D^+D=DD^+$ ，且 $(D^+)^k=(D^k)^+$ ，(k=1,2,…)</p><p><strong>证明：</strong></p><p><img src="/posts/941171150/image-20221124085851248.png" alt="image-20221124085851248"></p></li><li><p>A为Hermite幂等阵，即 $A^H=A=A^2$ ，则 $A^+=A=A^H$</p></li><li><p>若A为列优阵($A^HA=I$) ，则 $A^+=A^H$</p><script type="math/tex;mode=display">\begin{aligned}
+&证明:由于 A 是列半U阵，则 A^HA=I\\
+&A^HAA^H=A^H,AA^HA=A,(A^HA)^H=I=A^HA,(AA^H)^H=AA^H
+\end{aligned}</script><p>若 $A^H$ 为列优阵(A为行优阵)($AA^H=I$) ，则 $A^+=A^H$</p><script type="math/tex;mode=display">\begin{aligned}
+&证明:由于 A 是行半U阵，则 AA^H=I\\
+&A^HAA^H=A^H,AA^HA=A,(A^HA)^H=A^HA,(AA^H)^H=I=AA^H
+\end{aligned}</script></li><li><p>若A为U阵(<code>单位正交阵</code>)，则 $A^+=A^H=A^{-1}$</p><p>若A为U阵，则 $A^HA=AA^H=I,A^H=A^{-1}$</p><p>$A^HAA^H=A^H,AA^HA=A,(AA^H)^H=I=AA^H,(A^HA)^H=A^HA$ ，故 $A^+=A^H$</p></li><li><p>若A为单阵(<code>可相似对角化</code>)且<strong>可逆</strong> ，则有谱分解 $A=\lambda_1G_1+\cdots+\lambda_kG_k$ 且 $A^+=\lambda_1^{-1}G_1+\cdots+\lambda_k^{-1}G_k$</p><p>若不满足可逆条件，则未必成立</p></li><li><p>若A为正规阵(<code>正规方阵</code>)，则 $A^+$ 也为正规阵</p><p>有正规分解 $A=QDQ^H$ ，则 $A^+=QD^+Q^H$</p><p>有谱分解 $A=\lambda_1^+G_1+\cdots+\lambda_k^+G_k$</p></li></ul><h4 id="c-AA-与-A-A-相关结论"><a href="#c-AA-与-A-A-相关结论" class="headerlink" title="c. $AA^+$ 与 $A^+A$ 相关结论"></a>c. $AA^+$ 与 $A^+A$ 相关结论</h4><ul><li><p>$AA^+$ 与 $A^+A$ 都是Hermite阵</p></li><li><p>幂等性</p><p>$(A^+A)^2=A^+A,(AA^+)^2=AA^+$</p><p>$(I-A^+A)^2=I-A^+A$</p><ul><li><p>$r(I-A^+A)=n-r(A^+A)=n-r(A)$</p></li><li><p>$r(I-AA^+)=r(A)$</p></li></ul></li><li><p>$r(A^+A)=r(AA^+)=r(A)=tr(AA^+)=tr(A^+A)$</p><p>由于矩阵的秩越乘越小，则 $r(AA^+)\le r(A)$ 而 $A=AA^+A$ ，则 $r(A)\le r(AA^+)$ ，故有 $r(AA^+)\le r(A)\le r(AA^+)$</p></li><li><p>幂等性：$(AA^+)^2=AA^+$ ，$(A^+A)^2=A^+A$</p><p><img src="/posts/941171150/image-20221122221536891.png" alt="image-20221122221536891"></p><p><img src="/posts/941171150/image-20221122221934498.png" alt="image-20221122221934498"></p><script type="math/tex;mode=display">\begin{aligned}
+&(1)A=\left(
+\begin{matrix}1&0\\2&1
+\end{matrix}
+\right)为可逆阵，则A^+=A^{-1}=\left(
+\begin{matrix}1&0\\-2&1
+\end{matrix}
+\right),A=\left(
+\begin{matrix}
+a&b\\c&d
+\end{matrix}
+\right)=\frac{1}{\vert A\vert}\left(
+\begin{matrix}
+d&-b\\-c&a
+\end{matrix}
+\right)\\
+&(2)(3)(4)中A为对角阵
+\end{aligned}</script></li><li><p>$\lambda(AA^+)$ 与 $\lambda(A^+A)$ 都有 $r(A)$ 个1</p><p>设 $A\in C^{m,n},A^+\in C^{n,m}$ 由于 $AA^+$ 与 $A^+A$ 都是 Hermite 阵，且 $A^+A$ 是幂等阵， $(AA^+)^2=AA^+,(A^+A)^2=A^+A$ ，由Cayley定理 $x^2=x$ 则其0化式为 $x^2-x=0$ ，$AA^+$ 有两个不同的根1和0</p><p>已知 $r(A^+A)=r(AA^+)=r(A)=r$ ，</p><p>则 $AA^+$ 有r个正根，m-r 个0根;$A^+A$ 有r个正根，n-r 个0根</p></li><li><p>$A^+A$ 与 $AA^+$ 都是半正定阵 ($AA^+ \ge 0,A^+A\ge 0$)</p><p>已知 $A^+A$ 为幂等阵，则 $(AA^+)^2=(AA^+)^H(AA^+)\xlongequal{P=AA^+}P^HP\ge 0$ ，故 $AA^+$ 为半正定阵，同理 $AA+$ 为半正定阵</p><p>由Cayley定理，$x^2=x$ ，则0化式 $x(x-1)=0$ ，故特根 $\ge$ 0 ，为半正定阵</p></li><li><p>一般有 $AA^+\neq I$ , $A^+A\neq I$ （列半U以上）, 且 $AA^+\neq A^+A$ (正规阵)</p></li><li><p>若 A 为正规阵，则 $A^+A=AA^+$ ，且 $(A^+)^k=(A^k)^+,k=0,1,2,\cdots$</p><script type="math/tex;mode=display">\begin{aligned}
+&由于A是正规阵，则AA^H=A^HA,A有正规分解A=QDQ^H=Q\left(
+\begin{matrix}
+\lambda_1&&\\&\ddots&\\&&\lambda_n
+\end{matrix}
+\right)Q^H,其中Q为U阵\Rightarrow \\
+&\Rightarrow A^+=(QDQ^H)^+=(Q^H)^+D^+Q^+\xlongequal{Q^+=Q^H}QD^+Q^H,\\
+&\Rightarrow (A^+)^k=(QD^+Q^H)^k=Q(D^+)^kQ^H=Q(D^k)^+Q^H=(A^k)^+\\
+&且A^+A=(QD^+Q^H)QDQ^H=(QD^+DQ^H)=QDD^+Q^H=(QDQ^H)(QD^+Q^H)=AA^+
+\end{aligned}</script></li></ul><h3 id="4-4-2-A-计算"><a href="#4-4-2-A-计算" class="headerlink" title="4.4.2 $A^+$ 计算"></a>4.4.2 $A^+$ 计算</h3><h4 id="a-秩1阵"><a href="#a-秩1阵" class="headerlink" title="a. 秩1阵"></a>a. 秩1阵</h4><script type="math/tex;mode=display">\begin{matrix}
+若A=(a_{ij})_{m\times n},r(A)=1,则A^+=\frac{1}{\sum \vert a_{ij}\vert^2}A^H=\frac{1}{tr(A^HA)}A^H
+\end{matrix}</script><p>$A^HA$ 的相关结论：</p><ul><li>$tr(A^HA)=t(AA^H)=\sum\vert a_{ij}\vert^2=\Vert A \Vert_F^2$</li><li>$r(A^HA)=r(AA^H)=r(A)$</li><li>$A^HA,AA^H$ 为半正定阵</li></ul><p>证明：</p><script type="math/tex;mode=display">\begin{aligned}
+&由于r(A)=1,则A^HA优相似与对角阵D=\left(
+\begin{matrix}
+\lambda_1&&&\\&0&\\&&\ddots&\\&&&0
+\end{matrix}
+\right)，其中\sqrt{\lambda_1} 为正奇值\Rightarrow\\
+&tr(A^HA)=tr(AA^H)=\lambda_1=\sum\vert a_{ij}\vert^2,则A的正SVD为A=P\Delta Q^H=P\left(\sqrt{\lambda_1}\right)Q^H,其中P^HP=Q^HQ=I\\
+&A^H=Q\Delta P^H=Q(\sqrt{\lambda_1})P^H,A^+=Q\Delta^{-1}P^H=Q(\frac{1}{\sqrt{\lambda_1}})P^H\\
+&\Rightarrow A^+=\frac{1}
+{(\sqrt{\lambda_1})^2}Q(\sqrt{\lambda_1})P^H=\frac{1}{(\sqrt{\lambda_1})^2}Q\Delta P^H=\frac{1}{(\sqrt{\lambda_1})^2}A^H=\frac{1}{tr(A^HA)}A^H=\frac{1}{\sum \vert a_{ij}\vert^2}A^H\\
+\end{aligned}</script><p><strong>eg</strong>：</p><p><img src="/posts/941171150/image-20221123233049779.png" alt="image-20221123233049779"></p><h4 id="b-正奇分解求逆-第一公式"><a href="#b-正奇分解求逆-第一公式" class="headerlink" title="b. 正奇分解求逆(第一公式)"></a>b. 正奇分解求逆(第一公式)</h4><script type="math/tex;mode=display">\begin{aligned}
+&若A=A_{m\times n} 有正SVD，A=P\Delta Q^H,\Delta=\left(
+\begin{matrix}
+s_1&&\\&\ddots&\\&&s_r
+\end{matrix}
+\right)>0,，其中P，Q为半U阵，P^HP=I_r=Q^HQ\\
+&则有公式A^+=Q\Delta^{-1}P^H,其中 \Delta^{-1}=\Delta^{+}
+\end{aligned}</script><p>由 $A^+$ 的正奇公式，可证 <strong>逆的H穿脱公式</strong> $(A^H)^+=(A^+)^H$</p><ul><li>$A^+$ 的正奇值为 $\{s_1^{-1},s_2^{-1},\cdots,s_r^{-1}\}$ ，且有公式 $\Vert A^+\Vert_F=\sqrt{s_1^{-2},\cdots,s_r^{-2}}$ ，$\Vert A^+\Vert_2=s_r^{-1}$</li></ul><p><strong>证明</strong>：</p><script type="math/tex;mode=display">\begin{aligned}
+&A=P\Delta Q^H\Rightarrow A^H=Q\Delta P^H为A^H的正SVD\\
+&A^+=Q\Delta^{-1}P^H,(A^H)^+=P\Delta^{-1}Q^H\Rightarrow (A^+)^H=P\Delta^{-1}Q^H=(A^H)^+
+\end{aligned}</script><p><strong>eg</strong></p><p><img src="/posts/941171150/image-20221123105211268.png" alt="image-20221123105211268"></p><script type="math/tex;mode=display">\begin{aligned}
+&(1)求正奇值，A^HA=\left(
+\begin{matrix}
+1&0&2\\0&1&0
+\end{matrix}
+\right)\left(
+\begin{matrix}
+1&0\\0&1\\2&0
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+5&0\\0&1
+\end{matrix}
+\right),\lambda(A)=\{5,1\},正奇值为\sqrt{5},1,令\Delta=\left(
+\begin{matrix}
+\sqrt{5} & 0\\0&1
+\end{matrix}
+\right)\\
+&(2)SVD，Q=(q_1,q_2)=\left(
+\begin{matrix}
+1&0\\0&1
+\end{matrix}
+\right),P=\left(
+\begin{matrix}
+\frac{Aq_1}{\vert Aq_1\vert},\frac{Aq_2}{\vert Aq_2\vert}
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+\frac{1}{\sqrt{5}}&0\\0&1\\\frac{2}{\sqrt{5}}&0\\
+\end{matrix}
+\right),A=P\Delta Q^H=\left(
+\begin{matrix}
+\frac{1}{\sqrt{5}}&0\\0&1\\\frac{2}{\sqrt{5}}&0\\
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\sqrt{5} & 0\\0&1
+\end{matrix}
+\right)\left(
+\begin{matrix}
+1&0\\0&1
+\end{matrix}
+\right)^H\\
+&(3)A^+=Q\Delta^{-1}P^H=\left(
+\begin{matrix}
+1&0\\0&1
+\end{matrix}
+\right)\frac{1}{\sqrt{5}}\left(
+\begin{matrix}
+1&0\\0&\sqrt{5}
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\frac{1}{\sqrt{5}}&0&\frac{2}{\sqrt{5}}\\0&1&0\\
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+\frac{1}{\sqrt{5}}&0\\0&1
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\frac{1}{\sqrt{5}}&0&\frac{2}{\sqrt{5}}\\0&1&0\\
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+\frac{1}{5}&0&\frac{2}{5}\\
+0&1&0
+\end{matrix}
+\right)\\
+&(4)\because B=A^H,则B^+=(A^H)^+=(A^+)^H=\left(
+\begin{matrix}
+\frac{1}{5}&0\\0&1\\\frac{2}{5}&0
+\end{matrix}
+\right)
+\end{aligned}</script><hr><p><img src="/posts/941171150/image-20221123233226169.png" alt="image-20221123233226169"></p><script type="math/tex;mode=display">\begin{aligned}
+&A^HA=\left(
+\begin{matrix}
+2&1\\1&2
+\end{matrix}
+\right),\lambda(A^HA)=\{3,1\},正奇值S^+=\{\sqrt{3},1\},故A^HA优相似与\Delta=\left(
+\begin{matrix}
+\sqrt{3}&0\\0&1
+\end{matrix}
+\right),\\
+&\lambda_1=3的特根q_1=\left(
+\begin{matrix}
+1\\1
+\end{matrix}
+\right),\lambda_2=1的特根为q_2=\left(
+\begin{matrix}
+1\\-1
+\end{matrix}
+\right),\\
+&Q=(q_1,q_2)=\left(
+\begin{matrix}
+\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}\\
+\frac{1}{\sqrt{2}}&-\frac{1}{\sqrt{2}}
+\end{matrix}
+\right),P=\left(\frac{Aq_1}{\vert Aq_1 \vert},\frac{Aq_2}{\vert Aq_2 \vert}\right)=\left(
+\begin{matrix}
+\frac{1}{\sqrt{6}}\left(
+\begin{matrix}
+1\\1\\2
+\end{matrix}
+\right),\frac{1}{\sqrt{2}}\left(
+\begin{matrix}
+1\\-1\\0
+\end{matrix}
+\right)
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+\frac{1}{\sqrt{6}}&\frac{1}{\sqrt{2}}\\
+\frac{1}{\sqrt{6}}&-\frac{1}{\sqrt{2}}\\
+\frac{2}{\sqrt{6}}&0\\
+\end{matrix}
+\right)\\
+&A=P\Delta Q^H=\left(
+\begin{matrix}
+\frac{1}{\sqrt{6}}&\frac{1}{\sqrt{2}}\\
+\frac{1}{\sqrt{6}}&-\frac{1}{\sqrt{2}}\\
+\frac{2}{\sqrt{6}}&0\\
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\sqrt{3}&0\\0&1
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}\\
+\frac{1}{\sqrt{2}}&-\frac{1}{\sqrt{2}}
+\end{matrix}
+\right)\\
+&A^+=Q\Delta^{-1}P^H=\left(
+\begin{matrix}
+\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}\\
+\frac{1}{\sqrt{2}}&-\frac{1}{\sqrt{2}}
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\frac{1}{\sqrt{3}}&0\\0&1
+\end{matrix}
+\right)\left(
+\begin{matrix}
+\frac{1}{\sqrt{6}}&\frac{1}{\sqrt{6}}&\frac{2}{\sqrt{6}}\\\frac{1}{\sqrt{2}}&-\frac{1}{\sqrt{2}}&0\\
+\end{matrix}
+\right)=\frac{1}{6}=\left(
+\begin{matrix}
+4&-2&2\\-2&4&2
+\end{matrix}
+\right)
+\end{aligned}</script><h4 id="c-优分解求逆公式"><a href="#c-优分解求逆公式" class="headerlink" title="c. 优分解求逆公式"></a>c. 优分解求逆公式</h4><script type="math/tex;mode=display">\begin{aligned}
+&设P,Q为优阵，则 (PDQ)^+=Q^HD^+P^H=Q^HDP^H
+\end{aligned}</script><ul><li>引理：若 $D=\left(\begin{matrix}\lambda_1&amp;&amp;\\&amp;\ddots&amp;\\&amp;&amp;\lambda_n\end{matrix}\right)$ 为对角阵，则 $D^+D=DD^+$ ，且 $(D^+)^k=(D^k)^+$ ，(k=1,2,…)</li></ul><h4 id="d-QR分解求逆公式"><a href="#d-QR分解求逆公式" class="headerlink" title="d. QR分解求逆公式"></a>d. QR分解求逆公式</h4><script type="math/tex;mode=display">\begin{aligned}
+&设A=A_{m\times p}为高阵，且有QR分解，A=QR，Q为列U阵，R=R_{p\times p},则A^+=R^{-1}Q^H
+\end{aligned}</script><p><strong>eg</strong></p><p><img src="/posts/941171150/image-20221124092613349.png" alt="image-20221124092613349"></p><script type="math/tex;mode=display">\begin{aligned}
+&(1)求A的QR分解，令\beta_1=\left(
+\begin{matrix}
+1\\0\\2
+\end{matrix}
+\right),\beta_2=\alpha_2-\frac{(\alpha_2,\beta_1)}{(\beta_1,\beta_1)}\beta_1=\left(
+\begin{matrix}
+2\\0\\-1
+\end{matrix}
+\right),Q=\frac{1}{\sqrt{5}}\left(
+\begin{matrix}
+1&2\\0&0\\2&-1
+\end{matrix}
+\right)\\
+&\quad R=Q^HA=\sqrt{5}\left(
+\begin{matrix}
+1&1\\0&1
+\end{matrix}
+\right)\Rightarrow A=QR=\frac{1}{\sqrt{5}}\left(
+\begin{matrix}
+1&2\\0&0\\2&-1
+\end{matrix}
+\right)\sqrt{5}\left(
+\begin{matrix}
+1&1\\0&1
+\end{matrix}
+\right)\\
+&(2)A^+=(QR)^+=R^+Q^+=R^{-1}Q^H=\frac{1}{\sqrt{5}}\left(
+\begin{matrix}
+1&-1\\0&1
+\end{matrix}
+\right)\frac{1}{\sqrt{5}}\left(
+\begin{matrix}
+1&0&2\\2&0&-1
+\end{matrix}
+\right)=\frac{1}{5}\left(
+\begin{matrix}
+-1&0&3\\
+2&0&-1
+\end{matrix}
+\right)
+\end{aligned}</script><h4 id="e-单阵求逆"><a href="#e-单阵求逆" class="headerlink" title="e. 单阵求逆"></a>e. 单阵求逆</h4><p>若A为单阵不可逆，则不能用谱分解方式求逆</p><p><img src="/posts/941171150/image-20221124104713257.png" alt="image-20221124104713257"></p><script type="math/tex;mode=display">\begin{aligned}
+&tr(A)=1,故A^+=\frac{1}{2}A^H=\frac{1}{2}\left(
+\begin{matrix}
+1&0\\1&0
+\end{matrix}
+\right)\\
+&A的特征多项式为 \vert A-\lambda I\vert=\lambda(1-\lambda)\Rightarrow \lambda(A)=\{1,0\},G_1=\frac{A-\lambda_2I}{\lambda_1-\lambda_2}=\left(
+\begin{matrix}
+1&1\\0&0
+\end{matrix}
+\right)\\
+&A有谱分解A=G_1,A^+\neq A,故对于不可逆的单阵，A^+\neq \lambda_1^{-1}G_1+\cdots+\lambda_k^{-1}G_k
+\end{aligned}</script><hr><p>若A为单阵且<strong>可逆</strong>，则有谱分解 $A=\lambda_1G_1+\cdots+\lambda_kG_k$ 且 $A^+=\lambda_1^{-1}G_1+\cdots+\lambda_k^{-1}G_k$</p><p><img src="/posts/941171150/image-20221124112035934.png" alt="image-20221124112035934"></p><script type="math/tex;mode=display">\begin{aligned}
+&A为行和阵，\lambda(A)=\{4,1\},G_1=\frac{A-\lambda_2I}{\lambda_1-\lambda_2}=\frac{1}{3}\left(
+\begin{matrix}
+1&2\\1&2
+\end{matrix}
+\right),G_2=\frac{1}{3}\left(
+\begin{matrix}
+2&-2\\-1&1
+\end{matrix}
+\right),A=4G_1+G_2\\
+&r(A)=2，则A可逆，故\Rightarrow A^+=A^{-1}=\frac{1}{3}G_1+G_2=\frac{1}{4}\left(
+\begin{matrix}
+3&-2\\-1&2
+\end{matrix}
+\right)
+\end{aligned}</script><h5 id="正规阵谱分解"><a href="#正规阵谱分解" class="headerlink" title="正规阵谱分解"></a>正规阵谱分解</h5><script type="math/tex;mode=display">\begin{aligned}
+&若A为正规阵，且有谱分解：A=\lambda_1G_1+\cdots+\lambda_kG_k,则有 A^+=\lambda_1^+G_1+\lambda_2^+G_2+\cdots+\lambda_k^+G_k
+\end{aligned}</script><p><strong>eg</strong></p><p><img src="/posts/941171150/image-20221124100826429.png" alt="image-20221124100826429"></p><script type="math/tex;mode=display">\begin{aligned}
+&(1)求A的谱分解：\\
+&\quad A有特征多项式 \vert A-\lambda I \vert=\left|
+\begin{matrix}
+2-\lambda&1-i\\1+i&1-\lambda
+\end{matrix}
+\right|=(2-\lambda)(1-\lambda)-2=\lambda(\lambda-3)\Rightarrow \lambda(A)=\{3,0\}\\
+&\quad G_1=\frac{A-\lambda_2I}{\lambda_1-\lambda_2}=\frac{1}{3}\left(
+\begin{matrix}
+2&1-i\\1+i&1
+\end{matrix}
+\right),G_2=I-G_1=\frac{1}{3}\left(
+\begin{matrix}
+1&1-i\\-1-i&2
+\end{matrix}
+\right)\\
+&\quad 可得谱分解 A=3G_1+0G_2\\
+&(2)A^+=3^+G_1=\frac{1}{3}G_1=\frac{1}{9}\left(
+\begin{matrix}
+2&1-i\\1+i&1
+\end{matrix}
+\right)\\
+&验证：\\
+&\quad (1-i)r_2=r_1，即A为秩1公式，故有A^+=\frac{1}{\sum\vert a_{ij}\vert^2}\left(
+\begin{matrix}
+2&1+i\\1-i&1
+\end{matrix}
+\right)=\frac{1}{9}\left(
+\begin{matrix}
+2&1-i\\1+i&1
+\end{matrix}
+\right)
+\end{aligned}</script><h4 id="f-高低阵求逆及高低分解求逆公式"><a href="#f-高低阵求逆及高低分解求逆公式" class="headerlink" title="f. 高低阵求逆及高低分解求逆公式"></a>f. 高低阵求逆及高低分解求逆公式</h4><h5 id="引理"><a href="#引理" class="headerlink" title="引理"></a>引理</h5><p>高低阵引理：</p><p><img src="/posts/941171150/image-20221125153333205.png" alt="image-20221125153333205"></p><p>高低阵消去性质：</p><p><img src="/posts/941171150/image-20221125152959510.png" alt="image-20221125152959510"></p><p>Hermite性质：</p><p><img src="/posts/941171150/image-20221125153456284.png" alt="image-20221125153456284"></p><p><img src="/posts/941171150/image-20221125153422858.png" alt="image-20221125153422858"></p><h5 id="高低阵求逆"><a href="#高低阵求逆" class="headerlink" title="高低阵求逆"></a>高低阵求逆</h5><script type="math/tex;mode=display">\begin{aligned}
+&高阵公式：若A=A_{m\times r} 为列满秩阵(高阵)，则有加号逆 A^+=(A^HA)^{-1}A^H,且A^+A=I\\
+&低阵公式：若A=A_{r\times n} 为行满秩阵(低阵)，则有加号逆 A^+=A^H(AA^H)^{-1},且AA^+=I
+\end{aligned}</script><p><strong>eg</strong></p><p><img src="/posts/941171150/image-20221125160752119.png" alt="image-20221125160752119"></p><script type="math/tex;mode=display">\begin{aligned}
+&由高阵公式：A^+=(A^HA)^{-1}A^H,计算可得 A^HA=\left(
+\begin{matrix}
+2&0\\0&1
+\end{matrix}
+\right),(A^HA)^{-1}=\frac{1}{2}\left(
+\begin{matrix}
+1&0\\0&2
+\end{matrix}
+\right),\\
+&可得A^+=(A^HA)^{-1}A^H=\frac{1}{2}\left(
+\begin{matrix}
+1&0\\0&2
+\end{matrix}
+\right)\left(
+\begin{matrix}
+1&0&1\\0&1&0
+\end{matrix}
+\right)=\frac{1}{2}\left(
+\begin{matrix}
+1&0&1\\0&2&0
+\end{matrix}
+\right),可验证\\
+&A^+A=I
+\end{aligned}</script><hr><p><img src="/posts/941171150/image-20221125161121714.png" alt="image-20221125161121714"></p><script type="math/tex;mode=display">\begin{aligned}
+&由于B=A^H,则B^+=(A^H)^+=(A^+)^H=\frac{1}{2}\left(
+\begin{matrix}
+1&0\\0&2\\1&0
+\end{matrix}
+\right)
+\end{aligned}</script><hr><p><img src="/posts/941171150/image-20221125161507448.png" alt="image-20221125161507448"></p><script type="math/tex;mode=display">\begin{aligned}
+&由低阵公式A^+=A^H(AA^H)^{-1},AA^H=\left(
+\begin{matrix}
+2&1\\1&2
+\end{matrix}
+\right),(AA^H)^{-1}=\frac{1}{3}\left(
+\begin{matrix}
+2&-1\\-1&2
+\end{matrix}
+\right)\\
+&A^+=A^H(AA^H)^{-1}=\frac{1}{3}\left(
+\begin{matrix}
+1&1\\-1&2\\2&-1
+\end{matrix}
+\right)\\
+&由于B=A^H,B^+=(A^H)^+=(A^+)^H=\frac{1}{3}\left(
+\begin{matrix}
+1&-1&2\\1&2&-1
+\end{matrix}
+\right)
+\end{aligned}</script><h5 id="A-第二公式（高低分解求逆公式）"><a href="#A-第二公式（高低分解求逆公式）" class="headerlink" title="$A^+$ 第二公式（高低分解求逆公式）"></a>$A^+$ 第二公式（高低分解求逆公式）</h5><script type="math/tex;mode=display">\begin{aligned}
+&若有高低分解 A=BC，则有公式：A^+=C^+B^+,其中B^+=(B^HB)^{-1}B^H,C^+=A^H(AA^H)^{-1}\\
+&且有B^+B=I,CC^+=I
+\end{aligned}</script><p><strong>注</strong></p><p>$(BC)^+$ 一般不成立，只有在高低分解时才成立</p><p><strong>eg</strong></p><p><img src="/posts/941171150/image-20221125163153329.png" alt="image-20221125163153329"></p><script type="math/tex;mode=display">\begin{aligned}
+&\because A=\left(
+\begin{matrix}
+1&0&0\\0&1&-1\\0&0&0\\0&0&0
+\end{matrix}
+\right),故选第1,2列作为高阵，B=\left(
+\begin{matrix}
+1&0\\0&1\\1&0\\2&1
+\end{matrix}
+\right),C=\left(
+\begin{matrix}
+1&0&0\\0&1&-1
+\end{matrix}
+\right),A=BC(高低分解)\\
+&(B^HB)^{-1}=\frac{1}{4}\left(
+\begin{matrix}
+1&-1\\-1&3
+\end{matrix}
+\right),(CC^H)^{-1}=\frac{1}{2}\left(
+\begin{matrix}
+2&0\\0&1
+\end{matrix}
+\right),\\
+&B^+=(B^HB)^{-1}B^H=\frac{1}{4}\left(
+\begin{matrix}
+1&-1\\-1&3
+\end{matrix}
+\right)\left(
+\begin{matrix}
+1&0&1&2\\0&1&0&1
+\end{matrix}
+\right)=\frac{1}{4}\left(
+\begin{matrix}
+1&0&1&1\\-1&3&-1&1
+\end{matrix}
+\right),\\
+&C^+=C^H(CC^H)^{-1}=\frac{1}{2}\left(
+\begin{matrix}
+2&0\\0&1\\0&-1
+\end{matrix}
+\right),\\
+&A=C^+B^+=\frac{1}{8}\left(
+\begin{matrix}
+2&-2&2&2\\-1&3&-1&1\\1&-3&1&-1
+\end{matrix}
+\right)
+\end{aligned}</script><hr><p><img src="/posts/941171150/image-20221125165105628.png" alt="image-20221125165105628"></p><h4 id="g-张量分解公式"><a href="#g-张量分解公式" class="headerlink" title="g. 张量分解公式"></a>g. 张量分解公式</h4><script type="math/tex;mode=display">(A\otimes B)^+=A^+\otimes B^+</script><p><img src="/posts/941171150/image-20221125172800196.png" alt="image-20221125172800196"></p><h4 id="h-分块求逆公式"><a href="#h-分块求逆公式" class="headerlink" title="h. 分块求逆公式"></a>h. 分块求逆公式</h4><script type="math/tex;mode=display">\left(
+\begin{matrix}
+A\\0
+\end{matrix}
+\right)^+=\left(A^+,0\right),(A,0)^+=\left(
+\begin{matrix}
+A^+,0
+\end{matrix}
+\right)\\
+\left(
+\begin{matrix}
+A_1&0\\0&A_2
+\end{matrix}
+\right)^+=\left(
+\begin{matrix}
+A_1^+&0\\0&A_2^+
+\end{matrix}
+\right)\\
+\left(
+\begin{matrix}
+0&A_1\\A_2&0
+\end{matrix}
+\right)^+=\left(
+\begin{matrix}
+0&A_1^+\\A_2^+&0
+\end{matrix}
+\right)\\
+\left(
+\begin{matrix}
+A\\A\\A
+\end{matrix}
+\right)^+=\frac{1}{3}\left(A^+,A^+,A^+\right)\\
+(A,A,A)^+=\frac{1}{3}\left(
+\begin{matrix}
+A^+\\A^+\\A^+
+\end{matrix}
+\right)\\
+\left(
+\begin{matrix}
+A&A\\A&A
+\end{matrix}
+\right)^+=\frac{1}{4}\left(
+\begin{matrix}
+A^+&A^+\\A^+&A^+
+\end{matrix}
+\right)</script><p><img src="/posts/941171150/image-20221124000200566.png" alt="image-20221124000200566"></p><p><strong>eg</strong></p><p><img src="/posts/941171150/image-20221125170844010.png" alt="image-20221125170844010"></p><p><img src="/posts/941171150/image-20221125170910008.png" alt="image-20221125170910008"></p><hr><p><img src="/posts/941171150/image-20221125171018323.png" alt="image-20221125171018323"></p><script type="math/tex;mode=display">\begin{aligned}
+&A=\left(
+\begin{matrix}
+D\\0
+\end{matrix}
+\right),D为低阵，D^+=D^H(DD^H)^{-1}=\frac{1}{2}\left(
+\begin{matrix}
+1&0\\0&2\\1&0
+\end{matrix}
+\right),A^+=\left(
+\begin{matrix}
+D^+&0
+\end{matrix}
+\right)=\left(
+\begin{matrix}
+\frac{1}{2}&0&0\\0&1&0\\\frac{1}{2}&0&0
+\end{matrix}
+\right)
+\end{aligned}</script><hr><p><img src="/posts/941171150/image-20221125171411895.png" alt="image-20221125171411895"></p><p><img src="/posts/941171150/image-20221125171423593.png" alt="image-20221125171423593"></p><hr><p><strong>eg</strong></p><p><img src="/posts/941171150/image-20221124000402978.png" alt="image-20221124000402978"></p><hr><p><img src="/posts/941171150/image-20221124000532698.png" alt="image-20221124000532698"></p><p><img src="/posts/941171150/image-20221124000539000.png" alt="image-20221124000539000"></p><h4 id="i-第三公式-分步求逆"><a href="#i-第三公式-分步求逆" class="headerlink" title="i. 第三公式(分步求逆)"></a>i. 第三公式(分步求逆)</h4><script type="math/tex;mode=display">A^+=(A^HA)^+A^H</script><p><img src="/posts/941171150/image-20221124113517977.png" alt="image-20221124113517977"></p><h5 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h5><p><img src="/posts/941171150/image-20221124113527586.png" alt="image-20221124113527586"></p><p><strong>eg</strong></p><p><img src="/posts/941171150/image-20221124113603589.png" alt="image-20221124113603589"></p><p><img src="/posts/941171150/image-20221124113635194.png" alt="image-20221124113635194"></p><h2 id="4-5-减号逆"><a href="#4-5-减号逆" class="headerlink" title="4.5 减号逆"></a>4.5 减号逆</h2><p>若 $A=A_{m\times n}$ 与 $X=X_{n\times m}$ ，有 $AXA=A$ ，则称 $X=X_{n\times m}$ 为A的减号逆(一号逆)，记为 $X=A^{-}=A^{(1)}$</p><p>全体 $A^{-}$ 的集合记为 $A^{\{1\}}=\{X\mid AXA=A\}$</p><ul><li>$A^{-}\in A^{\{1\}}$</li></ul><h3 id="4-5-1-性质"><a href="#4-5-1-性质" class="headerlink" title="4.5.1 性质"></a>4.5.1 性质</h3><h4 id="a-自反性"><a href="#a-自反性" class="headerlink" title="a. 自反性"></a>a. 自反性</h4><p>$AA^{-}A=A$</p><h4 id="b-A-A-为幂等阵"><a href="#b-A-A-为幂等阵" class="headerlink" title="b. $A^-A$ 为幂等阵"></a>b. $A^-A$ 为幂等阵</h4><p>$(A^{-}A)^2=A^{-}A$ ， $(AA^{-})^2=AA^{-}$</p><script type="math/tex;mode=display">证明：\because (A^-A)^2=A^-AA^-A=A^-A\Rightarrow A^-A为幂等阵</script><h5 id="秩迹公式"><a href="#秩迹公式" class="headerlink" title="秩迹公式"></a>秩迹公式</h5><p>$r(A)=r(A^-A)=r(AA^-)=tr(AA^-)=tr(A^-A)$</p><script type="math/tex;mode=display">\begin{aligned}
+证明：
+&r(A^-A)\le r(A),且A=AA^-A\Rightarrow r(A)=r(AA^-A)\le r(A^-A)\le r(A)\\
+&故r(A)=r(A^-A)，同理，r(AA^-)=r(A)\\
+&A^2=A\overset{x^2=x}{\Longrightarrow} \lambda=1或0,且A为单阵 \Rightarrow A\sim\Lambda=\left(\begin{matrix}\left(\begin{matrix}1&&&\\&1&&\\&&\ddots&\\&&&1\end{matrix}\right)&&\\&0&\\&&\ddots\end{matrix}\right)\\
+&\therefore tr(A)=r(A)=r(A^-A)=r(AA^-)=tr(AA^-)=tr(A^-A)
+\end{aligned}</script><p>$(I-A^-A)^2=I-A^-A$</p><ul><li>$r(I-A^-A)=n-r(A^-A)=n-r(A)$</li><li>$r(I-AA^-)=r(A)$</li></ul><h4 id="c-A-不唯一"><a href="#c-A-不唯一" class="headerlink" title="c. $A^{-}$ 不唯一"></a>c. $A^{-}$ 不唯一</h4><ul><li>如 $A=\left(\begin{matrix}1\\0\end{matrix}\right)$ ，可取 X=(1 0) 或 Y=(1 1) 作为A的减号逆</li><li>$A^{-}$ 唯一的阵：方阵$A_{n\times n}$可逆，则必有唯一 $A^{-1}=A^{+}=A^-$</li></ul><h4 id="d-满秩乘积为单位阵"><a href="#d-满秩乘积为单位阵" class="headerlink" title="d. 满秩乘积为单位阵"></a>d. 满秩乘积为单位阵</h4><p>若 $A=A_{m\times n}$ 为列满秩（高阵），则 $A^-A=I_n$ ；若 $A$ 为行满秩（低阵），则 $AA^-=I_m$</p><p><img src="/posts/941171150/image-20221201101544718.png" alt="image-20221201101544718"></p><h3 id="4-5-2-计算"><a href="#4-5-2-计算" class="headerlink" title="4.5.2 计算"></a>4.5.2 计算</h3><h4 id="a-求解-AXA-A"><a href="#a-求解-AXA-A" class="headerlink" title="a. 求解$AXA=A$"></a>a. 求解$AXA=A$</h4><p>求解减号逆 $A{-}$ 即求解 $AXA=A$ 的全体通解</p><p><img src="/posts/941171150/image-20221201093610582.png" alt="image-20221201093610582"></p><script type="math/tex;mode=display">\begin{aligned}
+&由矩阵方程AXB=D的特解X_0=A^+=\left(1,0,0\right),故通解为A^-=X=X_0+Y-A^+AYAA^+\\
+&=\left(1，0，0\right)+\left(\begin{matrix}a，b，c\end{matrix}\right)-\left(\begin{matrix}a，0，0\end{matrix}\right)=\left(\begin{matrix}1，b，c\end{matrix}\right)
+\end{aligned}</script><p>也可见 $A^-$ 不唯一</p><ul><li>对于高阶阵 $A^-=A^++(Y-A^+AYAA^+)$ 的计算比较复杂</li></ul><h4 id="b-标准对角形"><a href="#b-标准对角形" class="headerlink" title="b. 标准对角形"></a>b. 标准对角形</h4><p>若 $A=\left(\begin{matrix}I_r&amp;0\\0&amp;0\end{matrix}\right)_{m\times n}$ ，则全体 $A^-=\left(\begin{matrix}I_r&amp;B\\C&amp;D\end{matrix}\right)_{n\times m}$ ，BCD为任一小块</p><p><img src="/posts/941171150/image-20221201095119097.png" alt="image-20221201095119097"></p><hr><p><img src="/posts/941171150/image-20221201095202557.png" alt="image-20221201095202557"></p><p><strong>SP</strong></p><p>若 $PAQ=\left(\begin{matrix}I_r&amp;0\\0&amp;0\end{matrix}\right)_{m\times n}$ ，全体 $A^{-}=Q\left(\begin{matrix}I_r&amp;B\\C&amp;D\end{matrix}\right)_{n\times m}P$ ，BCD为任一小块</p><h4 id="c-初等行，列变换（一般方法）"><a href="#c-初等行，列变换（一般方法）" class="headerlink" title="c. 初等行，列变换（一般方法）"></a>c. 初等行，列变换（一般方法）</h4><p>设 $A=A_{m\times n}$ ，令 $\left(\begin{array}{c:c}A&amp;I_m\\\hdashline I_n&amp;0\end{array}\right)\xrightarrow[列变换]{行变换}\left(\begin{array}{c:c}\left(\begin{matrix}I_r&amp;0\\0&amp;0\end{matrix}\right)_{m\times n}&amp;P\\\hdashline Q&amp;0\end{array}\right)$ ，则有 $A^-=Q\left(\begin{matrix}I_r&amp;B\\C&amp;D\end{matrix}\right)_{n\times m}P$</p><p><strong>eg</strong></p><p><img src="/posts/941171150/image-20221201100739325.png" alt="image-20221201100739325"></p><h3 id="4-5-3-矩阵方程求解"><a href="#4-5-3-矩阵方程求解" class="headerlink" title="4.5.3 矩阵方程求解"></a>4.5.3 矩阵方程求解</h3><blockquote><p>前置知识：正规方程求解</p></blockquote><h4 id="a-特解"><a href="#a-特解" class="headerlink" title="a. 特解"></a>a. 特解</h4><p><img src="/posts/941171150/image-20221201102640820.png" alt="image-20221201102640820"></p><h4 id="b-解空间"><a href="#b-解空间" class="headerlink" title="b. 解空间"></a>b. 解空间</h4><p>$N(A)$ 或 $AY=0$ 的通解为 $Y=(I_n-A^-A)y$ ，$\forall y\in C^n$</p><p>$N(A)=\{Y\vert AY=0\}$ ，$X=(I_n-A^-A)y,y=\left(\begin{matrix}y_1\\\vdots\\y_n\end{matrix}\right)\in C^n$</p><p>设y的值域为 R，则 $N(A)=R(I_n-A^-A)$ ，维数 $dim N(A)=n-r(A^-A)$</p><h4 id="c-通解"><a href="#c-通解" class="headerlink" title="c. 通解"></a>c. 通解</h4><p><img src="/posts/941171150/image-20221201104449808.png" alt="image-20221201104449808"></p><p><img src="/posts/941171150/image-20221201104508692.png" alt="image-20221201104508692"></p></div><div><div><div style="text-align:center;color:#ccc;font-size:14px">-------------<i class="fa fa-hand-peace-o"></i>本文结束-------------</div></div></div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者 </strong>AmosTian</li><li class="post-copyright-link"><strong>本文链接 </strong><a href="https://amostian.github.io/posts/941171150/" title="4. 矩阵运算">https://amostian.github.io/posts/941171150/</a></li><li class="post-copyright-license"><strong>版权声明 </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div><footer class="post-footer"><div class="post-tags"><a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"><i class="fa fa-tags"></i> 数学</a> <a href="/tags/%E7%9F%A9%E9%98%B5%E8%AE%BA/" rel="tag"><i class="fa fa-tags"></i> 矩阵论</a></div><div class="post-nav"><div class="post-nav-item"><a href="/posts/234958276/" rel="prev" title="hexo+NexT博客"><i class="fa fa-chevron-left"></i> hexo+NexT博客</a></div><div class="post-nav-item"><a href="/posts/3124348901/" rel="next" title="FTP">FTP <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div><script>window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span> <span class="toggle-line toggle-line-middle"></span> <span class="toggle-line toggle-line-last"></span></div><aside class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc">文章目录</li><li class="sidebar-nav-overview">站点概览</li></ul><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E7%89%B9%E6%A0%B9%E7%89%B9%E5%90%91%E6%B1%82%E6%B3%95"><span class="nav-text">4.1 特根特向求法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-1-%E7%89%B9%E6%A0%B9%E6%B1%82%E6%B3%95"><span class="nav-text">4.1.1 特根求法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-2-%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="nav-text">4.1.2 特征向量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E4%B8%A4%E4%B8%AA%E4%BA%92%E5%BC%82%E7%89%B9%E6%A0%B9%E7%9A%84%E7%89%B9%E5%90%91"><span class="nav-text">a. 两个互异特根的特向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E4%B8%89%E4%B8%AA%E4%BA%92%E5%BC%82%E7%89%B9%E6%A0%B9%E7%9A%84%E7%89%B9%E5%90%91"><span class="nav-text">b. 三个互异特根的特向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-%E9%87%8D%E6%A0%B9%E7%9A%84%E7%89%B9%E5%90%91"><span class="nav-text">c. 重根的特向</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-3-%E4%BA%A4%E6%8D%A2%E5%AE%9A%E7%90%86%E4%B8%8E%E5%85%AC%E5%85%B1%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="nav-text">4.1.3 交换定理与公共特征向量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-Cayley%E5%AE%9A%E7%90%86"><span class="nav-text">a. Cayley定理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E4%BA%A4%E6%8D%A2%E5%AE%9A%E7%90%86"><span class="nav-text">b. 交换定理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-%E5%8F%AF%E4%BA%A4%E6%8D%A2%E7%9A%84%E5%AE%9E%E5%AF%B9%E7%A7%B0%E9%98%B5%E4%B8%BA%E5%8D%95%E9%98%B5"><span class="nav-text">c. 可交换的实对称阵为单阵</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E5%BC%A0%E9%87%8F%E7%A7%AF"><span class="nav-text">4.2 张量积</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-%E5%AE%9A%E4%B9%89"><span class="nav-text">4.2.1 定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E7%90%86"><span class="nav-text">定理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-%E8%AE%A1%E7%AE%97"><span class="nav-text">4.2.2 计算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E5%88%86%E5%9D%97%E6%B3%95"><span class="nav-text">a. 分块法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E5%90%91%E9%87%8F%E4%B8%8E%E5%90%91%E9%87%8F%E5%BC%A0%E9%87%8F%E7%A7%AF"><span class="nav-text">b. 向量与向量张量积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-%E5%90%91%E9%87%8F%E4%B8%8E%E7%9F%A9%E9%98%B5%E5%BC%A0%E9%87%8F%E7%A7%AF"><span class="nav-text">c. 向量与矩阵张量积</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-3-%E8%BF%90%E7%AE%97%E5%BE%8B"><span class="nav-text">4.2.3 运算律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-4-%E5%BC%A0%E9%87%8F%E7%A7%AF%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-text">4.2.4 张量积行列式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-5-%E5%BC%A0%E9%87%8F%E7%A7%AF%E7%89%B9%E5%BE%81%E5%80%BC%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="nav-text">4.2.5 张量积特征值特征向量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E7%89%B9%E5%BE%81%E5%80%BC"><span class="nav-text">a. 特征值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="nav-text">b. 特征向量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-%E7%9F%A9%E9%98%B5%E5%87%BD%E6%95%B0%E7%9A%84%E7%89%B9%E6%A0%B9%E7%89%B9%E5%90%91"><span class="nav-text">c. 矩阵函数的特根特向</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E7%9F%A9%E9%98%B5%E6%8B%89%E7%9B%B4"><span class="nav-text">4.3 矩阵拉直</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-%E5%AE%9A%E4%B9%89"><span class="nav-text">4.3.1 定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-%E6%8B%89%E7%9B%B4%E6%80%A7%E8%B4%A8"><span class="nav-text">4.3.2 拉直性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-3-%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E7%9F%A9%E9%98%B5%E6%96%B9%E7%A8%8BAXB-C%E6%9C%89%E8%A7%A3%E5%88%A4%E5%AE%9A"><span class="nav-text">4.3.3 应用——矩阵方程AXB&#x3D;C有解判定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-%E5%8A%A0%E5%8F%B7%E9%80%86"><span class="nav-text">4.4 加号逆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-1-%E5%AE%9A%E4%B9%89"><span class="nav-text">4.4.1 定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E6%80%A7%E8%B4%A8"><span class="nav-text">a. 性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8A%A0%E5%8F%B7%E9%80%86"><span class="nav-text">b. 特殊矩阵的加号逆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-AA-%E4%B8%8E-A-A-%E7%9B%B8%E5%85%B3%E7%BB%93%E8%AE%BA"><span class="nav-text">c. $AA^+$ 与 $A^+A$ 相关结论</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-2-A-%E8%AE%A1%E7%AE%97"><span class="nav-text">4.4.2 $A^+$ 计算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E7%A7%A91%E9%98%B5"><span class="nav-text">a. 秩1阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E6%AD%A3%E5%A5%87%E5%88%86%E8%A7%A3%E6%B1%82%E9%80%86-%E7%AC%AC%E4%B8%80%E5%85%AC%E5%BC%8F"><span class="nav-text">b. 正奇分解求逆(第一公式)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-%E4%BC%98%E5%88%86%E8%A7%A3%E6%B1%82%E9%80%86%E5%85%AC%E5%BC%8F"><span class="nav-text">c. 优分解求逆公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#d-QR%E5%88%86%E8%A7%A3%E6%B1%82%E9%80%86%E5%85%AC%E5%BC%8F"><span class="nav-text">d. QR分解求逆公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#e-%E5%8D%95%E9%98%B5%E6%B1%82%E9%80%86"><span class="nav-text">e. 单阵求逆</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A3%E8%A7%84%E9%98%B5%E8%B0%B1%E5%88%86%E8%A7%A3"><span class="nav-text">正规阵谱分解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#f-%E9%AB%98%E4%BD%8E%E9%98%B5%E6%B1%82%E9%80%86%E5%8F%8A%E9%AB%98%E4%BD%8E%E5%88%86%E8%A7%A3%E6%B1%82%E9%80%86%E5%85%AC%E5%BC%8F"><span class="nav-text">f. 高低阵求逆及高低分解求逆公式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%95%E7%90%86"><span class="nav-text">引理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%AB%98%E4%BD%8E%E9%98%B5%E6%B1%82%E9%80%86"><span class="nav-text">高低阵求逆</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#A-%E7%AC%AC%E4%BA%8C%E5%85%AC%E5%BC%8F%EF%BC%88%E9%AB%98%E4%BD%8E%E5%88%86%E8%A7%A3%E6%B1%82%E9%80%86%E5%85%AC%E5%BC%8F%EF%BC%89"><span class="nav-text">$A^+$ 第二公式（高低分解求逆公式）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#g-%E5%BC%A0%E9%87%8F%E5%88%86%E8%A7%A3%E5%85%AC%E5%BC%8F"><span class="nav-text">g. 张量分解公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#h-%E5%88%86%E5%9D%97%E6%B1%82%E9%80%86%E5%85%AC%E5%BC%8F"><span class="nav-text">h. 分块求逆公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#i-%E7%AC%AC%E4%B8%89%E5%85%AC%E5%BC%8F-%E5%88%86%E6%AD%A5%E6%B1%82%E9%80%86"><span class="nav-text">i. 第三公式(分步求逆)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-text">应用</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-%E5%87%8F%E5%8F%B7%E9%80%86"><span class="nav-text">4.5 减号逆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-1-%E6%80%A7%E8%B4%A8"><span class="nav-text">4.5.1 性质</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E8%87%AA%E5%8F%8D%E6%80%A7"><span class="nav-text">a. 自反性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-A-A-%E4%B8%BA%E5%B9%82%E7%AD%89%E9%98%B5"><span class="nav-text">b. $A^-A$ 为幂等阵</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A7%A9%E8%BF%B9%E5%85%AC%E5%BC%8F"><span class="nav-text">秩迹公式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-A-%E4%B8%8D%E5%94%AF%E4%B8%80"><span class="nav-text">c. $A^{-}$ 不唯一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#d-%E6%BB%A1%E7%A7%A9%E4%B9%98%E7%A7%AF%E4%B8%BA%E5%8D%95%E4%BD%8D%E9%98%B5"><span class="nav-text">d. 满秩乘积为单位阵</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-2-%E8%AE%A1%E7%AE%97"><span class="nav-text">4.5.2 计算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E6%B1%82%E8%A7%A3-AXA-A"><span class="nav-text">a. 求解$AXA&#x3D;A$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E6%A0%87%E5%87%86%E5%AF%B9%E8%A7%92%E5%BD%A2"><span class="nav-text">b. 标准对角形</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-%E5%88%9D%E7%AD%89%E8%A1%8C%EF%BC%8C%E5%88%97%E5%8F%98%E6%8D%A2%EF%BC%88%E4%B8%80%E8%88%AC%E6%96%B9%E6%B3%95%EF%BC%89"><span class="nav-text">c. 初等行，列变换（一般方法）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-3-%E7%9F%A9%E9%98%B5%E6%96%B9%E7%A8%8B%E6%B1%82%E8%A7%A3"><span class="nav-text">4.5.3 矩阵方程求解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E7%89%B9%E8%A7%A3"><span class="nav-text">a. 特解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E8%A7%A3%E7%A9%BA%E9%97%B4"><span class="nav-text">b. 解空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-%E9%80%9A%E8%A7%A3"><span class="nav-text">c. 通解</span></a></li></ol></li></ol></li></ol></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" alt="AmosTian" src="/images/avatar.png"><p class="site-author-name" itemprop="name">AmosTian</p><div class="site-description" itemprop="description">知道的越多，不知道的越多</div></div><div class="site-state-wrap motion-element"><nav class="site-state"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">349</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/"><span class="site-state-item-count">58</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/"><span class="site-state-item-count">74</span> <span class="site-state-item-name">标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/AmosTian" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;AmosTian" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a> </span><span class="links-of-author-item"><a href="https://blog.csdn.net/qq_40479037?type=blog" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40479037?type&#x3D;blog" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a> </span><span class="links-of-author-item"><a href="mailto:17636679561@163.com" title="E-Mail → mailto:17636679561@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a></span></div></div><div id="days"></div><script>function show_date_time(){window.setTimeout("show_date_time()",1e3),BirthDay=new Date("01/27/2022 15:13:14"),today=new Date,timeold=today.getTime()-BirthDay.getTime(),sectimeold=timeold/1e3,secondsold=Math.floor(sectimeold),msPerDay=864e5,e_daysold=timeold/msPerDay,daysold=Math.floor(e_daysold),e_hrsold=24*(e_daysold-daysold),hrsold=setzero(Math.floor(e_hrsold)),e_minsold=60*(e_hrsold-hrsold),minsold=setzero(Math.floor(60*(e_hrsold-hrsold))),seconds=setzero(Math.floor(60*(e_minsold-minsold))),document.getElementById("days").innerHTML="已运行 "+daysold+" 天 "+hrsold+" 小时 "+minsold+" 分 "+seconds+" 秒"}function setzero(e){return e<10&&(e="0"+e),e}show_date_time()</script></div></aside><div id="sidebar-dimmer"></div></div></main><footer class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2024</span> <span class="with-love"><i class="fa fa-grav"></i> </span><span class="author" itemprop="copyrightHolder">AmosTian</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-area-chart"></i> </span><span class="post-meta-item-text">站点总字数 </span><span title="站点总字数">758.9k</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-coffee"></i> </span><span class="post-meta-item-text">站点阅读时长 &asymp;</span> <span title="站点阅读时长">31:46</span></div></div></footer></div><script color="0,0,0" opacity="0.5" zindex="-1" count="150" src="/lib/canvas-nest/canvas-nest.min.js"></script><script src="/lib/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script><script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script><script src="/js/utils.js"></script><script src="/js/schemes/pisces.js"></script><script src="/js/next-boot.js"></script><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script><script src="/js/local-search.js"></script><script>if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'neutral',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}</script><script>if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }</script><script async src="/js/cursor/fireworks.js"></script><script src="/js/activate-power-mode.min.js"></script><script>POWERMODE.colorful=!0,POWERMODE.shake=!1,document.body.addEventListener("input",POWERMODE)</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({pluginRootPath:"live2dw/",pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,model:{jsonPath:"live2d-widget-model-hijiki"},display:{position:"right",width:150,height:300},mobile:{show:!1},log:!1})</script></body></html>
